@@ -1,18 +1,14 @@
-//
-//  SwiftQuranApp.swift
-//  SwiftQuran
-//
-//  Created by Zabir Raihan on 14/03/2025.
-//
-
 import SwiftUI
 import SwiftData
 
 @main
 struct SwiftQuranApp: App {
+    @State private var importer: BackgroundImporter?
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Surah.self,
+            Verse.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -26,6 +22,12 @@ struct SwiftQuranApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .task {
+                    if importer == nil {
+                        importer = BackgroundImporter(modelContainer: sharedModelContainer)
+                        try? await importer?.fetchAndImportQuran()
+                    }
+                }
         }
         .modelContainer(sharedModelContainer)
     }
