@@ -18,6 +18,7 @@ final class Surah {
     var totalVerses: Int
     
     @Relationship(deleteRule: .cascade) var unorderedVerses: [Verse]
+    @Relationship(deleteRule: .cascade) var readingProgress: ReadingProgress?
     var verses: [Verse] {
         unorderedVerses.sorted { $0.id < $1.id }
     }

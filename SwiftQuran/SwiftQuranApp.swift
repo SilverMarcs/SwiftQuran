@@ -6,9 +6,11 @@ struct SwiftQuranApp: App {
     @State private var importer: BackgroundImporter?
     
     var sharedModelContainer: ModelContainer = {
+        print((URL.applicationSupportDirectory.path(percentEncoded: false)))
         let schema = Schema([
             Surah.self,
-            Verse.self
+            Verse.self,
+            ReadingProgress.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

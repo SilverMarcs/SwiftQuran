@@ -22,6 +22,7 @@ struct SurahListView: View {
                 HStack(alignment: .center) {
                     VStack {
                         Text("\(surah.id)")
+                            .foregroundStyle(.secondary)
                         Spacer()
                     }
                     
