@@ -20,11 +20,11 @@ struct SurahListView: View {
         List(filteredSurahs, id: \.id, selection: $selectedSurah) { surah in
             NavigationLink(value: surah) {
                 HStack(alignment: .center) {
-                    VStack {
-                        Text("\(surah.id)")
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                    }
+                    Text("\(surah.id)")
+                        .foregroundStyle(.secondary)
+                        #if !(macOS)
+                        .padding(.trailing, 2)
+                        #endif
                     
                     VStack(alignment: .leading, spacing: 4) {
                         Text(surah.transliteration)
@@ -36,9 +36,17 @@ struct SurahListView: View {
                     
                     Spacer()
                     
-                    Text("\(surah.totalVerses)")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                    HStack(spacing: 4) {
+                        if let progress = surah.readingProgress {
+                            Text("\(progress.lastReadVerseId)/\(surah.totalVerses)")
+                                .font(.subheadline)
+                                .foregroundStyle(.tint)
+                        } else {
+                            Text("\(surah.totalVerses)")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
                 }
             }
         }
