@@ -4,9 +4,20 @@ import SwiftData
 struct SurahListView: View {
     @Query(sort: \Surah.id) private var surahs: [Surah]
     @Binding var selectedSurah: Surah?
+    @State private var searchText = ""
+    
+    var filteredSurahs: [Surah] {
+        if searchText.isEmpty {
+            return surahs
+        }
+        return surahs.filter { surah in
+            surah.translation.localizedCaseInsensitiveContains(searchText) ||
+            surah.transliteration.localizedCaseInsensitiveContains(searchText)
+        }
+    }
     
     var body: some View {
-        List(surahs, id: \.id, selection: $selectedSurah) { surah in
+        List(filteredSurahs, id: \.id, selection: $selectedSurah) { surah in
             NavigationLink(value: surah) {
                 HStack(alignment: .center) {
                     VStack {
@@ -31,6 +42,7 @@ struct SurahListView: View {
             }
         }
         .navigationTitle("Surahs")
+        .searchable(text: $searchText, placement: .sidebar, prompt: "Search surahs")
         #if os(macOS)
         .navigationSplitViewColumnWidth(min: 220, ideal: 250)
         #endif

@@ -17,12 +17,12 @@ struct SurahDetailView: View {
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .padding(.vertical, 8)
+                    .padding(8)
                     .listRowSeparator(.visible)
                 }
             }
-            .navigationTitle(surah.translation + " • " + surah.name)
-//            .navigationSubtitle(surah.name + " • " + surah.type.capitalized)
+            .navigationTitle(surah.transliteration + " • " + surah.name)
+            .navigationSubtitle(surah.translation)
             .listStyle(.plain)
             .toolbarTitleDisplayMode(.inline)
         } else {
