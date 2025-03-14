@@ -3,6 +3,8 @@ import SwiftData
 
 struct SurahDetailView: View {
     let surah: Surah?
+    
+    @ObservedObject var settings = AppSettings.shared
     @Environment(\.modelContext) private var modelContext
     @Query private var readingProgress: [ReadingProgress]
     @State private var topVisibleVerseId: Int?
@@ -16,11 +18,12 @@ struct SurahDetailView: View {
                     ForEach(surah.verses, id: \.id) { verse in
                         VStack(spacing: 16) {
                             Text(verse.text)
-                                .font(.title)
+                                .kerning(3)
+                                .font(.system(size: settings.arabicTextFontSize))
                                 .frame(maxWidth: .infinity, alignment: .trailing)
                             
                             Text("\(verse.id) • \(verse.translation)")
-//                                .font(.body)
+                                .font(.system(size: settings.translationFontSize))
                                 .foregroundStyle(.secondary)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
@@ -60,6 +63,7 @@ struct SurahDetailView: View {
             }
             .navigationTitle(surah.transliteration + " • " + surah.name)
             .toolbarTitleDisplayMode(.inline)
+            .toolbar { SurahToolbar() }
             #if os(macOS)
             .navigationSubtitle(surah.translation)
             #endif
