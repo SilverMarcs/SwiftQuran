@@ -55,7 +55,10 @@ final class ReadingProgressManager: ObservableObject {
         guard let keys = userInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as? [String] else { return }
         
         if keys.contains(progressKey) {
-            loadProgress()
+            // Ensure we're on main actor since notification might come from background
+            Task { @MainActor in
+                self.loadProgress()
+            }
         }
     }
 }
