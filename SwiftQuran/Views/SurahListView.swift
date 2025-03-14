@@ -63,6 +63,12 @@ struct SurahListView: View {
                 }
             }
         }
+        .task {
+            // if there is recent surah, set teh first one as selected
+            if let surah = recentSurahs.first {
+                selectedSurah = surah
+            }
+        }
         .navigationTitle("Surahs")
         .searchable(text: $searchText, placement: .sidebar, prompt: "Search surahs")
         #if os(macOS)
