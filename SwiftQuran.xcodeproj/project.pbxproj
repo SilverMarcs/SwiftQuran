@@ -16,6 +16,9 @@
 			membershipExceptions = (
 				Info.plist,
 			);
+			platformFiltersByRelativePath = {
+				"Views/Search++.swift" = (macos, );
+			};
 			target = 08D6918F2D8343A700EC14D8 /* SwiftQuran */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */

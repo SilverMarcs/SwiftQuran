@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SurahRow: View {
     let surah: Surah
+    @ObservedObject var progressManager = ReadingProgressManager.shared
     
     var body: some View {
         HStack(alignment: .center) {
@@ -21,13 +22,28 @@ struct SurahRow: View {
             
             Spacer()
             
-            Text("\(surah.totalVerses)")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+            if let markedVerse = progressManager.getProgress(for: surah.id) {
+                Text("\(markedVerse)/\(surah.totalVerses)")
+                    .font(.subheadline)
+                    .foregroundStyle(.accent)
+            } else {
+                Text("\(surah.totalVerses)")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .swipeActions(edge: .trailing) {
+            if progressManager.getProgress(for: surah.id) != nil {
+                Button(role: .destructive) {
+                    progressManager.resetProgress(for: surah.id)
+                } label: {
+                    Label("Reset Progress", systemImage: "arrow.counterclockwise")
+                }
+            }
         }
     }
 }
 
 #Preview {
-    SurahRow(surah: Mock.surah)
+   SurahRow(surah: Mock.surah)
 }
