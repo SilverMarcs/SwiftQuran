@@ -1,9 +1,12 @@
 import SwiftUI
+import SwiftData
 
 struct SurahToolbar: ToolbarContent {
     let surah: Surah
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.modelContext) private var modelContext
+    @Query private var readingProgress: [ReadingProgress]
     @Binding var scrollTarget: Int?
     @State private var showingFontSettings = false
     @ObservedObject var settings = AppSettings.shared
@@ -39,6 +42,31 @@ struct SurahToolbar: ToolbarContent {
                             }
                         }
                     }
+                    
+                    Section {
+                        Menu {
+                            ForEach(surah.verses) { verse in
+                                Button(action: {
+                                    withAnimation {
+                                        scrollTarget = verse.id
+                                    }
+                                }) {
+                                    Text("Verse \(verse.id)")
+                                    
+                                }
+                            }
+                        } label: {
+                            Label("Verse List", systemImage: "list.bullet")
+                        }
+                    }
+                    
+                    LabeledContent {
+                        Button(role: .destructive, action: resetProgress) {
+                            Text("Reset")
+                        }
+                    } label: {
+                        Text("Reading Progress")
+                    }
                 }
                 .presentationDetents(horizontalSizeClass == .compact ? [.medium, .large] : [.large])
                 .presentationDragIndicator(.hidden)
@@ -48,23 +76,12 @@ struct SurahToolbar: ToolbarContent {
                 #endif
             }
         }
-            
-        ToolbarItem(placement: .navigation) {
-            Menu {
-                ForEach(surah.verses) { verse in
-                    Button(action: {
-                        withAnimation {
-                            scrollTarget = verse.id
-                        }
-                    }) {
-                        Text("Verse \(verse.id)")
-        
-                    }
-                }
-            } label: {
-                Label("Verse List", systemImage: "list.bullet")
-            }
-            .menuIndicator(.hidden)
+    }
+    
+    private func resetProgress() {
+        if let progress = readingProgress.first(where: { $0.surahId == surah.id }) {
+            modelContext.delete(progress)
+            scrollTarget = nil
         }
     }
 }
