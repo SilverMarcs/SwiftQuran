@@ -23,12 +23,6 @@ struct Surah: Codable, Identifiable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
-    enum CodingKeys: String, CodingKey {
-        case id, name, transliteration, translation, type
-        case totalVerses = "total_verses"
-        case verses
-    }
 }
 
 struct Verse: Codable, Identifiable {
