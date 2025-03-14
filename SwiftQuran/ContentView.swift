@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     @State private var selectedSurah: Surah?
@@ -8,12 +9,12 @@ struct ContentView: View {
             SurahListView(selectedSurah: $selectedSurah)
         } detail: {
             SurahDetailView(surah: selectedSurah)
-                .id(selectedSurah)
+                .id(selectedSurah?.id)
         }
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Surah.self, Verse.self], inMemory: true)
+        .modelContainer(for: [ReadingProgress.self], inMemory: true)
 }

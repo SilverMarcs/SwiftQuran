@@ -6,30 +6,33 @@
 //
 
 import Foundation
-import SwiftData
 
-@Model
-final class Surah {
-    var id: Int
-    var name: String
-    var transliteration: String
-    var translation: String
-    var type: String
-    var totalVerses: Int
+struct Surah: Codable, Identifiable, Hashable {
+    let id: Int
+    let name: String
+    let transliteration: String
+    let translation: String
+    let type: String
+    let totalVerses: Int
+    let verses: [Verse]
     
-    @Relationship(deleteRule: .cascade) var unorderedVerses: [Verse]
-    @Relationship(deleteRule: .cascade) var readingProgress: ReadingProgress?
-    var verses: [Verse] {
-        unorderedVerses.sorted { $0.id < $1.id }
+    static func == (lhs: Surah, rhs: Surah) -> Bool {
+        lhs.id == rhs.id
     }
     
-    init(id: Int, name: String, transliteration: String, translation: String, type: String, totalVerses: Int, verses: [Verse]) {
-        self.id = id
-        self.name = name
-        self.transliteration = transliteration
-        self.translation = translation
-        self.type = type
-        self.totalVerses = totalVerses
-        self.unorderedVerses = verses
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name, transliteration, translation, type
+        case totalVerses = "total_verses"
+        case verses
+    }
+}
+
+struct Verse: Codable, Identifiable {
+    let id: Int
+    let text: String
+    let translation: String
 }

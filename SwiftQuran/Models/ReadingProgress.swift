@@ -3,13 +3,13 @@ import SwiftData
 
 @Model
 final class ReadingProgress {
-    var lastReadAt: Date
-    var lastReadVerseId: Int
-    var surah: Surah?
+    var lastReadAt: Date?
+    var lastReadVerseId: Int?
+    var surahId: Int?
     
-    init(lastReadVerseId: Int, surah: Surah) {
+    init(lastReadVerseId: Int, surahId: Int) {
         self.lastReadAt = Date()
         self.lastReadVerseId = lastReadVerseId
-        self.surah = surah
+        self.surahId = surahId
     }
 }

@@ -3,13 +3,8 @@ import SwiftData
 
 @main
 struct SwiftQuranApp: App {
-    @State private var importer: BackgroundImporter?
-    
     var sharedModelContainer: ModelContainer = {
-        print((URL.applicationSupportDirectory.path(percentEncoded: false)))
         let schema = Schema([
-            Surah.self,
-            Verse.self,
             ReadingProgress.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -25,10 +20,7 @@ struct SwiftQuranApp: App {
         WindowGroup {
             ContentView()
                 .task {
-                    if importer == nil {
-                        importer = BackgroundImporter(modelContainer: sharedModelContainer)
-                        try? await importer?.fetchAndImportQuran()
-                    }
+                    QuranDataManager.shared.loadQuranData()
                 }
         }
         .modelContainer(sharedModelContainer)

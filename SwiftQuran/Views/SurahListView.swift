@@ -2,9 +2,18 @@ import SwiftUI
 import SwiftData
 
 struct SurahListView: View {
-    @Query(sort: \Surah.id) private var surahs: [Surah]
+    @Environment(\.modelContext) private var modelContext
+    @Query private var readingProgress: [ReadingProgress]
     @Binding var selectedSurah: Surah?
     @State private var searchText = ""
+    
+    private var surahs: [Surah] {
+        QuranDataManager.shared.surahs
+    }
+    
+    private func getProgress(for surahId: Int) -> ReadingProgress? {
+        readingProgress.first { $0.surahId == surahId }
+    }
     
     var filteredSurahs: [Surah] {
         if searchText.isEmpty {
@@ -37,8 +46,8 @@ struct SurahListView: View {
                     Spacer()
                     
                     HStack(spacing: 4) {
-                        if let progress = surah.readingProgress {
-                            Text("\(progress.lastReadVerseId)/\(surah.totalVerses)")
+                        if let progress = getProgress(for: surah.id) {
+                            Text("\(progress.lastReadVerseId ?? 0)/\(surah.totalVerses)")
                                 .font(.subheadline)
                                 .foregroundStyle(.tint)
                         } else {

@@ -4,6 +4,7 @@ import SwiftData
 struct SurahDetailView: View {
     let surah: Surah?
     @Environment(\.modelContext) private var modelContext
+    @Query private var readingProgress: [ReadingProgress]
     @State private var topVisibleVerseId: Int?
     @State private var lastScrollPhase: ScrollPhase = .idle
     @State private var scrollTarget: Int?
@@ -30,7 +31,6 @@ struct SurahDetailView: View {
                         .onAppear {
                             // Update topmost visible verse
                             topVisibleVerseId = verse.id
-                            // print("Verse \(verse.id) became visible")
                         }
                     }
                     .padding(.horizontal)
@@ -52,10 +52,8 @@ struct SurahDetailView: View {
             }
             .onAppear {
                 // Set initial scroll position if there's reading progress
-                if let progress = surah.readingProgress {
+                if let progress = getProgress(for: surah.id) {
                     Task { @MainActor in
-                        // Small delay to ensure view is ready
-//                        try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
                         scrollTarget = progress.lastReadVerseId
                     }
                 }
@@ -73,16 +71,17 @@ struct SurahDetailView: View {
     }
     
     private func updateReadingProgress(verseId: Int, surah: Surah) {
-        if let existingProgress = surah.readingProgress {
+        if let existingProgress = getProgress(for: surah.id) {
             existingProgress.lastReadAt = Date()
             existingProgress.lastReadVerseId = verseId
         } else {
-            let progress = ReadingProgress(lastReadVerseId: verseId, surah: surah)
-            surah.readingProgress = progress
+            let progress = ReadingProgress(lastReadVerseId: verseId, surahId: surah.id)
             modelContext.insert(progress)
         }
-        
-//        try? modelContext.save()
+    }
+    
+    private func getProgress(for surahId: Int) -> ReadingProgress? {
+        readingProgress.first { $0.surahId == surahId }
     }
 }
 
