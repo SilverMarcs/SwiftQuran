@@ -63,15 +63,15 @@ struct SurahListView: View {
                 }
             }
         }
+        .navigationTitle("Surahs")
+        .searchable(text: $searchText, placement: .sidebar, prompt: "Search surahs")
+        #if os(macOS)
         .task {
             // if there is recent surah, set teh first one as selected
             if let surah = recentSurahs.first {
                 selectedSurah = surah
             }
         }
-        .navigationTitle("Surahs")
-        .searchable(text: $searchText, placement: .sidebar, prompt: "Search surahs")
-        #if os(macOS)
         .navigationSplitViewColumnWidth(min: 220, ideal: 250)
         #endif
     }
