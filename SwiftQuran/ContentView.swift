@@ -8,8 +8,10 @@ struct ContentView: View {
         NavigationSplitView {
             SurahListView(selectedSurah: $selectedSurah)
         } detail: {
-            SurahDetailView(surah: selectedSurah)
-                .id(selectedSurah?.id)
+            if let surah = selectedSurah {
+                SurahDetailView(surah: surah)
+                    .id(surah.id)
+            }
         }
     }
 }
