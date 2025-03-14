@@ -17,7 +17,6 @@ struct VerseRow: View {
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(.vertical, 8)
     }
 }
 

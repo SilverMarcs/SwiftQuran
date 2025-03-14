@@ -9,7 +9,7 @@ struct SurahDetailView: View {
                 VerseRow(verse: verse)
                     .id(verse.id)
             }
-            .padding(.horizontal)
+            .padding(10)
         }
         .listStyle(.plain)
         .scrollContentBackground(.visible)
