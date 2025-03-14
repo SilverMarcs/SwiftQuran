@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SurahRow: View {
     let surah: Surah
     let progress: ReadingProgress?
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         HStack(alignment: .center) {
@@ -38,6 +40,17 @@ struct SurahRow: View {
                     Text("\(surah.totalVerses)")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+            if progress != nil {
+                Button(role: .destructive) {
+                    if let progress = progress {
+                        modelContext.delete(progress)
+                    }
+                } label: {
+                    Label("Reset Progress", systemImage: "arrow.counterclockwise")
                 }
             }
         }
