@@ -23,6 +23,7 @@ struct SwiftQuranApp: App {
                     QuranDataManager.shared.loadQuranData()
                 }
         }
+        .commands { MenuCommands() }
         .modelContainer(sharedModelContainer)
     }
 }
