@@ -5,17 +5,22 @@ struct SurahListView: View {
     @State private var searchText = ""
     
     private var surahs: [Surah] {
-        QuranDataManager.shared.surahs
+        let allSurahs = QuranDataManager.shared.surahs
+        
+        if searchText.isEmpty {
+            return allSurahs
+        } else {
+            return allSurahs.filter { surah in
+                surah.translation.localizedCaseInsensitiveContains(searchText) ||
+                surah.transliteration.localizedCaseInsensitiveContains(searchText)
+            }
+        }
     }
     
     var body: some View {
         List(selection: $selectedSurah) {
             Section("All Surahs") {
-                ForEach(surahs.filter { surah in
-                    searchText.isEmpty || 
-                    surah.translation.localizedCaseInsensitiveContains(searchText) ||
-                    surah.transliteration.localizedCaseInsensitiveContains(searchText)
-                }, id: \.id) { surah in
+                ForEach(surahs, id: \.id) { surah in
                     NavigationLink(value: surah) {
                         SurahRow(surah: surah)
                     }
