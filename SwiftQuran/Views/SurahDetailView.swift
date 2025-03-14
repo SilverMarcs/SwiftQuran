@@ -18,7 +18,7 @@ struct SurahDetailView: View {
         .scrollContentBackground(.visible)
         .navigationTitle(surah.transliteration)
         .toolbarTitleDisplayMode(.inline)
-        .toolbar { SurahToolbar(surah: surah, scrollTarget: .constant(nil)) }
+        .toolbar { SurahToolbar(surah: surah) }
         #if os(macOS)
         .navigationSubtitle(surah.translation)
         #endif
