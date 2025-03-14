@@ -16,13 +16,11 @@ struct VerseRow: View {
                 .font(.system(size: settings.translationFontSize))
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Divider()
         }
-        .padding(4)
+        .padding(.vertical, 8)
     }
 }
 
-//#Preview {
-//    VerseRow(verse: .sample)
-//}
+#Preview {
+    VerseRow(verse: Mock.verse)
+}

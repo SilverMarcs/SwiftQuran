@@ -4,17 +4,14 @@ struct SurahDetailView: View {
     let surah: Surah
     
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 16) {
-                ForEach(surah.verses, id: \.id) { verse in
-                    VerseRow(verse: verse)
-                        .id(verse.id)
-                }
-                .padding(.horizontal)
+        List {
+            ForEach(surah.verses, id: \.id) { verse in
+                VerseRow(verse: verse)
+                    .id(verse.id)
             }
-            .scrollTargetLayout()
+            .padding(.horizontal)
         }
-        .background(.background)
+        .listStyle(.plain)
         .scrollContentBackground(.visible)
         .navigationTitle(surah.transliteration)
         .toolbarTitleDisplayMode(.inline)
@@ -25,6 +22,6 @@ struct SurahDetailView: View {
     }
 }
 
-//#Preview {
-//    SurahDetailView(surah: .sample)
-//}
+#Preview {
+    SurahDetailView(surah: Mock.surah)
+}

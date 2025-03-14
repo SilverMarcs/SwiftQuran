@@ -27,3 +27,7 @@ struct SurahRow: View {
         }
     }
 }
+
+#Preview {
+    SurahRow(surah: Mock.surah)
+}

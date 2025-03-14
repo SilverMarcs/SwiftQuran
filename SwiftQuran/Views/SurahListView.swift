@@ -29,3 +29,7 @@ struct SurahListView: View {
         #endif
     }
 }
+
+#Preview {
+    SurahListView(selectedSurah: .constant(Mock.surah))
+}

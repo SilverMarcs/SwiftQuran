@@ -60,3 +60,13 @@ struct SurahToolbar: ToolbarContent {
         }
     }
 }
+
+#Preview {
+    VStack {
+        Text("whatever")
+    }
+    .frame(width: 300, height: 300)
+    .toolbar {
+        SurahToolbar(surah: Mock.surah)
+    }
+}
