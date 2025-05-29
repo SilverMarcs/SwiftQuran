@@ -21,14 +21,16 @@ struct VerseRow: View {
     var body: some View {
         VStack(spacing: 16) {
             Text(verse.text)
-                .kerning(4)
-                .lineSpacing(2)
+                .opacity(0.85)
+                .kerning(8)
+                .lineSpacing(4)
                 .font(.system(size: settings.arabicTextFontSize))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .environment(\.layoutDirection, .rightToLeft)
             
             HStack(alignment: .bottom) {
                 Text("\(verseNumber) • \(verse.translation)")
+                    .textSelection(.enabled)
                     .font(.system(size: settings.translationFontSize))
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
