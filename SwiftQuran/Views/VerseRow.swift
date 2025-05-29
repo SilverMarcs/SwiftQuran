@@ -3,12 +3,20 @@ import AVKit
 
 struct VerseRow: View {
     let verse: Verse
-    @State private var audioPlayer: AVPlayer?
-    @State private var isPlaying = false
     let surahNumber: Int
     let verseNumber: Int
     @ObservedObject var settings = AppSettings.shared
     @ObservedObject var progressManager = ReadingProgressManager.shared
+    @ObservedObject private var audioPlayer = AudioPlayerManager.shared
+    @State private var isDragging = false
+    
+    private var verseId: String {
+        "verse_\(surahNumber)_\(verseNumber)"
+    }
+    
+    private var isCurrentVerse: Bool {
+        audioPlayer.currentVerseId == verseId
+    }
     
     var body: some View {
         VStack(spacing: 16) {
@@ -35,59 +43,97 @@ struct VerseRow: View {
                     .foregroundStyle(progressManager.getProgress(for: surahNumber) == verseNumber ? .accent : .secondary)
                     
                     Button {
-                        if isPlaying {
-                            stopVerse()
+                        if isCurrentVerse && audioPlayer.isPlaying {
+                            audioPlayer.pause()
+                        } else if isCurrentVerse {
+                            playVerse()
                         } else {
                             playVerse()
                         }
                     } label: {
-                        Image(systemName: isPlaying ? "stop.circle.fill" : "play.circle.fill")
+                        Image(systemName: (isCurrentVerse && audioPlayer.isPlaying) ? "pause.circle.fill" : "play.circle.fill")
                     }
                     .buttonStyle(.plain)
-                    .foregroundStyle(isPlaying ? .accent : .secondary)
+                    .foregroundStyle((isCurrentVerse && audioPlayer.isPlaying) ? .accent : .secondary)
                 }
+            }
+            
+            // Audio player controls - only show if this verse is playing
+            if isCurrentVerse && audioPlayer.duration > 0 {
+                VStack(spacing: 8) {
+                    HStack {
+                        Text(formatTime(audioPlayer.currentTime))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        
+                        Slider(
+                            value: Binding(
+                                get: { isDragging ? audioPlayer.currentTime : audioPlayer.currentTime },
+                                set: { newValue in
+                                    if isDragging {
+                                        audioPlayer.seek(to: newValue)
+                                    }
+                                }
+                            ),
+                            in: 0...audioPlayer.duration,
+                            onEditingChanged: { editing in
+                                isDragging = editing
+                            }
+                        )
+                        .accentColor(.accent)
+                        
+                        Text(formatTime(audioPlayer.duration))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    
+                    HStack {
+                        Button {
+                            audioPlayer.seek(to: max(0, audioPlayer.currentTime - 15))
+                        } label: {
+                            Image(systemName: "gobackward.15")
+                        }
+                        .buttonStyle(.plain)
+                        
+                        Spacer()
+                        
+                        Button {
+                            audioPlayer.stop()
+                        } label: {
+                            Image(systemName: "stop.fill")
+                        }
+                        .buttonStyle(.plain)
+                        
+                        Spacer()
+                        
+                        Button {
+                            audioPlayer.seek(to: min(audioPlayer.duration, audioPlayer.currentTime + 15))
+                        } label: {
+                            Image(systemName: "goforward.15")
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .foregroundStyle(.secondary)
+                }
+                .padding(.horizontal)
             }
         }
         .id("verse\(verse.id)")
-        .onDisappear {
-            cleanup()
-        }
+//        .onDisappear {
+//            cleanup()
+//        }
     }
     
     private func playVerse() {
         let urlString = "https://the-quran-project.github.io/Quran-Audio/Data/1/\(surahNumber)_\(verseNumber).mp3"
         guard let url = URL(string: urlString) else { return }
-        
-        stopVerse() // Stop any existing playback
-        
-        let playerItem = AVPlayerItem(url: url)
-        audioPlayer = AVPlayer(playerItem: playerItem)
-        
-        // Add observer for when playback ends
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: playerItem, queue: .main) { _ in
-            isPlaying = false
-            audioPlayer = nil
-        }
-        
-        // Add observer for playback errors
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemFailedToPlayToEndTime, object: playerItem, queue: .main) { _ in
-            isPlaying = false
-            audioPlayer = nil
-        }
-        
-        audioPlayer?.play()
-        isPlaying = true
+        audioPlayer.play(url: url, verseId: verseId)
     }
     
-    private func stopVerse() {
-        audioPlayer?.pause()
-        audioPlayer = nil
-        isPlaying = false
-    }
-    
-    private func cleanup() {
-        stopVerse()
-        NotificationCenter.default.removeObserver(self)
+    private func formatTime(_ seconds: Double) -> String {
+        let minutes = Int(seconds) / 60
+        let seconds = Int(seconds) % 60
+        return String(format: "%d:%02d", minutes, seconds)
     }
 }
 
