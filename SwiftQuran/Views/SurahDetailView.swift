@@ -29,6 +29,7 @@ struct SurahDetailView: View {
             }
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 BottomAudioPlayer()
+                    .ignoresSafeArea(.all, edges: .bottom)
             }
         }
     }

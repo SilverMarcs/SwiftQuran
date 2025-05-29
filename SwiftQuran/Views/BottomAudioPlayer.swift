@@ -10,30 +10,9 @@ struct BottomAudioPlayer: View {
                 // Thin divider line
                 Rectangle()
                     .fill(.separator)
-                    .frame(height: 0.5)
+                    .frame(height: 1)
                 
                 VStack(spacing: 12) {
-                    // Currently playing verse info
-                    HStack {
-                        Image(systemName: "speaker.wave.2.fill")
-                            .font(.caption)
-                            .foregroundStyle(.accent)
-                        Text("Playing Verse \(getVerseDisplayText())")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        
-                        Spacer()
-                        
-                        Button {
-                            audioPlayer.stop()
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                    
                     // Progress bar
                     HStack(spacing: 8) {
                         Text(formatTime(audioPlayer.currentTime))
@@ -65,6 +44,16 @@ struct BottomAudioPlayer: View {
                     
                     // Control buttons
                     HStack(spacing: 32) {
+//                        Image(systemName: "speaker.wave.2.fill")
+//                            .font(.caption)
+//                            .foregroundStyle(.accent)
+                        
+                        Text("\(getVerseDisplayText())")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        
+                        Spacer()
+                        
                         Button {
                             audioPlayer.seek(to: max(0, audioPlayer.currentTime - 5))
                         } label: {
@@ -92,6 +81,17 @@ struct BottomAudioPlayer: View {
                                 .font(.title3)
                         }
                         .buttonStyle(.plain)
+                        
+                        Spacer()
+                        
+                        Button {
+                            audioPlayer.stop()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+//                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
                     }
                     .foregroundStyle(.primary)
                 }
@@ -99,7 +99,6 @@ struct BottomAudioPlayer: View {
                 .padding(.vertical, 12)
                 .background(.regularMaterial)
             }
-            .transition(.move(edge: .bottom).combined(with: .opacity))
         }
     }
     
