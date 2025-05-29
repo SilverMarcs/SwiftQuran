@@ -12,6 +12,25 @@ class AudioPlayerManager: ObservableObject {
     @Published var duration: Double = 0
     @Published var currentVerseId: String?
     
+    // Computed properties for easier access to verse information
+    var currentSurahNumber: Int? {
+        guard let verseId = currentVerseId else { return nil }
+        let components = verseId.components(separatedBy: "_")
+        if components.count == 3, let surahNumber = Int(components[1]) {
+            return surahNumber
+        }
+        return nil
+    }
+    
+    var currentVerseNumber: Int? {
+        guard let verseId = currentVerseId else { return nil }
+        let components = verseId.components(separatedBy: "_")
+        if components.count == 3, let verseNumber = Int(components[2]) {
+            return verseNumber
+        }
+        return nil
+    }
+    
     private init() {}
     
     func play(url: URL, verseId: String) {

@@ -3,6 +3,7 @@ import SwiftUI
 struct SurahDetailView: View {
     let surah: Surah
     @ObservedObject var progressManager = ReadingProgressManager.shared
+    @ObservedObject private var audioPlayer = AudioPlayerManager.shared
     
     var body: some View {
         ScrollViewReader { proxy in
@@ -25,6 +26,9 @@ struct SurahDetailView: View {
                     let verseId = surah.verses[markedVerse - 1].id
                     proxy.scrollTo("verse\(verseId)", anchor: .top)
                 }
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                BottomAudioPlayer()
             }
         }
     }
