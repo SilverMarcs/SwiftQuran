@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SurahToolbar: ToolbarContent {
     let surah: Surah
+    var proxy: ScrollViewProxy? = nil
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingFontSettings = false
@@ -41,7 +42,9 @@ struct SurahToolbar: ToolbarContent {
                     Section {
                         Menu {
                             ForEach(surah.verses) { verse in
-                                Button(action: {}) {
+                                Button(action: {
+                                    proxy?.scrollTo("verse\(verse.id)", anchor: .top)
+                                }) {
                                     Text("Verse \(verse.id)")
                                 }
                             }
@@ -50,7 +53,7 @@ struct SurahToolbar: ToolbarContent {
                         }
                     }
                 }
-                .presentationDetents(horizontalSizeClass == .compact ? [.medium, .large] : [.large])
+                .presentationDetents(horizontalSizeClass == .compact ? [.medium] : [.large])
                 .presentationDragIndicator(.hidden)
                 .formStyle(.grouped)
                 #if os(macOS)
