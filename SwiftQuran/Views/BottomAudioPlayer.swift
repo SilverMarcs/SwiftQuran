@@ -49,8 +49,8 @@ struct BottomAudioPlayer: View {
 //                            .foregroundStyle(.accent)
                         
                         Text("\(getVerseDisplayText())")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .font(.caption.bold())
+//                            .foregroundStyle(.secondary)
                         
                         Spacer()
                         
@@ -90,7 +90,7 @@ struct BottomAudioPlayer: View {
                         } label: {
                             Image(systemName: "xmark.circle.fill")
 //                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(.red)
                         }
                         .buttonStyle(.plain)
                     }

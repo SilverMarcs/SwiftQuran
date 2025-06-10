@@ -24,7 +24,7 @@ struct VerseRow: View {
                 #if os(macOS)
                 .opacity(0.9)
                 #else
-                .opacity(0.7)
+                .opacity(0.75)
                 #endif
                 .kerning(8)
                 .lineSpacing(4)
