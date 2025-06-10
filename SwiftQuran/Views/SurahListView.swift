@@ -41,7 +41,7 @@ struct SurahListView: View {
             }
         }
         .navigationTitle("Surahs")
-        .toolbarTitleDisplayMode(.inline)
+        .toolbarTitleDisplayMode(.inlineLarge)
         .searchable(text: $searchText, placement: .sidebar, prompt: "Search surahs")
         #if os(macOS)
         .navigationSplitViewColumnWidth(min: 220, ideal: 250)

@@ -4,6 +4,7 @@ struct SurahDetailView: View {
     let surah: Surah
     @ObservedObject var progressManager = ReadingProgressManager.shared
     @ObservedObject private var audioPlayer = AudioPlayerManager.shared
+    @State private var showingVerseList = false
     
     var body: some View {
         ScrollViewReader { proxy in
@@ -17,7 +18,22 @@ struct SurahDetailView: View {
             .scrollContentBackground(.visible)
             .navigationTitle(surah.transliteration)
             .toolbarTitleDisplayMode(.inline)
-            .toolbar { SurahToolbar(surah: surah, proxy: proxy) }
+            .toolbarTitleMenu {
+                Menu {
+                    ForEach(surah.verses) { verse in
+                        Button(action: {
+                            proxy.scrollTo("verse\(verse.id)", anchor: .top)
+                        }) {
+                            Text("Verse \(verse.id)")
+                        }
+                    }
+                } label: {
+                    Label("Verse List", systemImage: "list.bullet")
+                }
+            }
+            .toolbar {
+                SurahToolbar(surah: surah)
+            }
             #if os(macOS)
             .navigationSubtitle(surah.translation)
             #endif

@@ -2,7 +2,6 @@ import SwiftUI
 
 struct SurahToolbar: ToolbarContent {
     let surah: Surah
-    var proxy: ScrollViewProxy? = nil
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingFontSettings = false
@@ -36,20 +35,6 @@ struct SurahToolbar: ToolbarContent {
                             Button(action: settings.resetAllFontSizes) {
                                 Text("Reset")
                             }
-                        }
-                    }
-                    
-                    Section {
-                        Menu {
-                            ForEach(surah.verses) { verse in
-                                Button(action: {
-                                    proxy?.scrollTo("verse\(verse.id)", anchor: .top)
-                                }) {
-                                    Text("Verse \(verse.id)")
-                                }
-                            }
-                        } label: {
-                            Label("Verse List", systemImage: "list.bullet")
                         }
                     }
                 }
