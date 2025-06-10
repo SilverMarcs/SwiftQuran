@@ -8,9 +8,9 @@ struct BottomAudioPlayer: View {
         if audioPlayer.currentVerseId != nil && audioPlayer.duration > 0 {
             VStack(spacing: 0) {
                 // Thin divider line
-                Rectangle()
-                    .fill(.separator)
-                    .frame(height: 0.5)
+//                Rectangle()
+//                    .fill(.separator)
+//                    .frame(height: 0.5)
                 
                 VStack(spacing: 12) {
                     // Progress bar
@@ -71,6 +71,7 @@ struct BottomAudioPlayer: View {
                         } label: {
                             Image(systemName: audioPlayer.isPlaying ? "pause.circle.fill" : "play.circle.fill")
                                 .font(.title)
+//                                .foregroundStyle(audioPlayer.isPlaying ? .accent : .red)
                         }
                         .buttonStyle(.plain)
                         
@@ -97,7 +98,9 @@ struct BottomAudioPlayer: View {
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
-                .background(.bar)
+                .glassEffect(in: RoundedRectangle(cornerRadius: 20))
+                .padding(.horizontal)
+                .padding(.vertical, 13)
             }
         }
     }
