@@ -21,7 +21,11 @@ struct VerseRow: View {
     var body: some View {
         VStack(spacing: 16) {
             Text(verse.text)
-                .opacity(0.85)
+                #if os(macOS)
+                .opacity(0.9)
+                #else
+                .opacity(0.7)
+                #endif
                 .kerning(8)
                 .lineSpacing(4)
                 .font(.system(size: settings.arabicTextFontSize))

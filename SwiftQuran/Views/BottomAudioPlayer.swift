@@ -10,7 +10,7 @@ struct BottomAudioPlayer: View {
                 // Thin divider line
                 Rectangle()
                     .fill(.separator)
-                    .frame(height: 1)
+                    .frame(height: 0.5)
                 
                 VStack(spacing: 12) {
                     // Progress bar

@@ -12,7 +12,7 @@ class AppSettings: ObservableObject {
     
     static let defaultArabicFontSize: Double = 21
     static let minFontSize: Double = 10
-    static let maxFontSize: Double = 50
+    static let maxFontSize: Double = 60
     
     @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = defaultArabicFontSize
     @AppStorage("translationFontSize") var translationFontSize: Double = defaultTranslationFontSize
