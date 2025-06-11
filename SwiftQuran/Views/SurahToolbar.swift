@@ -15,7 +15,7 @@ struct SurahToolbar: ToolbarContent {
                 Image(systemName: "textformat.size")
             }
             .popover(isPresented: $showingFontSettings) {
-                VStack(spacing: 20) {
+                VStack(alignment: .trailing, spacing: 20) {
                     FontSizeControl(
                         title: "Arabic",
                         fontSize: $settings.arabicTextFontSize

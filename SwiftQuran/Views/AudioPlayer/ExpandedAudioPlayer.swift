@@ -56,7 +56,7 @@ struct ExpandedAudioPlayer: View {
     }
     
     private func getSurahName() -> String {
-        return audioPlayer.currentVerse?.surah?.translation ?? ""
+        return audioPlayer.currentVerse?.surah?.transliteration ?? ""
     }
     
     private func resumePlayback() {
