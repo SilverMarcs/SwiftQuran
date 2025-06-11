@@ -17,7 +17,7 @@ struct SurahSearchTab: View {
                 SurahRow(surah: surah)
             }
         }
-        .navigationTitle("All Surahs")
+        .navigationTitle("Search")
         .toolbarTitleDisplayMode(.inlineLarge)
     }
 }
