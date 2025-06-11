@@ -54,8 +54,6 @@ struct SurahDetailView: View {
             }
             #if os(macOS)
             .navigationSubtitle(surah.translation)
-            #else
-            .toolbar(.hidden, for: .tabBar)
             #endif
         }
     }

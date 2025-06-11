@@ -15,47 +15,58 @@ struct SurahToolbar: ToolbarContent {
                 Image(systemName: "textformat.size")
             }
             .popover(isPresented: $showingFontSettings) {
-                Form {
-                    Section() {
-                        Stepper(value: $settings.arabicTextFontSize, in: AppSettings.minFontSize...AppSettings.maxFontSize) {
-                            Text("Arabic Text Size")
-                            Text("\(Int(settings.arabicTextFontSize))")
-                        }
+                VStack(spacing: 20) {
+                    FontSizeControl(
+                        title: "Arabic",
+                        fontSize: $settings.arabicTextFontSize
+                    )
                     
-                        Stepper(value: $settings.translationFontSize, in: AppSettings.minFontSize...AppSettings.maxFontSize) {
-                            Text("Translation Text Size")
-                            Text("\(Int(settings.translationFontSize))")
-                        }
-                    } header: {
-                        HStack {
-                            Text("Font Settings")
-                            
-                            Spacer()
-                            
-                            Button(action: settings.resetAllFontSizes) {
-                                Text("Reset")
-                            }
-                        }
-                    }
+                    FontSizeControl(
+                        title: "English",
+                        fontSize: $settings.translationFontSize
+                    )
                 }
-                .scrollDisabled(true)
-                .presentationDetents(horizontalSizeClass == .compact ? [.medium] : [.large])
-                .presentationDragIndicator(.hidden)
-                .formStyle(.grouped)
-                #if os(macOS)
-                .frame(width: 300)
-                #endif
+                .padding()
+                .presentationCompactAdaptation(.popover)
+            }
+        }
+    }
+}
+
+struct FontSizeControl: View {
+    let title: String
+    @Binding var fontSize: Double
+    
+    var body: some View {
+        HStack(spacing: 30) {
+            Text(title)
+                .bold()
+            
+            ControlGroup {
+                Button {
+                    if fontSize > AppSettings.minFontSize {
+                        fontSize -= 1
+                    }
+                } label: {
+                    Image(systemName: "textformat.size.smaller")
+                        .foregroundStyle(fontSize > AppSettings.minFontSize ? .primary : .secondary)
+                }
+                .disabled(fontSize <= AppSettings.minFontSize)
+                
+                Button {
+                    if fontSize < AppSettings.maxFontSize {
+                        fontSize += 1
+                    }
+                } label: {
+                    Image(systemName: "textformat.size.larger")
+                        .foregroundStyle(fontSize < AppSettings.maxFontSize ? .primary : .secondary)
+                }
+                .disabled(fontSize >= AppSettings.maxFontSize)
             }
         }
     }
 }
 
 #Preview {
-   VStack {
-       Text("whatever")
-   }
-   .frame(width: 300, height: 300)
-   .toolbar {
-       SurahToolbar(surah: Mock.surah)
-   }
+    FontSizeControl(title: "English", fontSize: .constant(17))
 }
