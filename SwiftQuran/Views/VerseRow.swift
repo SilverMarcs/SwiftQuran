@@ -8,6 +8,7 @@ struct VerseRow: View {
     
     @ObservedObject var settings = AppSettings.shared
     @ObservedObject var progressManager = ReadingProgressManager.shared
+    @ObservedObject var savedVersesManager = SavedVersesManager.shared
     @ObservedObject private var audioPlayer = AudioPlayerManager.shared
     
     private var verseId: String {
@@ -40,6 +41,14 @@ struct VerseRow: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 HStack(alignment: .center) {
+                    Button {
+                        savedVersesManager.toggleSaved(surahNumber: surahNumber, verseNumber: verseNumber)
+                    } label: {
+                        Image(systemName: savedVersesManager.isSaved(surahNumber: surahNumber, verseNumber: verseNumber) ? "heart.fill" : "heart")
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(savedVersesManager.isSaved(surahNumber: surahNumber, verseNumber: verseNumber) ? .red : .secondary)
+                    
                     Button {
                         progressManager.toggleProgress(for: surahNumber, verseNumber: verseNumber)
                     } label: {
