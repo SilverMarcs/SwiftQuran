@@ -42,12 +42,12 @@ struct VerseRow: View {
                 
                 HStack(alignment: .center) {
                     Button {
-                        savedVersesManager.toggleSaved(surahNumber: surahNumber, verseNumber: verseNumber)
+                        savedVersesManager.toggleSaved(verse: verse)
                     } label: {
-                        Image(systemName: savedVersesManager.isSaved(surahNumber: surahNumber, verseNumber: verseNumber) ? "heart.fill" : "heart")
+                        Image(systemName: savedVersesManager.isSaved(verse: verse) ? "heart.fill" : "heart")
                     }
                     .buttonStyle(.plain)
-                    .foregroundStyle(savedVersesManager.isSaved(surahNumber: surahNumber, verseNumber: verseNumber) ? .red : .secondary)
+                    .foregroundStyle(savedVersesManager.isSaved(verse: verse) ? .red : .secondary)
                     
                     Button {
                         progressManager.toggleProgress(for: surahNumber, verseNumber: verseNumber)

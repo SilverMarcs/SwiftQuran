@@ -2,8 +2,6 @@ import SwiftUI
 
 struct SavedVerseRow: View {
     let verse: Verse
-    let surahNumber: Int
-    let verseNumber: Int
     
     @ObservedObject var settings = AppSettings.shared
     
@@ -16,7 +14,7 @@ struct SavedVerseRow: View {
                 .lineLimit(1)
                 .truncationMode(.tail)
             
-            Text("\(verseNumber) • \(verse.translation)")
+            Text("\(verse.verseIndex) • \(verse.translation)")
 //                .font(.system(size: settings.translationFontSize))
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -28,6 +26,6 @@ struct SavedVerseRow: View {
 }
 
 #Preview {
-    SavedVerseRow(verse: Mock.verse, surahNumber: 1, verseNumber: 1)
+    SavedVerseRow(verse: Mock.verse)
         .padding()
 }

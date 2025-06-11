@@ -31,4 +31,14 @@ struct Verse: Codable, Identifiable {
     let translation: String
     let surahNumber: Int
     let verseIndex: Int
+    
+    // Computed property to get the associated surah
+    var surah: Surah? {
+        QuranDataManager.shared.surah(id: surahNumber)
+    }
+    
+    // Helper method to generate verse key used for saving/audio
+    var verseKey: String {
+        "\(surahNumber)_\(verseIndex)"
+    }
 }

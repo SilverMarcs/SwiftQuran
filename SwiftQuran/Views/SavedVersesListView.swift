@@ -2,29 +2,25 @@ import SwiftUI
 
 struct SavedVersesListView: View {
     @ObservedObject var savedVersesManager = SavedVersesManager.shared
-    @State private var savedVersesData: [(verse: Verse, surahName: String, surahNumber: Int, verseNumber: Int)] = []
+    @State private var savedVerses: [Verse] = []
     
     var body: some View {
         List {
-            if savedVersesData.isEmpty {
+            if savedVerses.isEmpty {
                 Text("No saved verses")
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .listRowSeparator(.hidden)
             } else {
-                ForEach(savedVersesData, id: \.verse.id) { item in
-                    if let surah = QuranDataManager.shared.surahs.first(where: { $0.id == item.surahNumber }) {
-                        NavigationLink(destination: SurahDetailView(surah: surah, initialVerseNumberToScrollTo: item.verseNumber)) {
+                ForEach(savedVerses, id: \.id) { verse in
+                    if let surah = verse.surah {
+                        NavigationLink(destination: SurahDetailView(surah: surah, initialVerseNumberToScrollTo: verse.verseIndex)) {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text(item.surahName)
+                                Text(surah.translation)
                                     .font(.caption)
                                     .foregroundStyle(.tertiary)
                                 
-                                SavedVerseRow(
-                                    verse: item.verse,
-                                    surahNumber: item.surahNumber,
-                                    verseNumber: item.verseNumber
-                                )
+                                SavedVerseRow(verse: verse)
                             }
                         }
                     }
@@ -34,31 +30,15 @@ struct SavedVersesListView: View {
         .navigationTitle("Saved Verses")
         .toolbarTitleDisplayMode(.inlineLarge)
         .onAppear {
-            loadSavedVersesData()
+            loadSavedVerses()
         }
         .onChange(of: savedVersesManager.savedVerses) {
-            loadSavedVersesData()
+            loadSavedVerses()
         }
     }
     
-    private func loadSavedVersesData() {
-        let savedVerses = savedVersesManager.getSavedVerses()
-        let quranData = QuranDataManager.shared
-        
-        savedVersesData = savedVerses.compactMap { savedVerse in
-            guard let surah = quranData.surahs.first(where: { $0.id == savedVerse.surahNumber }),
-                  savedVerse.verseNumber > 0 && savedVerse.verseNumber <= surah.verses.count else {
-                return nil
-            }
-            
-            let verse = surah.verses[savedVerse.verseNumber - 1]
-            return (
-                verse: verse,
-                surahName: surah.translation,
-                surahNumber: savedVerse.surahNumber,
-                verseNumber: savedVerse.verseNumber
-            )
-        }
+    private func loadSavedVerses() {
+        savedVerses = savedVersesManager.getSavedVersesData()
     }
 }
 
