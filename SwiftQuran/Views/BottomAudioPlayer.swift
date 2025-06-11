@@ -60,6 +60,7 @@ struct BottomAudioPlayer: View {
                             }
                         } label: {
                             Image(systemName: audioPlayer.isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                                .contentTransition(.symbolEffect(.replace))
                                 .font(.title)
                         }
                         .buttonStyle(.plain)
@@ -77,7 +78,7 @@ struct BottomAudioPlayer: View {
                         Button {
                             audioPlayer.stop()
                         } label: {
-                            Image(systemName: "stop.fill")
+                            Image(systemName: "stop.circle.fill")
                                 .foregroundStyle(.red)
                         }
                         .buttonStyle(.plain)
