@@ -20,9 +20,9 @@ struct SurahDetailView: View {
                 }
                 .padding(10)
             }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                BottomAudioPlayer()
-            }
+//            .safeAreaInset(edge: .bottom, spacing: 0) {
+//                AudioPlayer()
+//            }
             .listStyle(.plain)
             .scrollContentBackground(.visible)
             .navigationTitle(surah.transliteration)
