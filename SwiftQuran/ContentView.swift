@@ -30,10 +30,14 @@ struct ContentView: View {
         }
         .searchable(text: $searchText)
         .tabViewStyle(.sidebarAdaptable)
+        #if os(macOS)
+        .tabViewSidebarBottomBar {
+            AudioPlayer()
+        }
+        #else
         .tabViewBottomAccessory {
             AudioPlayer()
         }
-        #if !os(macOS)
         .tabBarMinimizeBehavior(.onScrollDown)
         #endif
     }
