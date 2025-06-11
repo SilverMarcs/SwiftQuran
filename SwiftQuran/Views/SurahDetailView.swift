@@ -34,9 +34,6 @@ struct SurahDetailView: View {
             .toolbar {
                 SurahToolbar(surah: surah)
             }
-            #if os(macOS)
-            .navigationSubtitle(surah.translation)
-            #endif
             .onAppear {
                 if let markedVerse = progressManager.getProgress(for: surah.id) {
                     let verseId = surah.verses[markedVerse - 1].id
@@ -47,6 +44,11 @@ struct SurahDetailView: View {
                 BottomAudioPlayer()
                     .ignoresSafeArea()
             }
+            #if os(macOS)
+            .navigationSubtitle(surah.translation)
+            #else
+            .toolbar(.hidden, for: .tabBar)
+            #endif
         }
     }
 }
