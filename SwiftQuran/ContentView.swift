@@ -10,31 +10,22 @@ struct ContentView: View {
             Tab("Surahs", systemImage: "book", value: .surahList) {
                 NavigationStack {
                     SurahListTab()
-                        .navigationDestination(for: Surah.self) { surah in
-                            SurahDetailView(surah: surah)
-                                .id(surah.id)
-                        }
                 }
+                .surahNavigationDestination()
             }
             
             Tab(value: .search, role: .search) {
                 NavigationStack {
                     SurahSearchTab(searchText: $searchText)
-                        .navigationDestination(for: Surah.self) { surah in
-                            SurahDetailView(surah: surah)
-                                .id(surah.id)
-                        }
                 }
+                .surahNavigationDestination()
             }
             
             Tab("Saved", systemImage: "heart", value: .saved) {
                 NavigationStack {
                     SavedVersesListView()
-                        .navigationDestination(for: Surah.self) { surah in
-                            SurahDetailView(surah: surah)
-                                .id(surah.id)
-                        }
                 }
+                .surahNavigationDestination()
             }
         }
         .searchable(text: $searchText)
