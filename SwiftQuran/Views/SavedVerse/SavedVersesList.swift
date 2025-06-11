@@ -30,12 +30,17 @@ struct SavedVersesList: View {
                             NavigationLink(destination: SurahDetailView(surah: surah, initialVerseNumberToScrollTo: verse.verseIndex)) {
                                 SavedVerseRow(verse: verse)
                             }
+                            .swipeActions(edge: .trailing) {
+                                Button("Unfavorite", systemImage: "heart.slash", role: .destructive) {
+                                    savedVersesManager.toggleSaved(verse: verse)
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-        .navigationTitle("Saved Verses")
+        .navigationTitle("Saved")
         .toolbarTitleDisplayMode(.inlineLarge)
         .onAppear {
             loadSavedVerses()

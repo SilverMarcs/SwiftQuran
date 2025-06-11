@@ -31,44 +31,44 @@ struct VerseRow: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .environment(\.layoutDirection, .rightToLeft)
             
-            HStack(alignment: .bottom) {
-                Text("\(verse.verseIndex) • \(verse.translation)")
-                    .textSelection(.enabled)
-                    .font(.system(size: settings.translationFontSize))
-                    .foregroundStyle(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                HStack(alignment: .center) {
-                    Button {
-                        savedVersesManager.toggleSaved(verse: verse)
-                    } label: {
-                        Image(systemName: savedVersesManager.isSaved(verse: verse) ? "heart.fill" : "heart")
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundStyle(savedVersesManager.isSaved(verse: verse) ? .red : .secondary)
-                    
-                    Button {
-                        progressManager.toggleProgress(for: verse)
-                    } label: {
-                        Image(systemName: progressManager.isProgress(for: verse) ? "bookmark.fill" : "bookmark")
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundStyle(progressManager.isProgress(for: verse) ? .accent : .secondary)
-                    
-                    Button {
-                        if isCurrentVerse && audioPlayer.isPlaying {
-                            audioPlayer.pause()
-                        } else if isCurrentVerse {
-                            playVerse()
-                        } else {
-                            playVerse()
-                        }
-                    } label: {
-                        Image(systemName: (isCurrentVerse && audioPlayer.isPlaying) ? "pause.circle.fill" : "play.circle.fill")
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundStyle((isCurrentVerse && audioPlayer.isPlaying) ? .accent : .secondary)
+            Text("\(verse.verseIndex) • \(verse.translation)")
+                .textSelection(.enabled)
+                .font(.system(size: settings.translationFontSize))
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            HStack {
+                Button {
+                    savedVersesManager.toggleSaved(verse: verse)
+                } label: {
+                    Image(systemName: savedVersesManager.isSaved(verse: verse) ? "heart.fill" : "heart")
                 }
+                .buttonStyle(.glass)
+                .foregroundStyle(savedVersesManager.isSaved(verse: verse) ? .red : .secondary)
+                
+                Spacer()
+                
+                Button {
+                    progressManager.toggleProgress(for: verse)
+                } label: {
+                    Image(systemName: progressManager.isProgress(for: verse) ? "bookmark.fill" : "bookmark")
+                }
+                .buttonStyle(.glass)
+                .foregroundStyle(progressManager.isProgress(for: verse) ? .accent : .secondary)
+                
+                Button {
+                    if isCurrentVerse && audioPlayer.isPlaying {
+                        audioPlayer.pause()
+                    } else if isCurrentVerse {
+                        playVerse()
+                    } else {
+                        playVerse()
+                    }
+                } label: {
+                    Image(systemName: (isCurrentVerse && audioPlayer.isPlaying) ? "pause.fill" : "play.fill")
+                }
+                .buttonStyle(.glass)
+                .foregroundStyle((isCurrentVerse && audioPlayer.isPlaying) ? .accent : .secondary)
             }
         }
         .id("verse\(verse.id)")
