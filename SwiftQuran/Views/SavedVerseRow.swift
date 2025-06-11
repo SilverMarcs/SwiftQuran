@@ -10,14 +10,14 @@ struct SavedVerseRow: View {
     var body: some View {
         VStack(spacing: 8) {
             Text(verse.text)
-                .font(.system(size: settings.arabicTextFontSize))
+                .font(.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .environment(\.layoutDirection, .rightToLeft)
                 .lineLimit(1)
                 .truncationMode(.tail)
             
             Text("\(verseNumber) • \(verse.translation)")
-                .font(.system(size: settings.translationFontSize))
+//                .font(.system(size: settings.translationFontSize))
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(1)

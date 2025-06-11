@@ -13,16 +13,20 @@ struct SavedVersesListView: View {
                     .listRowSeparator(.hidden)
             } else {
                 ForEach(savedVersesData, id: \.verse.id) { item in
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(item.surahName)
-                            .font(.caption)
-                            .foregroundStyle(.tertiary)
-                        
-                        SavedVerseRow(
-                            verse: item.verse,
-                            surahNumber: item.surahNumber,
-                            verseNumber: item.verseNumber
-                        )
+                    if let surah = QuranDataManager.shared.surahs.first(where: { $0.id == item.surahNumber }) {
+                        NavigationLink(destination: SurahDetailView(surah: surah, initialVerseNumberToScrollTo: item.verseNumber)) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(item.surahName)
+                                    .font(.caption)
+                                    .foregroundStyle(.tertiary)
+                                
+                                SavedVerseRow(
+                                    verse: item.verse,
+                                    surahNumber: item.surahNumber,
+                                    verseNumber: item.verseNumber
+                                )
+                            }
+                        }
                     }
                 }
             }

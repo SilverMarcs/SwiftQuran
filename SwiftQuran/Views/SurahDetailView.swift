@@ -2,9 +2,15 @@ import SwiftUI
 
 struct SurahDetailView: View {
     let surah: Surah
+    let initialVerseNumberToScrollTo: Int?
     @ObservedObject var progressManager = ReadingProgressManager.shared
     @ObservedObject private var audioPlayer = AudioPlayerManager.shared
     @State private var showingVerseList = false
+    
+    init(surah: Surah, initialVerseNumberToScrollTo: Int? = nil) {
+        self.surah = surah
+        self.initialVerseNumberToScrollTo = initialVerseNumberToScrollTo
+    }
     
     var body: some View {
         ScrollViewReader { proxy in
@@ -38,7 +44,10 @@ struct SurahDetailView: View {
                 SurahToolbar(surah: surah)
             }
             .onAppear {
-                if let markedVerse = progressManager.getProgress(for: surah.id) {
+                if let initial = initialVerseNumberToScrollTo, initial > 0, initial <= surah.verses.count {
+                    let verseId = surah.verses[initial - 1].id
+                    proxy.scrollTo("verse\(verseId)", anchor: .top)
+                } else if let markedVerse = progressManager.getProgress(for: surah.id) {
                     let verseId = surah.verses[markedVerse - 1].id
                     proxy.scrollTo("verse\(verseId)", anchor: .top)
                 }
