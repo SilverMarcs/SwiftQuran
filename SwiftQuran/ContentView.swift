@@ -9,7 +9,7 @@ struct ContentView: View {
         TabView(selection: $selectedTab) {
             Tab("Surahs", systemImage: "book", value: .surahList) {
                 NavigationStack {
-                    SurahListTab()
+                    SurahList()
                         .surahNavigationDestination()
                 }
             }
@@ -23,7 +23,7 @@ struct ContentView: View {
             
             Tab("Saved", systemImage: "heart", value: .saved) {
                 NavigationStack {
-                    SavedVersesListView()
+                    SavedVersesList()
                         .surahNavigationDestination()
                 }
             }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SavedVersesListView: View {
+struct SavedVersesList: View {
     @ObservedObject var savedVersesManager = SavedVersesManager.shared
     @State private var savedVerses: [Verse] = []
     
@@ -51,5 +51,5 @@ struct SavedVersesListView: View {
 }
 
 #Preview {
-    SavedVersesListView()
+    SavedVersesList()
 }
