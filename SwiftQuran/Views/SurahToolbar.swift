@@ -38,6 +38,7 @@ struct SurahToolbar: ToolbarContent {
                         }
                     }
                 }
+                .scrollDisabled(true)
                 .presentationDetents(horizontalSizeClass == .compact ? [.medium] : [.large])
                 .presentationDragIndicator(.hidden)
                 .formStyle(.grouped)

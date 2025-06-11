@@ -7,11 +7,6 @@ struct BottomAudioPlayer: View {
     var body: some View {
         if audioPlayer.currentVerseId != nil && audioPlayer.duration > 0 {
             VStack(spacing: 0) {
-                // Thin divider line
-//                Rectangle()
-//                    .fill(.separator)
-//                    .frame(height: 0.5)
-                
                 VStack(spacing: 12) {
                     // Progress bar
                     HStack(spacing: 8) {
@@ -43,14 +38,9 @@ struct BottomAudioPlayer: View {
                     }
                     
                     // Control buttons
-                    HStack(spacing: 32) {
-//                        Image(systemName: "speaker.wave.2.fill")
-//                            .font(.caption)
-//                            .foregroundStyle(.accent)
-                        
+                    HStack(spacing: 28) {
                         Text("\(getVerseDisplayText())")
                             .font(.caption.bold())
-//                            .foregroundStyle(.secondary)
                         
                         Spacer()
                         
@@ -71,7 +61,6 @@ struct BottomAudioPlayer: View {
                         } label: {
                             Image(systemName: audioPlayer.isPlaying ? "pause.circle.fill" : "play.circle.fill")
                                 .font(.title)
-//                                .foregroundStyle(audioPlayer.isPlaying ? .accent : .red)
                         }
                         .buttonStyle(.plain)
                         
@@ -88,8 +77,7 @@ struct BottomAudioPlayer: View {
                         Button {
                             audioPlayer.stop()
                         } label: {
-                            Image(systemName: "xmark.circle.fill")
-//                                .font(.caption)
+                            Image(systemName: "stop.fill")
                                 .foregroundStyle(.red)
                         }
                         .buttonStyle(.plain)

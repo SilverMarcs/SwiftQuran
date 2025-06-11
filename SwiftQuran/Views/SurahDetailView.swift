@@ -14,6 +14,9 @@ struct SurahDetailView: View {
                 }
                 .padding(10)
             }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                BottomAudioPlayer()
+            }
             .listStyle(.plain)
             .scrollContentBackground(.visible)
             .navigationTitle(surah.transliteration)
@@ -39,10 +42,6 @@ struct SurahDetailView: View {
                     let verseId = surah.verses[markedVerse - 1].id
                     proxy.scrollTo("verse\(verseId)", anchor: .top)
                 }
-            }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                BottomAudioPlayer()
-                    .ignoresSafeArea()
             }
             #if os(macOS)
             .navigationSubtitle(surah.translation)
