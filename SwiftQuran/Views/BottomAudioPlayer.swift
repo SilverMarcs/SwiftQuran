@@ -5,7 +5,7 @@ struct BottomAudioPlayer: View {
     @State private var isDragging = false
     
     var body: some View {
-        if audioPlayer.currentVerseId != nil && audioPlayer.duration > 0 {
+        if audioPlayer.currentVerse != nil && audioPlayer.duration > 0 {
             VStack(spacing: 0) {
                 VStack(spacing: 12) {
                     // Progress bar
@@ -103,13 +103,8 @@ struct BottomAudioPlayer: View {
     
     private func resumePlayback() {
         // Resume playing current verse
-        if let verseId = audioPlayer.currentVerseId,
-           let surahNumber = audioPlayer.currentSurahNumber,
-           let verseNumber = audioPlayer.currentVerseNumber {
-            let urlString = "https://the-quran-project.github.io/Quran-Audio/Data/1/\(surahNumber)_\(verseNumber).mp3"
-            if let url = URL(string: urlString) {
-                audioPlayer.play(url: url, verseId: verseId)
-            }
+        if let currentVerse = audioPlayer.currentVerse {
+            audioPlayer.play(verse: currentVerse)
         }
     }
     

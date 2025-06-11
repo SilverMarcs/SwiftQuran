@@ -15,8 +15,8 @@ struct SurahDetailView: View {
     var body: some View {
         ScrollViewReader { proxy in
             List {
-                ForEach(Array(surah.verses.enumerated()), id: \.element.id) { index, verse in
-                    VerseRow(verse: verse, surahNumber: surah.id, verseNumber: index + 1)
+                ForEach(surah.verses, id: \.id) { verse in
+                    VerseRow(verse: verse)
                 }
                 .padding(10)
             }

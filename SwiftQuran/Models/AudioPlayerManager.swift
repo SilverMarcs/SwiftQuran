@@ -10,37 +10,34 @@ class AudioPlayerManager: ObservableObject {
     @Published var isPlaying = false
     @Published var currentTime: Double = 0
     @Published var duration: Double = 0
-    @Published var currentVerseId: String?
+    @Published var currentVerse: Verse?
     
     // Computed properties for easier access to verse information
     var currentSurahNumber: Int? {
-        guard let verseId = currentVerseId else { return nil }
-        let components = verseId.components(separatedBy: "_")
-        if components.count == 3, let surahNumber = Int(components[1]) {
-            return surahNumber
-        }
-        return nil
+        currentVerse?.surahNumber
     }
     
     var currentVerseNumber: Int? {
-        guard let verseId = currentVerseId else { return nil }
-        let components = verseId.components(separatedBy: "_")
-        if components.count == 3, let verseNumber = Int(components[2]) {
-            return verseNumber
-        }
-        return nil
+        currentVerse?.verseIndex
+    }
+    
+    // Legacy computed property for compatibility
+    var currentVerseId: String? {
+        guard let verse = currentVerse else { return nil }
+        return "verse_\(verse.verseKey)"
     }
     
     private init() {}
     
-    func play(url: URL, verseId: String) {
+    func play(url: URL, verse: Verse) {
         // Stop current playback if different verse
+        let verseId = "verse_\(verse.verseKey)"
         if currentVerseId != verseId {
             stop()
         }
         
         // If same verse and paused, just resume
-        if currentVerseId == verseId && player != nil {
+        if currentVerse?.id == verse.id && player != nil {
             player?.play()
             isPlaying = true
             return
@@ -49,12 +46,19 @@ class AudioPlayerManager: ObservableObject {
         // New playback
         let playerItem = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: playerItem)
-        currentVerseId = verseId
+        currentVerse = verse
         
         setupPlayerObservers(playerItem: playerItem)
         
         player?.play()
         isPlaying = true
+    }
+    
+    // Convenience method to play a verse directly from Verse object
+    func play(verse: Verse) {
+        let urlString = "https://the-quran-project.github.io/Quran-Audio/Data/1/\(verse.verseKey).mp3"
+        guard let url = URL(string: urlString) else { return }
+        play(url: url, verse: verse)
     }
     
     func pause() {
@@ -69,7 +73,7 @@ class AudioPlayerManager: ObservableObject {
         isPlaying = false
         currentTime = 0
         duration = 0
-        currentVerseId = nil
+        currentVerse = nil
     }
     
     func seek(to time: Double) {

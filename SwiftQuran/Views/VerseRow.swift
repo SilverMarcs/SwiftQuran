@@ -3,8 +3,6 @@ import AVKit
 
 struct VerseRow: View {
     let verse: Verse
-    let surahNumber: Int
-    let verseNumber: Int
     
     @ObservedObject var settings = AppSettings.shared
     @ObservedObject var progressManager = ReadingProgressManager.shared
@@ -12,7 +10,7 @@ struct VerseRow: View {
     @ObservedObject private var audioPlayer = AudioPlayerManager.shared
     
     private var verseId: String {
-        "verse_\(surahNumber)_\(verseNumber)"
+        "verse_\(verse.verseKey)"
     }
     
     private var isCurrentVerse: Bool {
@@ -34,7 +32,7 @@ struct VerseRow: View {
                 .environment(\.layoutDirection, .rightToLeft)
             
             HStack(alignment: .bottom) {
-                Text("\(verseNumber) • \(verse.translation)")
+                Text("\(verse.verseIndex) • \(verse.translation)")
                     .textSelection(.enabled)
                     .font(.system(size: settings.translationFontSize))
                     .foregroundStyle(.secondary)
@@ -50,12 +48,12 @@ struct VerseRow: View {
                     .foregroundStyle(savedVersesManager.isSaved(verse: verse) ? .red : .secondary)
                     
                     Button {
-                        progressManager.toggleProgress(for: surahNumber, verseNumber: verseNumber)
+                        progressManager.toggleProgress(for: verse)
                     } label: {
-                        Image(systemName: progressManager.getProgress(for: surahNumber) == verseNumber ? "bookmark.fill" : "bookmark")
+                        Image(systemName: progressManager.isProgress(for: verse) ? "bookmark.fill" : "bookmark")
                     }
                     .buttonStyle(.plain)
-                    .foregroundStyle(progressManager.getProgress(for: surahNumber) == verseNumber ? .accent : .secondary)
+                    .foregroundStyle(progressManager.isProgress(for: verse) ? .accent : .secondary)
                     
                     Button {
                         if isCurrentVerse && audioPlayer.isPlaying {
@@ -77,13 +75,11 @@ struct VerseRow: View {
     }
     
     private func playVerse() {
-        let urlString = "https://the-quran-project.github.io/Quran-Audio/Data/1/\(surahNumber)_\(verseNumber).mp3"
-        guard let url = URL(string: urlString) else { return }
-        audioPlayer.play(url: url, verseId: verseId)
+        audioPlayer.play(verse: verse)
     }
 }
 
 #Preview {
-    VerseRow(verse: Mock.verse, surahNumber: 1, verseNumber: 1)
+    VerseRow(verse: Mock.verse)
         .padding()
 }

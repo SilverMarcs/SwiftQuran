@@ -29,6 +29,11 @@ final class ReadingProgressManager: ObservableObject {
         saveProgress()
     }
     
+    // Convenience method that works directly with Verse objects
+    func toggleProgress(for verse: Verse) {
+        toggleProgress(for: verse.surahNumber, verseNumber: verse.verseIndex)
+    }
+    
     func resetProgress(for surahNumber: Int) {
         markedVerses.removeValue(forKey: surahNumber)
         saveProgress()
@@ -36,6 +41,11 @@ final class ReadingProgressManager: ObservableObject {
     
     func getProgress(for surahNumber: Int) -> Int? {
         markedVerses[surahNumber]
+    }
+    
+    // Convenience method to check if a specific verse is the marked progress
+    func isProgress(for verse: Verse) -> Bool {
+        return getProgress(for: verse.surahNumber) == verse.verseIndex
     }
     
     private func loadProgress() {
