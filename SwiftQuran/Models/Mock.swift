@@ -16,15 +16,15 @@ enum Mock {
        type: "meccan",
        totalVerses: 7,
        verses: [
-           Verse(id: 1, text: "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", translation: "In the name of Allah, the Entirely Merciful, the Especially Merciful"),
-           Verse(id: 2, text: "ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ", translation: "[All] praise is [due] to Allah, Lord of the worlds"),
-           Verse(id: 3, text: "ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", translation: "The Entirely Merciful, the Especially Merciful"),
-           Verse(id: 4, text: "مَٰلِكِ يَوۡمِ ٱلدِّينِ", translation: "Sovereign of the Day of Recompense"),
-           Verse(id: 5, text: "إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ", translation: "It is You we worship and You we ask for help"),
-           Verse(id: 6, text: "ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ", translation: "Guide us to the straight path"),
-           Verse(id: 7, text: "صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ", translation: "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray")
+           Verse(id: 1, text: "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", translation: "In the name of Allah, the Entirely Merciful, the Especially Merciful", surahNumber: 1, verseIndex: 1),
+           Verse(id: 2, text: "ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ", translation: "[All] praise is [due] to Allah, Lord of the worlds", surahNumber: 1, verseIndex: 2),
+           Verse(id: 3, text: "ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", translation: "The Entirely Merciful, the Especially Merciful", surahNumber: 1, verseIndex: 3),
+           Verse(id: 4, text: "مَٰلِكِ يَوۡمِ ٱلدِّينِ", translation: "Sovereign of the Day of Recompense", surahNumber: 1, verseIndex: 4),
+           Verse(id: 5, text: "إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ", translation: "It is You we worship and You we ask for help", surahNumber: 1, verseIndex: 5),
+           Verse(id: 6, text: "ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ", translation: "Guide us to the straight path", surahNumber: 1, verseIndex: 6),
+           Verse(id: 7, text: "صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ", translation: "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray", surahNumber: 1, verseIndex: 7)
        ]
    )
    
-   static let verse = Verse(id: 1, text: "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", translation: "In the name of Allah, the Entirely Merciful, the Especially Merciful")
+   static let verse = Verse(id: 1, text: "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", translation: "In the name of Allah, the Entirely Merciful, the Especially Merciful", surahNumber: 1, verseIndex: 1)
 }

@@ -29,4 +29,6 @@ struct Verse: Codable, Identifiable {
     let id: Int
     let text: String
     let translation: String
+    let surahNumber: Int
+    let verseIndex: Int
 }
