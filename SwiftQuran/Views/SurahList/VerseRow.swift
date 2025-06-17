@@ -27,6 +27,7 @@ struct VerseRow: View {
                 #endif
                 .kerning(8)
                 .lineSpacing(4)
+                .fontDesign(.serif)
                 .font(.system(size: settings.arabicTextFontSize))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .environment(\.layoutDirection, .rightToLeft)

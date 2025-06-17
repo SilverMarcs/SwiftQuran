@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SurahList: View {
     @ObservedObject var progressManager = ReadingProgressManager.shared
+    @State private var showingSettings = false
     
     private var filteredSurahs: ([Surah], [Surah]) {
         let allSurahs = QuranDataManager.shared.surahs
@@ -34,5 +35,19 @@ struct SurahList: View {
         }
         .navigationTitle("Surahs")
         .toolbarTitleDisplayMode(.inlineLarge)
+        #if !os(macOS)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showingSettings = true
+                } label: {
+                    Image(systemName: "gear")
+                }
+            }
+        }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+        }
+        #endif
     }
 }

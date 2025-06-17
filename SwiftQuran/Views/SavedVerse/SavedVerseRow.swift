@@ -15,6 +15,7 @@ struct SavedVerseRow: View {
                 .truncationMode(.tail)
             
             Text("\(verse.verseIndex) • \(verse.translation)")
+                .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .lineLimit(1)
