@@ -1,0 +1,46 @@
+{
+  "fill" : {
+    "solid" : "extended-srgb:0.34902,0.67843,0.76863,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "blend-mode" : "normal",
+          "glass" : true,
+          "hidden" : false,
+          "image-name" : "icons8-ibooks white.svg",
+          "name" : "icons8-ibooks white",
+          "position" : {
+            "scale" : 26,
+            "translation-in-points" : [
+              3.5,
+              0
+            ]
+          }
+        }
+      ],
+      "position" : {
+        "scale" : 1,
+        "translation-in-points" : [
+          1,
+          6
+        ]
+      },
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.45
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

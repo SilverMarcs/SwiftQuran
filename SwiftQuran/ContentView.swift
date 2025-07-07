@@ -33,12 +33,13 @@ struct ContentView: View {
         #if os(macOS)
         .tabViewSidebarBottomBar {
             AudioPlayer()
+                .padding()
         }
         #else
+        .tabBarMinimizeBehavior(.onScrollDown)
         .tabViewBottomAccessory {
             AudioPlayer()
         }
-        .tabBarMinimizeBehavior(.onScrollDown)
         #endif
     }
 }
