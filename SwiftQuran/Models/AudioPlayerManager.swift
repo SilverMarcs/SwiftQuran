@@ -88,7 +88,10 @@ class AudioPlayerManager: ObservableObject {
             object: playerItem,
             queue: .main
         ) { [weak self] _ in
-            self?.stop()
+            // Only pause and update state, do not reset player or state
+            self?.player?.pause()
+            self?.isPlaying = false
+            // Do not call stop(), do not set player = nil, do not reset currentTime/duration/currentVerse
         }
         
         // Time observer

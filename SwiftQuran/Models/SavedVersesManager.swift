@@ -1,6 +1,5 @@
 import Foundation
 
-@MainActor
 final class SavedVersesManager: ObservableObject {
     static let shared = SavedVersesManager()
     private let store = NSUbiquitousKeyValueStore.default

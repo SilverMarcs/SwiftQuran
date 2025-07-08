@@ -11,10 +11,3 @@ struct AudioPlayer: View {
         }
     }
 }
-
-#Preview {
-    VStack {
-        Spacer()
-        AudioPlayer()
-    }
-}

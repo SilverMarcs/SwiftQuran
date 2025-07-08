@@ -42,16 +42,9 @@ struct SavedVersesList: View {
         }
         .navigationTitle("Saved")
         .toolbarTitleDisplayMode(.inlineLarge)
-        .onAppear {
-            loadSavedVerses()
+        .task(id: savedVersesManager.savedVerses) {
+            savedVerses = savedVersesManager.getSavedVersesData()
         }
-        .onChange(of: savedVersesManager.savedVerses) {
-            loadSavedVerses()
-        }
-    }
-    
-    private func loadSavedVerses() {
-        savedVerses = savedVersesManager.getSavedVersesData()
     }
 }
 

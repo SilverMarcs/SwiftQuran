@@ -1,6 +1,5 @@
 import Foundation
 
-@MainActor
 final class ReadingProgressManager: ObservableObject {
     static let shared = ReadingProgressManager()
     private let store = NSUbiquitousKeyValueStore.default
