@@ -45,6 +45,11 @@ struct SavedVersesList: View {
         .task(id: savedVersesManager.savedVerses) {
             savedVerses = savedVersesManager.getSavedVersesData()
         }
+        #if !os(macOS)
+        .toolbar {
+            SettingsToolbar()
+        }
+        #endif
     }
 }
 

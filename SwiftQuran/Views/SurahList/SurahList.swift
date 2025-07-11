@@ -37,16 +37,7 @@ struct SurahList: View {
         .toolbarTitleDisplayMode(.inlineLarge)
         #if !os(macOS)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    showingSettings = true
-                } label: {
-                    Image(systemName: "gear")
-                }
-            }
-        }
-        .sheet(isPresented: $showingSettings) {
-            SettingsView()
+            SettingsToolbar()
         }
         #endif
     }

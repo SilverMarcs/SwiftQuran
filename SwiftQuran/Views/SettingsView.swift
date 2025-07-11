@@ -31,18 +31,16 @@ struct SettingsView: View {
             .navigationTitle("Settings")
             .toolbarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Reset") {
+                ToolbarItem(placement: .destructiveAction) {
+                    Button("Reset", role: .destructive) {
                         settings.resetAllFontSizes()
                     }
                     .foregroundStyle(.red)
                 }
                 
-                ToolbarItem(placement: .confirmationAction) {
-                    Button {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(role:. close) {
                         dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
                     }
                 }
             }
