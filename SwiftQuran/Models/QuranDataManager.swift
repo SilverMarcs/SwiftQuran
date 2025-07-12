@@ -19,7 +19,7 @@ private struct RawVerse: Codable {
 
 @Observable
 class QuranDataManager {
-    static let shared = QuranDataManager()
+    @ObservationIgnored static let shared = QuranDataManager()
     private(set) var surahs: [Surah] = []
     private(set) var isLoaded = false
     

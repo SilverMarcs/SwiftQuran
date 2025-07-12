@@ -2,7 +2,7 @@ import AVFoundation
 import Combine
 
 @Observable class AudioPlayerManager {
-    static let shared = AudioPlayerManager()
+    @ObservationIgnored static let shared = AudioPlayerManager()
     
     @ObservationIgnored private var player: AVPlayer?
     

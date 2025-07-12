@@ -1,7 +1,7 @@
 import Foundation
 
 @Observable class SavedVersesManager {
-    static let shared = SavedVersesManager()
+    @ObservationIgnored static let shared = SavedVersesManager()
     @ObservationIgnored private let store = NSUbiquitousKeyValueStore.default
     @ObservationIgnored private let savedVersesKey = "saved_verses"
     

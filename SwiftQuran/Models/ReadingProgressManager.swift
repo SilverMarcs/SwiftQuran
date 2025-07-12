@@ -1,7 +1,7 @@
 import Foundation
 
 @Observable final class ReadingProgressManager {
-    static let shared = ReadingProgressManager()
+    @ObservationIgnored static let shared = ReadingProgressManager()
     @ObservationIgnored private let store = NSUbiquitousKeyValueStore.default
     @ObservationIgnored private let progressKey = "reading_progress"
     
