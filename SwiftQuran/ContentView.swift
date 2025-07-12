@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var progressManager = ReadingProgressManager.shared
     @State private var selectedTab: Tabs = .surahList
     @State private var searchText: String = ""
     

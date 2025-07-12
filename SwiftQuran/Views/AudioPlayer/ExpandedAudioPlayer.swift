@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ExpandedAudioPlayer: View {
-    @ObservedObject private var audioPlayer = AudioPlayerManager.shared
+    private var audioPlayer = AudioPlayerManager.shared
     
     var body: some View {
         if audioPlayer.currentVerse != nil {

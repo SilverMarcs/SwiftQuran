@@ -5,7 +5,8 @@ struct SurahToolbar: ToolbarContent {
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingFontSettings = false
-    @ObservedObject var settings = AppSettings.shared
+    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
+    @AppStorage("translationFontSize") var translationFontSize: Double = 18
     
     var body: some ToolbarContent {
         ToolbarItem(placement: .primaryAction) {
@@ -18,12 +19,12 @@ struct SurahToolbar: ToolbarContent {
                 VStack(alignment: .trailing, spacing: 20) {
                     FontSizeControl(
                         title: "Arabic",
-                        fontSize: $settings.arabicTextFontSize
+                        fontSize: $arabicTextFontSize
                     )
                     
                     FontSizeControl(
                         title: "English",
-                        fontSize: $settings.translationFontSize
+                        fontSize: $translationFontSize
                     )
                 }
                 .padding()
@@ -37,6 +38,9 @@ struct FontSizeControl: View {
     let title: String
     @Binding var fontSize: Double
     
+    private let minFontSize: Double = 10
+    private let maxFontSize: Double = 60
+    
     var body: some View {
         HStack(spacing: 30) {
             Text(title)
@@ -44,24 +48,24 @@ struct FontSizeControl: View {
             
             ControlGroup {
                 Button {
-                    if fontSize > AppSettings.minFontSize {
+                    if fontSize > minFontSize {
                         fontSize -= 1
                     }
                 } label: {
                     Image(systemName: "textformat.size.smaller")
-                        .foregroundStyle(fontSize > AppSettings.minFontSize ? .primary : .secondary)
+                        .foregroundStyle(fontSize > minFontSize ? .primary : .secondary)
                 }
-                .disabled(fontSize <= AppSettings.minFontSize)
+                .disabled(fontSize <= minFontSize)
                 
                 Button {
-                    if fontSize < AppSettings.maxFontSize {
+                    if fontSize < maxFontSize {
                         fontSize += 1
                     }
                 } label: {
                     Image(systemName: "textformat.size.larger")
-                        .foregroundStyle(fontSize < AppSettings.maxFontSize ? .primary : .secondary)
+                        .foregroundStyle(fontSize < maxFontSize ? .primary : .secondary)
                 }
-                .disabled(fontSize >= AppSettings.maxFontSize)
+                .disabled(fontSize >= maxFontSize)
             }
         }
     }

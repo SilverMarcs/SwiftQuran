@@ -1,11 +1,11 @@
 import Foundation
 
-final class SavedVersesManager: ObservableObject {
+@Observable class SavedVersesManager {
     static let shared = SavedVersesManager()
-    private let store = NSUbiquitousKeyValueStore.default
-    private let savedVersesKey = "saved_verses"
+    @ObservationIgnored private let store = NSUbiquitousKeyValueStore.default
+    @ObservationIgnored private let savedVersesKey = "saved_verses"
     
-    @Published private(set) var savedVerses: Set<String> = [] // Set of "surahNumber_verseNumber"
+    private(set) var savedVerses: Set<String> = [] // Set of "surahNumber_verseNumber"
     
     private init() {
         NotificationCenter.default.addObserver(

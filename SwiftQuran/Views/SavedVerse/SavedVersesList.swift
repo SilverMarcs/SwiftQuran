@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SavedVersesList: View {
-    @ObservedObject var savedVersesManager = SavedVersesManager.shared
+    var savedVersesManager = SavedVersesManager.shared
     @State private var savedVerses: [Verse] = []
     
     private var groupedVerses: [(Surah, [Verse])] {

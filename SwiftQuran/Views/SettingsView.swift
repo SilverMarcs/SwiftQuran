@@ -1,7 +1,19 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject var settings = AppSettings.shared
+    // Default font sizes per platform
+    #if os(iOS)
+    private let defaultTranslationFontSize: Double = 18
+    #else
+    private let defaultTranslationFontSize: Double = 13
+    #endif
+    
+    private let defaultArabicFontSize: Double = 21
+    private let minFontSize: Double = 10
+    private let maxFontSize: Double = 60
+    
+    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
+    @AppStorage("translationFontSize") var translationFontSize: Double = 18
     @Environment(\.dismiss) private var dismiss
     
     // Sample texts for preview
@@ -14,7 +26,7 @@ struct SettingsView: View {
                 // Arabic Font Settings
                 fontSettingsSection(
                     title: "Arabic Text",
-                    fontSize: $settings.arabicTextFontSize,
+                    fontSize: $arabicTextFontSize,
                     sampleText: sampleArabicText,
                     isArabic: true
                 )
@@ -22,7 +34,7 @@ struct SettingsView: View {
                 // English Font Settings
                 fontSettingsSection(
                     title: "English Translation",
-                    fontSize: $settings.translationFontSize,
+                    fontSize: $translationFontSize,
                     sampleText: sampleEnglishText,
                     isArabic: false
                 )
@@ -33,7 +45,7 @@ struct SettingsView: View {
             .toolbar {
                 ToolbarItem(placement: .destructiveAction) {
                     Button("Reset", role: .destructive) {
-                        settings.resetAllFontSizes()
+                        resetAllFontSizes()
                     }
                     .foregroundStyle(.red)
                 }
@@ -45,6 +57,15 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+    
+    func resetAllFontSizes() {
+        arabicTextFontSize = defaultArabicFontSize
+        #if os(iOS)
+        translationFontSize = 18
+        #else
+        translationFontSize = 13
+        #endif
     }
     
     @ViewBuilder
@@ -61,7 +82,7 @@ struct SettingsView: View {
             
             Slider(
                 value: fontSize,
-                in: AppSettings.minFontSize...AppSettings.maxFontSize,
+                in: minFontSize...maxFontSize,
                 step: 1
             )
         }

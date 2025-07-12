@@ -9,26 +9,35 @@ import SwiftUI
 import SwiftData
 
 struct MenuCommands: Commands {
-    @ObservedObject var settings = AppSettings.shared
+    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
+    @AppStorage("translationFontSize") var translationFontSize: Double = 18
+    
+    private let minFontSize: Double = 10
+    private let maxFontSize: Double = 60
     
     var body: some Commands {
         CommandGroup(before: .toolbar) {
             Button("Increase Font Size") {
-                if settings.arabicTextFontSize < AppSettings.maxFontSize {
-                    settings.arabicTextFontSize += 1
+                if arabicTextFontSize < maxFontSize {
+                    arabicTextFontSize += 1
                 }
             }
             .keyboardShortcut("+")
             
             Button("Decrease Font Size") {
-                if settings.arabicTextFontSize > AppSettings.minFontSize {
-                    settings.arabicTextFontSize -= 1
+                if arabicTextFontSize > minFontSize {
+                    arabicTextFontSize -= 1
                 }
             }
             .keyboardShortcut("-")
             
             Button("Reset Font Size") {
-                settings.resetAllFontSizes()
+                arabicTextFontSize = 21
+                #if os(iOS)
+                translationFontSize = 18
+                #else
+                translationFontSize = 13
+                #endif
             }
             .keyboardShortcut("o")
         }

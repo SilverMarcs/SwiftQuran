@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct BottomAudioPlayer: View {
-    @ObservedObject private var audioPlayer = AudioPlayerManager.shared
+    private var audioPlayer = AudioPlayerManager.shared
     @State private var isDragging = false
     
     var body: some View {
@@ -112,7 +112,7 @@ struct BottomAudioPlayer: View {
     private func formatTime(_ seconds: Double) -> String {
         let minutes = Int(seconds) / 60
         let seconds = Int(seconds) % 60
-        return String(format: "%d:%02d", minutes, seconds)
+        return unsafe String(format: "%d:%02d", minutes, seconds)
     }
 }
 

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SurahList: View {
-    @ObservedObject var progressManager = ReadingProgressManager.shared
+    var progressManager = ReadingProgressManager.shared
     @State private var showingSettings = false
     
     private var filteredSurahs: ([Surah], [Surah]) {

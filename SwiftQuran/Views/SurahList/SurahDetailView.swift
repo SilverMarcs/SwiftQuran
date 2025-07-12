@@ -3,8 +3,8 @@ import SwiftUI
 struct SurahDetailView: View {
     let surah: Surah
     let initialVerseNumberToScrollTo: Int?
-    @ObservedObject var progressManager = ReadingProgressManager.shared
-    @ObservedObject private var audioPlayer = AudioPlayerManager.shared
+    var progressManager = ReadingProgressManager.shared
+    private var audioPlayer = AudioPlayerManager.shared
     @State private var showingVerseList = false
     
     init(surah: Surah, initialVerseNumberToScrollTo: Int? = nil) {

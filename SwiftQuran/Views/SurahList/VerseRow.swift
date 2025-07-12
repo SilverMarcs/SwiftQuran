@@ -4,10 +4,11 @@ import AVKit
 struct VerseRow: View {
     let verse: Verse
     
-    @ObservedObject var settings = AppSettings.shared
-    @ObservedObject var progressManager = ReadingProgressManager.shared
-    @ObservedObject var savedVersesManager = SavedVersesManager.shared
-    @ObservedObject private var audioPlayer = AudioPlayerManager.shared
+    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
+    @AppStorage("translationFontSize") var translationFontSize: Double = 18
+    var progressManager = ReadingProgressManager.shared
+    var savedVersesManager = SavedVersesManager.shared
+    var audioPlayer = AudioPlayerManager.shared
     
     private var verseId: String {
         "verse_\(verse.verseKey)"
@@ -28,13 +29,13 @@ struct VerseRow: View {
                 .kerning(8)
                 .lineSpacing(4)
                 .fontDesign(.serif)
-                .font(.system(size: settings.arabicTextFontSize))
+                .font(.system(size: arabicTextFontSize))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .environment(\.layoutDirection, .rightToLeft)
             
             Text("\(verse.verseIndex) • \(verse.translation)")
                 .textSelection(.enabled)
-                .font(.system(size: settings.translationFontSize))
+                .font(.system(size: translationFontSize))
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
             

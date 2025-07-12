@@ -3,8 +3,6 @@ import SwiftUI
 struct SavedVerseRow: View {
     let verse: Verse
     
-    @ObservedObject var settings = AppSettings.shared
-    
     var body: some View {
         VStack(spacing: 8) {
             Text(verse.text)

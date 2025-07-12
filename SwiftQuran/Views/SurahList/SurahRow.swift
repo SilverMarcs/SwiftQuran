@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SurahRow: View {
     let surah: Surah
-    @ObservedObject var progressManager = ReadingProgressManager.shared
+    var progressManager = ReadingProgressManager.shared
     
     var body: some View {
         HStack(alignment: .center) {

@@ -1,11 +1,11 @@
 import Foundation
 
-final class ReadingProgressManager: ObservableObject {
+@Observable final class ReadingProgressManager {
     static let shared = ReadingProgressManager()
-    private let store = NSUbiquitousKeyValueStore.default
-    private let progressKey = "reading_progress"
+    @ObservationIgnored private let store = NSUbiquitousKeyValueStore.default
+    @ObservationIgnored private let progressKey = "reading_progress"
     
-    @Published private(set) var markedVerses: [Int: Int] = [:] // [surahNumber: verseNumber]
+    private(set) var markedVerses: [Int: Int] = [:] // [surahNumber: verseNumber]
     
     private init() {
         NotificationCenter.default.addObserver(
