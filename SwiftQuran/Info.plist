@@ -6,5 +6,7 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs your location to show accurate prayer times for your area.</string>
 </dict>
 </plist>

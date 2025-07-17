@@ -13,16 +13,22 @@ struct ContentView: View {
                 }
             }
             
-            Tab(value: .search, role: .search) {
+            Tab("Saved", systemImage: "heart", value: .saved) {
                 NavigationStack {
-                    SurahSearchTab(searchText: $searchText)
+                    SavedVersesList()
                         .surahNavigationDestination()
                 }
             }
             
-            Tab("Saved", systemImage: "heart", value: .saved) {
+            Tab("Prayers", systemImage: "clock", value: .saved) {
                 NavigationStack {
-                    SavedVersesList()
+                    PrayerTimesTab()
+                }
+            }
+            
+            Tab(value: .search, role: .search) {
+                NavigationStack {
+                    SurahSearchTab(searchText: $searchText)
                         .surahNavigationDestination()
                 }
             }
