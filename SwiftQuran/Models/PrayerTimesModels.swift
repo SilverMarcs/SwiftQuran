@@ -28,3 +28,25 @@ struct Settings: Codable {
     let longitude: String
     let timezone: String
 }
+
+enum PrayerTimeType: String, CaseIterable, Codable, Identifiable {
+    case fajr = "Fajr"
+    case duha = "Duha"
+    case dhuhr = "Dhuhr"
+    case asr = "Asr"
+    case maghrib = "Maghrib"
+    case isha = "Isha"
+
+    var id: String { rawValue }
+    var label: String { rawValue }
+    var symbol: String {
+        switch self {
+        case .fajr: return "sunrise"
+        case .duha: return "sun.max"
+        case .dhuhr: return "sun.max.fill"
+        case .asr: return "sunset"
+        case .maghrib: return "moon.stars"
+        case .isha: return "moon.fill"
+        }
+    }
+}

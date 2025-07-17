@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct PrayerTimeRow: View {
-    let title: String
+    let type: PrayerTimeType
     let time: String
+    
+    var formattedTime: String {
+        let cleaned = time.replacingOccurrences(of: "%", with: "")
+        let components = cleaned.split(separator: " ")
+        guard components.count == 2 else { return cleaned }
+        let hour = components[0]
+        let ampm = components[1].uppercased()
+        return "\(hour) \(ampm)"
+    }
     
     var body: some View {
         HStack {
-            Text(title)
+            Label {
+                Text(type.label)
+            } icon: {
+                Image(systemName: type.symbol)
+            }
+            
             Spacer()
-            Text(time)
+            
+            Text(formattedTime)
+                .contentTransition(.numericText())
+                .bold()
+//                .foregroundStyle(.secondary)
         }
     }
 }
