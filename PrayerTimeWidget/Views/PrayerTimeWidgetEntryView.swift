@@ -7,23 +7,24 @@
 
 import SwiftUI
 import WidgetKit
+import AppIntents
 
 struct PrayerTimeWidgetEntryView: View {
     var entry: PrayerTimesEntry
     
     var body: some View {
         VStack(spacing: 12) {
-            // Top row with location and date
             HStack {
                 Text("Prayer Times")
                     .font(.headline)
                 
                 Spacer()
                 
-                Text(Date(), style: .date)
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.secondary)
+                Button(intent: UpdatePrayerTimesIntent()) {
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundStyle(.teal)
+                        .fontWeight(.semibold)
+                }
             }
             .padding(5)
             
