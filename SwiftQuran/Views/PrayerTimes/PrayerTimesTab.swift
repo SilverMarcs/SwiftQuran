@@ -86,8 +86,9 @@ struct PrayerTimesTab: View {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let response = try JSONDecoder().decode(PrayerTimesResponse.self, from: data)
-            prayerTimes = response.results
-            let persisted = PersistedPrayerTimes(prayerTimes: response.results, lastFetched: Date())
+            let formattedTimes = PrayerTimes.formatted(from: response.results)
+            prayerTimes = formattedTimes
+            let persisted = PersistedPrayerTimes(prayerTimes: formattedTimes, lastFetched: Date())
             if let encoded = try? JSONEncoder().encode(persisted) {
                 storedPrayerTimes = encoded
                 lastFetched = persisted.lastFetched

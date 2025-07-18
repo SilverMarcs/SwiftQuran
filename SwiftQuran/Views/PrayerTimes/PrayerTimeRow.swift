@@ -11,15 +11,6 @@ struct PrayerTimeRow: View {
     let type: PrayerTimeType
     let time: String
     
-    var formattedTime: String {
-        let cleaned = time.replacingOccurrences(of: "%", with: "")
-        let components = cleaned.split(separator: " ")
-        guard components.count == 2 else { return cleaned }
-        let hour = components[0]
-        let ampm = components[1].uppercased()
-        return "\(hour) \(ampm)"
-    }
-    
     var body: some View {
         HStack {
             Label {
@@ -31,7 +22,7 @@ struct PrayerTimeRow: View {
             
             Spacer()
             
-            Text(formattedTime)
+            Text(time)
                 .contentTransition(.numericText())
                 .bold()
         }

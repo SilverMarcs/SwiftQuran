@@ -21,6 +21,26 @@ struct PrayerTimes: Codable {
     let Asr: String
     let Maghrib: String
     let Isha: String
+    
+    static func formatted(from raw: PrayerTimes) -> PrayerTimes {
+        func format(_ time: String) -> String {
+            let cleaned = time.replacingOccurrences(of: "%", with: "")
+            let components = cleaned.split(separator: " ")
+            guard components.count == 2 else { return cleaned }
+            let hour = components[0]
+            let ampm = components[1].uppercased()
+            return "\(hour) \(ampm)"
+        }
+        
+        return PrayerTimes(
+            Fajr: format(raw.Fajr),
+            Duha: format(raw.Duha),
+            Dhuhr: format(raw.Dhuhr),
+            Asr: format(raw.Asr),
+            Maghrib: format(raw.Maghrib),
+            Isha: format(raw.Isha)
+        )
+    }
 }
 
 struct Settings: Codable {
