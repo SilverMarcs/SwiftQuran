@@ -31,8 +31,7 @@ struct UpdatePrayerTimesIntent: AppIntent {
         //     try await PrayerTimesService.shared.fetchAndStorePrayerTimes(for: locationData)
         // }
         
-        // Reload widget timelines
-        WidgetCenter.shared.reloadTimelines(ofKind: "PrayerTimeWidget")
+        // Widget timeline reload is handled automatically by PrayerTimesService
         
         return .result()
     }

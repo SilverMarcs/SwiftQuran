@@ -28,6 +28,7 @@ struct PrayerTimeWidgetEntryView: View {
 
                 Spacer()
 
+                // doesnt seem to work
                 Button(intent: UpdatePrayerTimesIntent()) {
                     Image(systemName: "arrow.clockwise")
                         .foregroundStyle(.teal)

@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import MapKit
+import WidgetKit
 
 @Observable
 class PrayerTimesService {
@@ -59,6 +60,9 @@ class PrayerTimesService {
         }
         
         userDefaults?.set(encoded, forKey: storageKey)
+        
+        // Reload widget timelines after storing new prayer times
+        reloadWidgetTimelines()
     }
     
     func fetchPrayerTimesForStoredLocation() async throws {
@@ -66,6 +70,20 @@ class PrayerTimesService {
             throw PrayerTimesError.noStoredLocation
         }
         try await fetchAndStorePrayerTimes(for: locationData)
+    }
+    
+    // MARK: - Widget Management
+    
+    func reloadWidgetTimelines() {
+        // Only reload if we have prayer times data to show
+        if loadStoredPrayerTimes() != nil {
+            WidgetCenter.shared.reloadTimelines(ofKind: "PrayerTimeWidget")
+        }
+    }
+    
+    // Convenience method to reload widgets from anywhere in the app
+    static func reloadWidgets() {
+        shared.reloadWidgetTimelines()
     }
     
     // MARK: - Location Services
