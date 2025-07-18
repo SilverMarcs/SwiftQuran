@@ -4,7 +4,6 @@ struct SurahDetailView: View {
     let surah: Surah
     let initialVerseNumberToScrollTo: Int?
     var progressManager = ReadingProgressManager.shared
-    private var audioPlayer = AudioPlayerManager.shared
     @State private var showingVerseList = false
     
     init(surah: Surah, initialVerseNumberToScrollTo: Int? = nil) {

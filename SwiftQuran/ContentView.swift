@@ -48,7 +48,9 @@ struct ContentView: View {
         #else
         .tabBarMinimizeBehavior(.onScrollDown)
         .tabViewBottomAccessory {
-            AudioPlayer()
+            if  AudioPlayerManager.shared.currentVerse != nil {
+                AudioPlayer()
+            }
         }
         #endif
     }

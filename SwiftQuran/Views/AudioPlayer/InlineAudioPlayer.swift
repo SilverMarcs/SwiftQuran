@@ -4,30 +4,34 @@ struct InlineAudioPlayer: View {
     private var audioPlayer = AudioPlayerManager.shared
     
     var body: some View {
-        if audioPlayer.currentVerse != nil {
-            HStack(spacing: 16) {
-                Text(getSurahName())
-                    .font(.caption.bold())
-                    .lineLimit(1)
-                
-                Spacer()
-                
-                Button {
-                    if audioPlayer.isPlaying {
-                        audioPlayer.pause()
-                    } else {
-                        resumePlayback()
-                    }
-                } label: {
-                    Image(systemName: audioPlayer.isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                        .contentTransition(.symbolEffect(.replace))
+        HStack {
+            Text(getSurahName())
+                .font(.caption.bold())
+                .lineLimit(1)
+            
+            Spacer()
+            
+            Button {
+                if audioPlayer.isPlaying {
+                    audioPlayer.pause()
+                } else {
+                    resumePlayback()
                 }
-                .buttonStyle(.plain)
+            } label: {
+                Image(systemName: audioPlayer.isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                    .contentTransition(.symbolEffect(.replace))
             }
-            .padding()
-        } else {
-            Text("Not Playing")
+            .buttonStyle(.plain)
+            
+            Button {
+                audioPlayer.stop()
+            } label: {
+                Image(systemName: "stop.circle.fill")
+                    .foregroundStyle(.red)
+            }
+            .buttonStyle(.plain)
         }
+        .padding()
     }
     
     private func getSurahName() -> String {

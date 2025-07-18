@@ -35,7 +35,7 @@ struct PrayerTimesTab: View {
                                   unsafe Text(String(format: "%.4f°N, %.4f°E", location.latitude, location.longitude))
                               }
                           } icon: {
-                              Image(systemName: "location.fill")
+                              Image(systemName: "location")
                           }
                           
                           Label {
