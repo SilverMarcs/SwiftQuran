@@ -15,16 +15,17 @@ struct PrayerTimeWidgetEntryView: View {
         VStack(spacing: 12) {
             // Top row with location and date
             HStack {
-                Text("New York")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                Text("Prayer Times")
+                    .font(.headline)
+                
                 Spacer()
-                Text("July 18")
-                    .font(.caption)
+                
+                Text(Date(), style: .date)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
             }
-            
-            Spacer()
+            .padding(5)
             
             // Prayer times row
             if let times = entry.prayerTimes {
