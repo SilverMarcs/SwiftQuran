@@ -28,5 +28,5 @@ struct PrayerTimeWidget: Widget {
 #Preview(as: .systemSmall) {
     PrayerTimeWidget()
 } timeline: {
-    PrayerTimesEntry(date: .now, prayerTimes: nil)
+    PrayerTimesEntry(date: .now, prayerTimes: nil, locationName: "Cupertino")
 }

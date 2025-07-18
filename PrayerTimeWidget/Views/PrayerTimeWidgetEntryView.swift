@@ -15,19 +15,27 @@ struct PrayerTimeWidgetEntryView: View {
     var body: some View {
         VStack(spacing: 12) {
             HStack {
-                Text("Prayer Times")
-                    .font(.headline)
-                    .padding(.leading)
-                
+                Label {
+                    if let name = entry.locationName, !name.isEmpty {
+                        Text(name)
+                    } else {
+                        Text("Prayer Times")
+                    }
+                } icon: {
+                    Image(systemName: "location")
+                }
+                .font(.headline)
+                .opacity(0.8)
+                .padding(.leading)
+
                 Spacer()
-                
+
                 Button(intent: UpdatePrayerTimesIntent()) {
                     Image(systemName: "arrow.clockwise")
                         .foregroundStyle(.teal)
                         .fontWeight(.semibold)
                 }
             }
-//            .padding(5)
             
             // Prayer times row
             if let times = entry.prayerTimes {
