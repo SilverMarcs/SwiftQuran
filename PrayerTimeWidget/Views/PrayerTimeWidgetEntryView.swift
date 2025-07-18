@@ -17,6 +17,7 @@ struct PrayerTimeWidgetEntryView: View {
             HStack {
                 Text("Prayer Times")
                     .font(.headline)
+                    .padding(.leading)
                 
                 Spacer()
                 
@@ -26,7 +27,7 @@ struct PrayerTimeWidgetEntryView: View {
                         .fontWeight(.semibold)
                 }
             }
-            .padding(5)
+//            .padding(5)
             
             // Prayer times row
             if let times = entry.prayerTimes {

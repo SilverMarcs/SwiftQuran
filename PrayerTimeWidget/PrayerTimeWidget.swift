@@ -15,7 +15,7 @@ struct PrayerTimeWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             PrayerTimeWidgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    Color.clear
+                    Color(.systemBackground)
                 }
         }
         .configurationDisplayName("Prayer Times")
