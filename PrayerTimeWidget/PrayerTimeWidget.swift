@@ -17,6 +17,7 @@ struct PrayerTimeWidget: Widget {
                 .containerBackground(for: .widget) {
                     Color(.systemBackground)
                 }
+                .widgetURL(URL(string: "swiftquran://prayers"))
         }
         .configurationDisplayName("Prayer Times")
         .supportedFamilies([.systemMedium])

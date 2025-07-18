@@ -20,7 +20,7 @@ struct ContentView: View {
                 }
             }
             
-            Tab("Prayers", systemImage: "clock", value: .saved) {
+            Tab("Prayers", systemImage: "clock", value: .prayers) {
                 NavigationStack {
                     PrayerTimesTab()
                 }
@@ -35,6 +35,11 @@ struct ContentView: View {
         }
         .searchable(text: $searchText)
         .tabViewStyle(.sidebarAdaptable)
+        .onOpenURL { url in
+            if url.scheme == "swiftquran" && url.host == "prayers" {
+                selectedTab = .prayers
+            }
+        }
         #if os(macOS)
         .tabViewSidebarBottomBar {
             AudioPlayer()
@@ -53,6 +58,7 @@ enum Tabs: Equatable, Hashable {
     case surahList
     case search
     case saved
+    case prayers
 }
 
 #Preview {
