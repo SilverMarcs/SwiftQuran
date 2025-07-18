@@ -15,24 +15,28 @@ struct PrayerTimeWidgetEntryView: View {
     var body: some View {
         VStack(spacing: 12) {
             HStack {
-//                Label {
-//                    Text(entry.locationName ?? "Unknown Location")
-//                } icon: {
-//                    Image(systemName: "location")
-//                }
-                Text(entry.locationName ?? "Loading Location")
-                    .lineLimit(1)
-                    .font(.headline)
-                    .opacity(0.8)
-                    .padding(.leading, 10)
+                Label {
+                    Text((entry.locationName ?? "Loading Location").components(separatedBy: ",").first ?? "")
+                } icon: {
+                    Image(systemName: "location.fill")
+                        .foregroundStyle(.accent)
+                }
+                .padding(.leading, 5)
 
                 Spacer()
-
-                // doesnt seem to work. fix pls
-                Button(intent: UpdatePrayerTimesIntent()) {
-                    Image(systemName: "arrow.clockwise")
-                        .foregroundStyle(.teal)
-                        .fontWeight(.semibold)
+                
+                if let next = nextPrayer {
+                    Button {} label: {
+                        HStack(spacing: 2) {
+                            Text(next.name)
+                                .font(.subheadline)
+                            Text(next.time)
+                                .font(.subheadline)
+                                .bold()
+                        }
+                    }
+                    .tint(Color(.accent).tertiary)
+                    .buttonStyle(.borderedProminent)
                 }
             }
             
@@ -52,5 +56,35 @@ struct PrayerTimeWidgetEntryView: View {
                     .foregroundStyle(.secondary)
             }
         }
+    }
+    
+    var nextPrayer: (name: String, time: String)? {
+        guard let times = entry.prayerTimes else { return nil }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        let currentTime = formatter.string(from: Date())
+        
+        // Convert prayer times to comparable format
+        let prayers: [(name: String, time: String)] = [
+            ("Fajr", times.Fajr),
+            ("Dhuhr", times.Dhuhr),
+            ("Asr", times.Asr),
+            ("Maghrib", times.Maghrib),
+            ("Isha", times.Isha)
+        ]
+        
+        // Find next prayer
+        for prayer in prayers {
+            if let prayerDate = formatter.date(from: prayer.time),
+               let currentDate = formatter.date(from: currentTime) {
+                if prayerDate > currentDate {
+                    return prayer
+                }
+            }
+        }
+        
+        // If no prayer is found after current time, return first prayer of next day
+        return ("Fajr", times.Fajr)
     }
 }

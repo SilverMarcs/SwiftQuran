@@ -88,7 +88,7 @@ class PrayerTimesService {
     
     // MARK: - Location Services
     
-    func reverseGeocode(latitude: Double, longitude: Double) async throws -> String {
+    nonisolated func reverseGeocode(latitude: Double, longitude: Double) async throws -> String {
         let location = CLLocation(latitude: latitude, longitude: longitude)
         guard let request = MKReverseGeocodingRequest(location: location) else {
             throw PrayerTimesError.reverseGeocodingFailed
@@ -116,7 +116,7 @@ class PrayerTimesService {
 
 // MARK: - Errors
 
-enum PrayerTimesError: Error, LocalizedError {
+enum PrayerTimesError: Error {
     case invalidURL
     case encodingFailed
     case noStoredLocation
