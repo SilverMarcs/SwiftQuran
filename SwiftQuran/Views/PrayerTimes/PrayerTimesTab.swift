@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
+import CoreLocation
 import MapKit
 
 struct PrayerTimesTab: View {
-    @AppStorage("prayer_times", store: UserDefaults(suiteName: "group.com.temporary.SwiftQuran")) private var storedPrayerTimes: Data?
-    
     @State private var prayerTimes: PrayerTimes? = nil
     @State private var lastFetched: Date? = nil
     @State private var isLoading = false
     @State private var locationData: LocationData? = nil
     @State private var locationManager = LocationManager()
+    
+    private let prayerTimesService = PrayerTimesService.shared
     
     var body: some View {
           List {
@@ -67,7 +68,7 @@ struct PrayerTimesTab: View {
           .task {
               loadStoredPrayerTimes()
               
-              if shouldFetchNewTimes {
+              if prayerTimesService.shouldFetchNewTimes() {
                   await fetchPrayerTimesForStoredLocation()
               }
           }
@@ -76,39 +77,43 @@ struct PrayerTimesTab: View {
     private func fetchPrayerTimes(latitude: Double, longitude: Double) async {
         isLoading = true
         defer { isLoading = false }
-        let timezone = TimeZone.current.identifier
-        let urlString = "https://www.islamicfinder.us/index.php/api/prayer_times?latitude=\(latitude)&longitude=\(longitude)&timezone=\(timezone)"
-        guard let url = URL(string: urlString) else { return }
+        
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let response = try JSONDecoder().decode(PrayerTimesResponse.self, from: data)
-            let formattedTimes = PrayerTimes.formatted(from: response.results)
-            prayerTimes = formattedTimes
-            
             // Ensure we have location data before saving
             if locationData == nil {
                 locationData = LocationData(latitude: latitude, longitude: longitude, locationName: "Unknown Location")
-                await reverseGeocode(latitude: latitude, longitude: longitude)
+                let locationName = try await prayerTimesService.reverseGeocode(latitude: latitude, longitude: longitude)
+                locationData?.locationName = locationName
             }
             
-            let persisted = PersistedPrayerTimes(prayerTimes: formattedTimes, lastFetched: Date(), location: locationData)
-            if let encoded = try? JSONEncoder().encode(persisted) {
-                storedPrayerTimes = encoded
-                lastFetched = persisted.lastFetched
-            }
+            guard let currentLocationData = locationData else { return }
+            try await prayerTimesService.fetchAndStorePrayerTimes(for: currentLocationData)
+            
+            // Reload local state
+            loadStoredPrayerTimes()
         } catch {
             print("Error fetching prayer times: \(error)")
         }
     }
     
     private func requestLocationAndFetchPrayerTimes() async {
+        isLoading = true
+        defer { isLoading = false }
+        
         guard let location = await locationManager.requestLocation() else {
             print("Failed to get location")
             return
         }
         
-        locationData = LocationData(latitude: location.latitude, longitude: location.longitude, locationName: "Unknown Location")
-        await reverseGeocode(latitude: location.latitude, longitude: location.longitude)
+        locationData = LocationData(latitude: location.latitude, longitude: location.longitude, locationName: "Loading Location")
+        
+        do {
+            let locationName = try await prayerTimesService.reverseGeocode(latitude: location.latitude, longitude: location.longitude)
+            locationData?.locationName = locationName
+        } catch {
+            print("Error reverse geocoding: \(error)")
+        }
+        
         await fetchPrayerTimes(latitude: location.latitude, longitude: location.longitude)
     }
     
@@ -117,39 +122,11 @@ struct PrayerTimesTab: View {
         await fetchPrayerTimes(latitude: storedLocation.latitude, longitude: storedLocation.longitude)
     }
     
-    private func reverseGeocode(latitude: Double, longitude: Double) async {
-        let location = CLLocation(latitude: latitude, longitude: longitude)
-        guard let request = MKReverseGeocodingRequest(location: location) else {
-            print("Failed to create reverse geocoding request")
-            return
-        }
-        do {
-            let mapItems = try await request.mapItems
-            let mapItem = mapItems.first
-            if let address = mapItem?.address {
-                locationData?.locationName = address.fullAddress
-            } else {
-                let name = mapItem?.addressRepresentations?.cityWithContext ?? "Unknown Location"
-                locationData?.locationName = name
-            }
-        } catch {
-            print("Error reverse geocoding location: \(error)")
-        }
-    }
-    
     func loadStoredPrayerTimes() {
-        if let data = storedPrayerTimes {
-            if let decoded = try? JSONDecoder().decode(PersistedPrayerTimes.self, from: data) {
-                prayerTimes = decoded.prayerTimes
-                lastFetched = decoded.lastFetched
-                locationData = decoded.location
-            }
+        if let persistedData = prayerTimesService.loadStoredPrayerData() {
+            prayerTimes = persistedData.prayerTimes
+            lastFetched = persistedData.lastFetched
+            locationData = persistedData.location
         }
-    }
-    
-    var shouldFetchNewTimes: Bool {
-        guard let lastFetched else { return true }
-        let calendar = Calendar.current
-        return !calendar.isDateInToday(lastFetched)
     }
 }

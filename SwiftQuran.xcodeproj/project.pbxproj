@@ -62,6 +62,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Models/PrayerTimesModels.swift,
+				Models/PrayerTimesService.swift,
 				Models/UpdatePrayerTimesIntent.swift,
 			);
 			target = 08ED25D22E29CEF500AC8D97 /* PrayerTimeWidgetExtension */;

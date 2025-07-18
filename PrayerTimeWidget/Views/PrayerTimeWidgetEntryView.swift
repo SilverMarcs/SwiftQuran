@@ -15,26 +15,24 @@ struct PrayerTimeWidgetEntryView: View {
     var body: some View {
         VStack(spacing: 12) {
             HStack {
-                Label {
-                    if let name = entry.locationName, !name.isEmpty {
-                        Text(name)
-                    } else {
-                        Text("Prayer Times")
-                    }
-                } icon: {
-                    Image(systemName: "location")
-                }
-                .font(.headline)
-                .opacity(0.8)
-                .padding(.leading)
+//                Label {
+//                    Text(entry.locationName ?? "Unknown Location")
+//                } icon: {
+//                    Image(systemName: "location")
+//                }
+                Text(entry.locationName ?? "Loading Location")
+                    .lineLimit(1)
+                    .font(.headline)
+                    .opacity(0.8)
+                    .padding(.leading, 10)
 
                 Spacer()
 
-//                Button(intent: UpdatePrayerTimesIntent()) {
-//                    Image(systemName: "arrow.clockwise")
-//                        .foregroundStyle(.teal)
-//                        .fontWeight(.semibold)
-//                }
+                Button(intent: UpdatePrayerTimesIntent()) {
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundStyle(.teal)
+                        .fontWeight(.semibold)
+                }
             }
             
             // Prayer times row

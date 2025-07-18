@@ -19,32 +19,27 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (PrayerTimesEntry) -> ()) {
-        let entry = PrayerTimesEntry(date: Date(), prayerTimes: loadPrayerTimes(), locationName: loadLocationName())
+        let prayerData = loadPrayerData()
+        let entry = PrayerTimesEntry(
+            date: Date(), 
+            prayerTimes: prayerData?.prayerTimes,
+            locationName: prayerData?.location?.locationName
+        )
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<PrayerTimesEntry>) -> ()) {
-        let prayerTimes = loadPrayerTimes()
+        let prayerData = loadPrayerData()
         let entry = PrayerTimesEntry(
             date: Date(),
-            prayerTimes: prayerTimes,
-            locationName: loadLocationName(),
+            prayerTimes: prayerData?.prayerTimes,
+            locationName: prayerData?.location?.locationName
         )
         let timeline = Timeline(entries: [entry], policy: .never)
         completion(timeline)
     }
 
-    private func loadPrayerTimes() -> PrayerTimes? {
-        let defaults = UserDefaults(suiteName: "group.com.temporary.SwiftQuran")
-        if let data = defaults?.data(forKey: "prayer_times"),
-           let persisted = try? JSONDecoder().decode(PersistedPrayerTimes.self, from: data) {
-            return persisted.prayerTimes
-        }
-        return nil
-    }
-
-    private func loadLocationName() -> String? {
-        let defaults = UserDefaults(suiteName: "group.com.temporary.SwiftQuran")
-        return defaults?.string(forKey: "location_name")
+    private func loadPrayerData() -> PersistedPrayerTimes? {
+        return PrayerTimesService.shared.loadStoredPrayerData()
     }
 }
