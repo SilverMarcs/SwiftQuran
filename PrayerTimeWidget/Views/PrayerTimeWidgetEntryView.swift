@@ -30,11 +30,11 @@ struct PrayerTimeWidgetEntryView: View {
 
                 Spacer()
 
-                Button(intent: UpdatePrayerTimesIntent()) {
-                    Image(systemName: "arrow.clockwise")
-                        .foregroundStyle(.teal)
-                        .fontWeight(.semibold)
-                }
+//                Button(intent: UpdatePrayerTimesIntent()) {
+//                    Image(systemName: "arrow.clockwise")
+//                        .foregroundStyle(.teal)
+//                        .fontWeight(.semibold)
+//                }
             }
             
             // Prayer times row

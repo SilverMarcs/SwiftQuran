@@ -52,6 +52,13 @@ struct Settings: Codable {
 struct PersistedPrayerTimes: Codable {
     let prayerTimes: PrayerTimes
     let lastFetched: Date
+    let location: LocationData?
+}
+
+struct LocationData: Codable {
+    let latitude: Double
+    let longitude: Double
+    var locationName: String
 }
 
 enum PrayerTimeType: String, CaseIterable, Codable, Identifiable {

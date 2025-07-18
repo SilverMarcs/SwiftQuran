@@ -63,7 +63,6 @@
 			membershipExceptions = (
 				Models/PrayerTimesModels.swift,
 				Models/UpdatePrayerTimesIntent.swift,
-				Views/PrayerTimes/LocationStore.swift,
 			);
 			target = 08ED25D22E29CEF500AC8D97 /* PrayerTimeWidgetExtension */;
 		};
