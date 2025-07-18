@@ -29,6 +29,11 @@ struct Settings: Codable {
     let timezone: String
 }
 
+struct PersistedPrayerTimes: Codable {
+    let prayerTimes: PrayerTimes
+    let lastFetched: Date
+}
+
 enum PrayerTimeType: String, CaseIterable, Codable, Identifiable {
     case fajr = "Fajr"
     case duha = "Duha"

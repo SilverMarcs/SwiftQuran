@@ -33,7 +33,6 @@ struct PrayerTimeRow: View {
             Text(formattedTime)
                 .contentTransition(.numericText())
                 .bold()
-//                .foregroundStyle(.secondary)
         }
     }
 }
