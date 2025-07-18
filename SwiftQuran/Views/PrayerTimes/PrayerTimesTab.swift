@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PrayerTimesTab: View {
-    @AppStorage("prayer_times") private var storedPrayerTimes: Data?
+    @AppStorage("prayer_times", store: UserDefaults(suiteName: "group.com.temporary.SwiftQuran")) private var storedPrayerTimes: Data?
     @State private var prayerTimes: PrayerTimes? = nil
     @State private var lastFetched: Date? = nil
     @State private var isLoading = false

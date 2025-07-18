@@ -44,6 +44,7 @@ enum PrayerTimeType: String, CaseIterable, Codable, Identifiable {
 
     var id: String { rawValue }
     var label: String { rawValue }
+    
     var symbol: String {
         switch self {
         case .fajr: return "sunrise"
@@ -54,4 +55,15 @@ enum PrayerTimeType: String, CaseIterable, Codable, Identifiable {
         case .isha: return "moon.fill"
         }
     }
+    
+    var color: Color {
+         switch self {
+         case .fajr: return .indigo // Dawn purple/blue
+         case .duha: return .orange // Morning sun
+         case .dhuhr: return .yellow // Noon sun
+         case .asr: return .orange // Afternoon sun
+         case .maghrib: return .pink // Sunset pink
+         case .isha: return .blue // Night blue
+         }
+     }
 }

@@ -26,6 +26,7 @@ struct PrayerTimeRow: View {
                 Text(type.label)
             } icon: {
                 Image(systemName: type.symbol)
+                    .foregroundStyle(type.color)
             }
             
             Spacer()

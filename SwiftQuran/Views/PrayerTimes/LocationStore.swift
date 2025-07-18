@@ -10,9 +10,9 @@ import CoreLocation
 import MapKit
 
 struct LocationData {
-    @AppStorage("last_latitude") var latitude: Double?
-    @AppStorage("last_longitude") var longitude: Double?
-    @AppStorage("location_name") var locationName: String?
+    @AppStorage("last_latitude", store: UserDefaults(suiteName: "group.com.temporary.SwiftQuran")) var latitude: Double?
+    @AppStorage("last_longitude", store: UserDefaults(suiteName: "group.com.temporary.SwiftQuran")) var longitude: Double?
+    @AppStorage("location_name", store: UserDefaults(suiteName: "group.com.temporary.SwiftQuran")) var locationName: String?
 }
 
 @Observable class LocationStore: NSObject, CLLocationManagerDelegate {
