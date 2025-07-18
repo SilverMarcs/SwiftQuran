@@ -14,21 +14,6 @@ struct PrayerTimesTab: View {
     @State private var isLoading = false
     @State var locationStore = LocationStore()
     
-    func loadStoredPrayerTimes() {
-        if let data = storedPrayerTimes {
-            if let decoded = try? JSONDecoder().decode(PersistedPrayerTimes.self, from: data) {
-                prayerTimes = decoded.prayerTimes
-                lastFetched = decoded.lastFetched
-            }
-        }
-    }
-    
-    func shouldFetchNewTimes() -> Bool {
-        guard let lastFetched else { return true }
-        let calendar = Calendar.current
-        return !calendar.isDateInToday(lastFetched)
-    }
-    
     var body: some View {
           List {
               if let times = prayerTimes {
@@ -74,7 +59,6 @@ struct PrayerTimesTab: View {
                   locationStore.requestLocation()
                   if let location = locationStore.getLocation() {
                       Task {
-                          // Always fetch, regardless of lastFetched
                           await fetchPrayerTimes(latitude: location.latitude, longitude: location.longitude)
                       }
                   }
@@ -84,8 +68,11 @@ struct PrayerTimesTab: View {
           }
           .task {
               loadStoredPrayerTimes()
-              if let location = locationStore.getLocation(), shouldFetchNewTimes() {
-                  await fetchPrayerTimes(latitude: location.latitude, longitude: location.longitude)
+              
+              if shouldFetchNewTimes() {
+                  if let location = locationStore.getLocation() {
+                      await fetchPrayerTimes(latitude: location.latitude, longitude: location.longitude)
+                  }
               }
           }
       }
@@ -108,5 +95,20 @@ struct PrayerTimesTab: View {
         } catch {
             print("Error fetching prayer times: \(error)")
         }
+    }
+    
+    func loadStoredPrayerTimes() {
+        if let data = storedPrayerTimes {
+            if let decoded = try? JSONDecoder().decode(PersistedPrayerTimes.self, from: data) {
+                prayerTimes = decoded.prayerTimes
+                lastFetched = decoded.lastFetched
+            }
+        }
+    }
+    
+    func shouldFetchNewTimes() -> Bool {
+        guard let lastFetched else { return true }
+        let calendar = Calendar.current
+        return !calendar.isDateInToday(lastFetched)
     }
 }
