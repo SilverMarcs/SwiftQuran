@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreLocation
-import MapKit
+@unsafe @preconcurrency import MapKit
 import WidgetKit
 
 @Observable
@@ -88,7 +88,7 @@ class PrayerTimesService {
     
     // MARK: - Location Services
     
-    nonisolated func reverseGeocode(latitude: Double, longitude: Double) async throws -> String {
+    func reverseGeocode(latitude: Double, longitude: Double) async throws -> String {
         let location = CLLocation(latitude: latitude, longitude: longitude)
         guard let request = MKReverseGeocodingRequest(location: location) else {
             throw PrayerTimesError.reverseGeocodingFailed

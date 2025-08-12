@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsToolbar: ToolbarContent {
-    @State private var showSettings: Bool = false
+    @Binding var showSettings: Bool
     
     var body: some ToolbarContent {
         ToolbarItem(placement: .primaryAction) {
@@ -16,9 +16,6 @@ struct SettingsToolbar: ToolbarContent {
                 showSettings.toggle()
             } label: {
                 Label("Settings", systemImage: "gear")
-            }
-            .sheet(isPresented: $showSettings) {
-                SettingsView()
             }
         }
     }

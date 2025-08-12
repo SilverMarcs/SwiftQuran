@@ -2,7 +2,9 @@ import SwiftUI
 
 struct SavedVersesList: View {
     var savedVersesManager = SavedVersesManager.shared
+    
     @State private var savedVerses: [Verse] = []
+    @State private var showSettings = false
     
     private var groupedVerses: [(Surah, [Verse])] {
         let grouped = Dictionary(grouping: savedVerses) { verse in
@@ -47,7 +49,10 @@ struct SavedVersesList: View {
         }
         #if !os(macOS)
         .toolbar {
-            SettingsToolbar()
+            SettingsToolbar(showSettings: $showSettings)
+        }
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
         }
         #endif
     }
