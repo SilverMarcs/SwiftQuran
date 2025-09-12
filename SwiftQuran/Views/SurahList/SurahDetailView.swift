@@ -16,6 +16,8 @@ struct SurahDetailView: View {
             List {
                 ForEach(surah.verses, id: \.id) { verse in
                     VerseRow(verse: verse)
+                        .listRowSeparator(.hidden, edges: .top)
+                        .listRowSeparator(.visible, edges: .bottom)
                 }
                 .padding(10)
             }

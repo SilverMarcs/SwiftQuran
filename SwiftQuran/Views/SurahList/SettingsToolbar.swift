@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsToolbar: ToolbarContent {
     @Binding var showSettings: Bool
+    var transition: Namespace.ID
     
     var body: some ToolbarContent {
         ToolbarItem(placement: .primaryAction) {
@@ -18,5 +19,6 @@ struct SettingsToolbar: ToolbarContent {
                 Label("Settings", systemImage: "gear")
             }
         }
+        .matchedTransitionSource(id: "settings-button", in: transition)
     }
 }
