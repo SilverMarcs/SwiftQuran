@@ -1,22 +1,13 @@
 import Foundation
 
 @Observable class SavedVersesManager {
-    @ObservationIgnored static let shared = SavedVersesManager()
-    @ObservationIgnored private let store = NSUbiquitousKeyValueStore.default
-    @ObservationIgnored private let savedVersesKey = "saved_verses"
+    static let shared = SavedVersesManager()
+    private let savedVersesKey = "saved_verses"
     
     private(set) var savedVerses: Set<String> = [] // Set of "surahNumber_verseNumber"
     
     private init() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(storeDidChange),
-            name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
-            object: NSUbiquitousKeyValueStore.default
-        )
-        
         loadSavedVerses()
-        store.synchronize()
     }
     
     // Convenience methods that work directly with Verse objects
@@ -75,26 +66,13 @@ import Foundation
     }
     
     private func loadSavedVerses() {
-        if let data = store.array(forKey: savedVersesKey) as? [String] {
+        if let data = UserDefaults.standard.array(forKey: savedVersesKey) as? [String] {
             savedVerses = Set(data)
         }
     }
     
     private func saveSavedVerses() {
         let data = Array(savedVerses)
-        store.set(data, forKey: savedVersesKey)
-        store.synchronize()
-    }
-    
-    @objc private func storeDidChange(_ notification: Notification) {
-        guard let userInfo = notification.userInfo else { return }
-        guard let keys = userInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as? [String] else { return }
-        
-        if keys.contains(savedVersesKey) {
-            // Ensure we're on main actor since notification might come from background
-            Task { @MainActor in
-                self.loadSavedVerses()
-            }
-        }
+        UserDefaults.standard.set(data, forKey: savedVersesKey)
     }
 }
