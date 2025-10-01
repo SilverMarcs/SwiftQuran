@@ -8,7 +8,7 @@ struct VerseRow: View {
     @AppStorage("translationFontSize") var translationFontSize: Double = 18
     var progressManager = ReadingProgressManager.shared
     var savedVersesManager = SavedVersesManager.shared
-    var audioPlayer = AudioPlayerManager.shared
+    @Environment(AudioPlayerManager.self) var audioPlayer
     
     private var verseId: String {
         "verse_\(verse.verseKey)"
@@ -87,4 +87,5 @@ struct VerseRow: View {
 #Preview {
     VerseRow(verse: Mock.verse)
         .padding()
+        .environment(AudioPlayerManager())
 }

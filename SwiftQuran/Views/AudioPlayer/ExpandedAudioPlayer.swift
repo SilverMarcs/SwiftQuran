@@ -1,70 +1,79 @@
 import SwiftUI
 
 struct ExpandedAudioPlayer: View {
-    private var audioPlayer = AudioPlayerManager.shared
+    @Environment(AudioPlayerManager.self) var manager
+    
+    private var sliderRange: ClosedRange<Double> {
+        let upper = max(manager.duration, manager.currentTime)
+        return 0...max(upper, 1)
+    }
     
     var body: some View {
-        HStack(spacing: 20) {
-            Text(getSurahName())
-                .lineLimit(1)
+        VStack {
+            Text(manager.currentSurahTitle)
+                .font(.title2)
+                .fontWeight(.bold)
+            
+            Text(manager.currentAyahLabel)
+                .font(.headline)
+                .fontWeight(.medium)
+            
+            Spacer()
+                
+            HStack {
+                GlassEffectContainer {
+                    Button {
+                        manager.seek(to: max(0, manager.currentTime - 5))
+                    } label: {
+                        Image(systemName: "gobackward.5")
+                            .font(.title)
+                            .padding(8)
+                    }
+                    .buttonStyle(.glass)
+                    
+                    Button {
+                        if manager.isPlaying {
+                            manager.pause()
+                        } else {
+                            resumePlayback()
+                        }
+                    } label: {
+                        Image(systemName: manager.isPlaying ? "pause" : "play.fill")
+                            .contentTransition(.symbolEffect(.replace))
+                            .font(.largeTitle)
+                            .padding(15)
+                            .frame(width: 60)
+                    }
+                    .buttonStyle(.glass)
+                    
+                    Button {
+                        manager.seek(to: min(manager.duration, manager.currentTime + 5))
+                    } label: {
+                        Image(systemName: "goforward.5")
+                            .padding(8)
+                    }
+                    .buttonStyle(.glass)
+                    .font(.title)
+                }
+                .buttonBorderShape(.circle)
+            }
             
             Spacer()
             
-            ControlGroup {
-                Button {
-                    audioPlayer.seek(to: max(0, audioPlayer.currentTime - 5))
-                } label: {
-                    Image(systemName: "gobackward.5")
-                }
-                .buttonStyle(.plain)
-                
-                Button {
-                    if audioPlayer.isPlaying {
-                        audioPlayer.pause()
-                    } else {
-                        resumePlayback()
-                    }
-                } label: {
-                    Image(systemName: audioPlayer.isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                        .contentTransition(.symbolEffect(.replace))
-                        .font(.title2)
-                }
-                .buttonStyle(.plain)
-                
-                
-                Button {
-                    audioPlayer.seek(to: min(audioPlayer.duration, audioPlayer.currentTime + 5))
-                } label: {
-                    Image(systemName: "goforward.5")
-                }
-                .buttonStyle(.plain)
-            }
-            
-            Button {
-                audioPlayer.stop()
-            } label: {
-                Image(systemName: "stop.circle.fill")
-                    .foregroundStyle(.red)
-            }
-            .buttonStyle(.plain)
+            Slider(value: Binding(
+                get: { manager.currentTime },
+                set: { manager.seek(to: $0) }
+            ), in: sliderRange)
+            .disabled(manager.duration <= 0)
+            .padding(.horizontal)
         }
         .padding()
-    }
-    
-    private func getSurahName() -> String {
-        return audioPlayer.currentVerse?.surah?.transliteration ?? ""
+        .padding(.top, 10)
     }
     
     private func resumePlayback() {
-        if let currentVerse = audioPlayer.currentVerse {
-            audioPlayer.play(verse: currentVerse)
+        if let currentVerse = manager.currentVerse {
+            manager.play(verse: currentVerse)
         }
-    }
-}
-
-#Preview {
-    VStack {
-        Spacer()
-        ExpandedAudioPlayer()
     }
 }

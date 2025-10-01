@@ -1,10 +1,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(AudioPlayerManager.self) var audioManager
+    
     @State private var selectedTab: Tabs = .surahList
     @State private var searchText: String = ""
     
+    @Namespace private var audioPlayerAnimation
+    
     var body: some View {
+        @Bindable var manager = audioManager
+
         TabView(selection: $selectedTab) {
             Tab("Surahs", systemImage: "book", value: .surahList) {
                 NavigationStack {
@@ -42,15 +48,21 @@ struct ContentView: View {
         }
         #if os(macOS)
         .tabViewSidebarBottomBar {
-            AudioPlayer()
+            AudioPlayer(manager: manager)
                 .padding()
         }
         #else
         .tabBarMinimizeBehavior(.onScrollDown)
         .tabViewBottomAccessory {
-            if  AudioPlayerManager.shared.currentVerse != nil {
-                AudioPlayer()
-            }
+            InlineAudioPlayer()
+                .matchedTransitionSource(id: "MINIPLAYER", in: audioPlayerAnimation)
+        }
+        .sheet(isPresented: $manager.isExpanded) {
+            ExpandedAudioPlayer()
+                .navigationTransition(.zoom(sourceID: "MINIPLAYER", in: audioPlayerAnimation))
+                .presentationDetents([.fraction(2/5)])
+                .presentationDragIndicator(.visible)
+                .presentationBackgroundInteraction(.enabled)
         }
         #endif
     }

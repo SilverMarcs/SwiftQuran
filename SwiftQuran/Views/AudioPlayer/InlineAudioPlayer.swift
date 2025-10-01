@@ -1,50 +1,56 @@
 import SwiftUI
 
 struct InlineAudioPlayer: View {
-    private var audioPlayer = AudioPlayerManager.shared
+    @Environment(AudioPlayerManager.self) var manager
     
     var body: some View {
-        HStack {
-            Text(getSurahName())
-                .font(.caption.bold())
-                .lineLimit(1)
-            
-            Spacer()
-            
-            Button {
-                if audioPlayer.isPlaying {
-                    audioPlayer.pause()
-                } else {
-                    resumePlayback()
+        if manager.currentVerse != nil {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(manager.currentSurahTitle)
+                        .font(.subheadline)
+                        .lineLimit(1)
+                    
+                    Text(manager.currentAyahLabel)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
                 }
-            } label: {
-                Image(systemName: audioPlayer.isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                    .contentTransition(.symbolEffect(.replace))
+                .fontWeight(.medium)
+                
+                Spacer()
+                
+                Button {
+                    if manager.isPlaying {
+                        manager.pause()
+                    } else {
+                        resumePlayback()
+                    }
+                } label: {
+                    Image(systemName: manager.isPlaying ? "pause" : "play.fill")
+                        .fontWeight(.semibold)
+                        .contentTransition(.symbolEffect(.replace))
+                }
+                
+//                    Button {
+//                        manager.stop()
+//                    } label: {
+//                        Image(systemName: "stop.circle")
+//                            .foregroundStyle(.red)
+//                    }
+//                    .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
-            
-            Button {
-                audioPlayer.stop()
-            } label: {
-                Image(systemName: "stop.circle.fill")
-                    .foregroundStyle(.red)
+            .padding()
+            .contentShape(.rect)
+            .onTapGesture {
+                manager.isExpanded = true
             }
-            .buttonStyle(.plain)
         }
-        .padding()
-    }
-    
-    private func getSurahName() -> String {
-        return audioPlayer.currentVerse?.surah?.translation ?? ""
     }
     
     private func resumePlayback() {
-        if let currentVerse = audioPlayer.currentVerse {
-            audioPlayer.play(verse: currentVerse)
+        if let currentVerse = manager.currentVerse {
+            manager.play(verse: currentVerse)
         }
     }
-}
-
-#Preview {
-    InlineAudioPlayer()
 }
