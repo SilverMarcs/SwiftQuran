@@ -42,7 +42,7 @@ struct SurahList: View {
         }
         .sheet(isPresented: $showSettings) {
             SettingsView()
-//                .navigationTransition(.zoom(sourceID: "settings-button", in: transition))
+                .navigationTransition(.zoom(sourceID: "settings-button", in: transition))
         }
         #endif
     }
