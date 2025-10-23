@@ -3,10 +3,30 @@ import Foundation
 @Observable final class ReadingProgressManager {
     static let shared = ReadingProgressManager()
     private let progressKey = "reading_progress"
+    private let cloudStore = NSUbiquitousKeyValueStore.default
     
     private(set) var markedVerses: [Int: Int] = [:] // [surahNumber: verseNumber]
     
     private init() {
+        loadProgress()
+        setupCloudSync()
+    }
+    
+    private func setupCloudSync() {
+        // Sync from iCloud on startup
+        cloudStore.synchronize()
+        
+        // Listen for iCloud changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleCloudUpdate),
+            name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+            object: cloudStore
+        )
+    }
+    
+    @objc private func handleCloudUpdate(_ notification: Notification) {
+        // Reload progress when iCloud data changes
         loadProgress()
     }
     
@@ -39,13 +59,14 @@ import Foundation
     }
     
     private func loadProgress() {
-        if let data = UserDefaults.standard.array(forKey: progressKey) as? [[Int]] {
-            markedVerses = Dictionary(uniqueKeysWithValues: data.map { ($0[0], $0[1]) })
+        if let cloudData = cloudStore.array(forKey: progressKey) as? [[Int]] {
+            markedVerses = Dictionary(uniqueKeysWithValues: cloudData.map { ($0[0], $0[1]) })
         }
     }
     
     private func saveProgress() {
         let data = markedVerses.map { [$0.key, $0.value] }
-        UserDefaults.standard.set(data, forKey: progressKey)
+        cloudStore.set(data, forKey: progressKey)
+        cloudStore.synchronize()
     }
 }

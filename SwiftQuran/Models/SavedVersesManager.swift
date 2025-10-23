@@ -3,10 +3,30 @@ import Foundation
 @Observable class SavedVersesManager {
     static let shared = SavedVersesManager()
     private let savedVersesKey = "saved_verses"
+    private let cloudStore = NSUbiquitousKeyValueStore.default
     
     private(set) var savedVerses: Set<String> = [] // Set of "surahNumber_verseNumber"
     
     private init() {
+        loadSavedVerses()
+        setupCloudSync()
+    }
+    
+    private func setupCloudSync() {
+        // Sync from iCloud on startup
+        cloudStore.synchronize()
+        
+        // Listen for iCloud changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleCloudUpdate),
+            name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+            object: cloudStore
+        )
+    }
+    
+    @objc private func handleCloudUpdate(_ notification: Notification) {
+        // Reload saved verses when iCloud data changes
         loadSavedVerses()
     }
     
@@ -66,13 +86,14 @@ import Foundation
     }
     
     private func loadSavedVerses() {
-        if let data = UserDefaults.standard.array(forKey: savedVersesKey) as? [String] {
-            savedVerses = Set(data)
+        if let cloudData = cloudStore.array(forKey: savedVersesKey) as? [String] {
+            savedVerses = Set(cloudData)
         }
     }
     
     private func saveSavedVerses() {
         let data = Array(savedVerses)
-        UserDefaults.standard.set(data, forKey: savedVersesKey)
+        cloudStore.set(data, forKey: savedVersesKey)
+        cloudStore.synchronize()
     }
 }

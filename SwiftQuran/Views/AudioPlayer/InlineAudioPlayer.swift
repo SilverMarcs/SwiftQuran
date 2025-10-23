@@ -8,7 +8,7 @@ struct InlineAudioPlayer: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(manager.currentSurahTitle)
-                        .font(.subheadline)
+                        .font(.system(size: 13))
                         .lineLimit(1)
                     
                     Text(manager.currentAyahLabel)
@@ -27,7 +27,7 @@ struct InlineAudioPlayer: View {
                         resumePlayback()
                     }
                 } label: {
-                    Image(systemName: manager.isPlaying ? "pause" : "play.fill")
+                    Image(systemName: manager.isPlaying ? "pause.fill" : "play.fill")
                         .fontWeight(.semibold)
                         .contentTransition(.symbolEffect(.replace))
                 }
@@ -41,6 +41,7 @@ struct InlineAudioPlayer: View {
 //                    .buttonStyle(.plain)
             }
             .padding()
+            .padding(.horizontal, 4)
             .contentShape(.rect)
             .onTapGesture {
                 manager.isExpanded = true
