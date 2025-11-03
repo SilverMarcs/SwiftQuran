@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct SurahSearchTab: View {
-    @Binding var searchText: String
+    @State private var searchText: String = ""
+    
     private var surahs: [Surah] {
         let allSurahs = QuranDataManager.shared.surahs
         if searchText.isEmpty { return allSurahs }
@@ -17,11 +18,12 @@ struct SurahSearchTab: View {
                 SurahRow(surah: surah)
             }
         }
+        .searchable(text: $searchText, prompt: "Search surahs")
         .navigationTitle("Search")
         .toolbarTitleDisplayMode(.inlineLarge)
     }
 }
 
 #Preview {
-    SurahSearchTab(searchText: .constant(""))
+    SurahSearchTab()
 }

@@ -34,7 +34,7 @@ struct ContentView: View {
             
             Tab(value: .search, role: .search) {
                 NavigationStack {
-                    SurahSearchTab(searchText: $searchText)
+                    SurahSearchTab()
                         .surahNavigationDestination()
                 }
             }
@@ -52,6 +52,7 @@ struct ContentView: View {
                 .padding()
         }
         #else
+        .tabViewSearchActivation(.searchTabSelection)
         .tabBarMinimizeBehavior(.onScrollDown)
         .tabViewBottomAccessory {
             InlineAudioPlayer()

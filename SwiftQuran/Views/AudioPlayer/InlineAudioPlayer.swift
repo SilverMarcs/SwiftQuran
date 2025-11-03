@@ -46,6 +46,8 @@ struct InlineAudioPlayer: View {
             .onTapGesture {
                 manager.isExpanded = true
             }
+        } else {
+            Text("No Surah Playing")
         }
     }
     
