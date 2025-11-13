@@ -3,7 +3,7 @@ import SwiftData
 
 @main
 struct SwiftQuranApp: App {
-    @State var audioPlayerManager = AudioPlayerManager()
+    let audioPlayerManager = AudioPlayerManager()
     
     var body: some Scene {
         WindowGroup {
