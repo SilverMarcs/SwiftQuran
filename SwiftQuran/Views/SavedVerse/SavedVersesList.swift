@@ -4,8 +4,6 @@ struct SavedVersesList: View {
     var savedVersesManager = SavedVersesManager.shared
     
     @State private var savedVerses: [Verse] = []
-    @State private var showSettings = false
-    @Namespace private var transition
     
     private var groupedVerses: [(Surah, [Verse])] {
         let grouped = Dictionary(grouping: savedVerses) { verse in
@@ -48,15 +46,7 @@ struct SavedVersesList: View {
         .task(id: savedVersesManager.savedVerses) {
             savedVerses = savedVersesManager.getSavedVersesData()
         }
-        #if !os(macOS)
-        .toolbar {
-            SettingsToolbar(showSettings: $showSettings, transition: transition)
-        }
-        .sheet(isPresented: $showSettings) {
-            SettingsView()
-                .navigationTransition(.zoom(sourceID: "settings-button", in: transition))
-        }
-        #endif
+        .settingsSheet()
     }
 }
 

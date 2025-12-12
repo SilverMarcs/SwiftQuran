@@ -39,7 +39,6 @@ struct ContentView: View {
                 }
             }
         }
-        .searchable(text: $searchText)
         .tabViewStyle(.sidebarAdaptable)
         .onOpenURL { url in
             if url.scheme == "swiftquran" && url.host == "prayers" {
@@ -48,7 +47,7 @@ struct ContentView: View {
         }
         #if os(macOS)
         .tabViewSidebarBottomBar {
-            AudioPlayer(manager: manager)
+            InlineAudioPlayer()
                 .padding()
         }
         #else

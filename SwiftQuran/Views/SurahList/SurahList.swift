@@ -2,8 +2,6 @@ import SwiftUI
 
 struct SurahList: View {
     var progressManager = ReadingProgressManager.shared
-    @State private var showSettings = false
-    @Namespace private var transition
     
     private var filteredSurahs: ([Surah], [Surah]) {
         let allSurahs = QuranDataManager.shared.surahs
@@ -36,14 +34,6 @@ struct SurahList: View {
         }
         .navigationTitle("Surahs")
         .toolbarTitleDisplayMode(.inlineLarge)
-        #if !os(macOS)
-        .toolbar {
-            SettingsToolbar(showSettings: $showSettings, transition: transition)
-        }
-        .sheet(isPresented: $showSettings) {
-            SettingsView()
-                .navigationTransition(.zoom(sourceID: "settings-button", in: transition))
-        }
-        #endif
+        .settingsSheet()
     }
 }

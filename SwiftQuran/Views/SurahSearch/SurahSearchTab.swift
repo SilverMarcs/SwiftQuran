@@ -18,7 +18,9 @@ struct SurahSearchTab: View {
                 SurahRow(surah: surah)
             }
         }
+        .contentMargins(.top, 10)
         .searchable(text: $searchText, prompt: "Search surahs")
+        .searchPresentationToolbarBehavior(.avoidHidingContent)
         .navigationTitle("Search")
         .toolbarTitleDisplayMode(.inlineLarge)
     }
