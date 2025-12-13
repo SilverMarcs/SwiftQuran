@@ -10,18 +10,8 @@ struct ExpandedAudioPlayer: View {
     
     var body: some View {
         VStack {
-            Text(manager.currentSurahTitle)
-                .font(.title2)
-                .fontWeight(.bold)
-            
-            Text(manager.currentAyahLabel)
-                .font(.headline)
-                .fontWeight(.medium)
-            
-            Spacer()
-                
-            HStack {
-                GlassEffectContainer {
+            GlassEffectContainer {
+                HStack {
                     Button {
                         manager.seek(to: max(0, manager.currentTime - 5))
                     } label: {
@@ -29,7 +19,6 @@ struct ExpandedAudioPlayer: View {
                             .font(.title)
                             .padding(8)
                     }
-                    .buttonStyle(.glass)
                     
                     Button {
                         if manager.isPlaying {
@@ -38,13 +27,13 @@ struct ExpandedAudioPlayer: View {
                             resumePlayback()
                         }
                     } label: {
-                        Image(systemName: manager.isPlaying ? "pause" : "play.fill")
+                        Image(systemName: manager.isPlaying ? "pause.fill" : "play.fill")
                             .contentTransition(.symbolEffect(.replace))
                             .font(.largeTitle)
                             .padding(15)
                             .frame(width: 60)
                     }
-                    .buttonStyle(.glass)
+
                     
                     Button {
                         manager.seek(to: min(manager.duration, manager.currentTime + 5))
@@ -52,13 +41,11 @@ struct ExpandedAudioPlayer: View {
                         Image(systemName: "goforward.5")
                             .padding(8)
                     }
-                    .buttonStyle(.glass)
                     .font(.title)
                 }
+                .buttonStyle(.glass)
                 .buttonBorderShape(.circle)
             }
-            
-            Spacer()
             
             Slider(value: Binding(
                 get: { manager.currentTime },
@@ -68,7 +55,9 @@ struct ExpandedAudioPlayer: View {
             .padding(.horizontal)
         }
         .padding()
-        .padding(.top, 10)
+        .toolbarTitleDisplayMode(.inline)
+        .navigationTitle(manager.currentSurahTitle)
+        .navigationSubtitle(manager.currentAyahLabel)
     }
     
     private func resumePlayback() {

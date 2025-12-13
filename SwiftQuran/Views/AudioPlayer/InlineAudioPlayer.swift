@@ -30,15 +30,8 @@ struct InlineAudioPlayer: View {
                     Image(systemName: manager.isPlaying ? "pause.fill" : "play.fill")
                         .fontWeight(.semibold)
                         .contentTransition(.symbolEffect(.replace))
+                        .foregroundStyle(.primary)
                 }
-                
-//                    Button {
-//                        manager.stop()
-//                    } label: {
-//                        Image(systemName: "stop.circle")
-//                            .foregroundStyle(.red)
-//                    }
-//                    .buttonStyle(.plain)
             }
             .padding()
             .padding(.horizontal, 4)
@@ -46,8 +39,6 @@ struct InlineAudioPlayer: View {
             .onTapGesture {
                 manager.isExpanded = true
             }
-        } else {
-            Text("No Surah Playing")
         }
     }
     

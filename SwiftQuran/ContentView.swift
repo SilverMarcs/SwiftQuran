@@ -53,16 +53,18 @@ struct ContentView: View {
         #else
         .tabViewSearchActivation(.searchTabSelection)
         .tabBarMinimizeBehavior(.onScrollDown)
-        .tabViewBottomAccessory {
+        .tabViewBottomAccessory(isEnabled: audioManager.currentVerse != nil) {
             InlineAudioPlayer()
                 .matchedTransitionSource(id: "MINIPLAYER", in: audioPlayerAnimation)
         }
         .sheet(isPresented: $manager.isExpanded) {
-            ExpandedAudioPlayer()
-                .navigationTransition(.zoom(sourceID: "MINIPLAYER", in: audioPlayerAnimation))
-                .presentationDetents([.fraction(2/5)])
-                .presentationDragIndicator(.visible)
-                .presentationBackgroundInteraction(.enabled)
+            NavigationStack {
+                ExpandedAudioPlayer()
+                    .presentationDetents([.fraction(1/3.5)])
+                    .presentationDragIndicator(.visible)
+                    .presentationBackgroundInteraction(.enabled)
+            }
+            .navigationTransition(.zoom(sourceID: "MINIPLAYER", in: audioPlayerAnimation))
         }
         #endif
     }
