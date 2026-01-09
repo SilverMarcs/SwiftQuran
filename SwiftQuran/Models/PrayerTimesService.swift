@@ -10,6 +10,7 @@ import CoreLocation
 @unsafe @preconcurrency import MapKit
 import WidgetKit
 
+@MainActor
 @Observable
 class PrayerTimesService {
     static let shared = PrayerTimesService()
@@ -40,15 +41,32 @@ class PrayerTimesService {
     // MARK: - Prayer Times Fetching
     
     func fetchPrayerTimes(latitude: Double, longitude: Double) async throws -> PrayerTimes {
-        let timezone = TimeZone.current.identifier
-        let urlString = "https://www.islamicfinder.us/index.php/api/prayer_times?latitude=\(latitude)&longitude=\(longitude)&timezone=\(timezone)"
-        guard let url = URL(string: urlString) else {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "api.aladhan.com"
+        components.path = "/v1/timings"
+        components.queryItems = [
+            URLQueryItem(name: "latitude", value: String(latitude)),
+            URLQueryItem(name: "longitude", value: String(longitude)),
+            URLQueryItem(name: "method", value: "2")
+        ]
+
+        guard let url = components.url else {
             throw PrayerTimesError.invalidURL
         }
         
         let (data, _) = try await URLSession.shared.data(from: url)
-        let response = try JSONDecoder().decode(PrayerTimesResponse.self, from: data)
-        return PrayerTimes.formatted(from: response.results)
+        let response = try JSONDecoder().decode(AlAdhanResponse.self, from: data)
+        let timings = response.data.timings
+        let rawTimes = PrayerTimes(
+            Fajr: timings.Fajr,
+            Duha: timings.Sunrise ?? timings.Fajr,
+            Dhuhr: timings.Dhuhr,
+            Asr: timings.Asr,
+            Maghrib: timings.Maghrib,
+            Isha: timings.Isha
+        )
+        return PrayerTimes.formatted(from: rawTimes)
     }
     
     func fetchAndStorePrayerTimes(for locationData: LocationData) async throws {
@@ -134,4 +152,21 @@ enum PrayerTimesError: Error {
             return "Failed to reverse geocode location"
         }
     }
+}
+
+private struct AlAdhanResponse: Decodable {
+    let data: AlAdhanData
+}
+
+private struct AlAdhanData: Decodable {
+    let timings: AlAdhanTimings
+}
+
+private struct AlAdhanTimings: Decodable {
+    let Fajr: String
+    let Sunrise: String?
+    let Dhuhr: String
+    let Asr: String
+    let Maghrib: String
+    let Isha: String
 }

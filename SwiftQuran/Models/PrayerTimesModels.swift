@@ -24,12 +24,23 @@ struct PrayerTimes: Codable {
     
     static func formatted(from raw: PrayerTimes) -> PrayerTimes {
         func format(_ time: String) -> String {
-            let cleaned = time.replacingOccurrences(of: "%", with: "")
+            let cleaned = time.replacing("%", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
             let components = cleaned.split(separator: " ")
-            guard components.count == 2 else { return cleaned }
-            let hour = components[0]
-            let ampm = components[1].uppercased()
-            return "\(hour) \(ampm)"
+            if components.count == 2 {
+                let hour = components[0]
+                let ampm = components[1].uppercased()
+                return "\(hour) \(ampm)"
+            }
+
+            let formatter24 = DateFormatter()
+            formatter24.dateFormat = "HH:mm"
+            if let date = formatter24.date(from: cleaned) {
+                let formatter12 = DateFormatter()
+                formatter12.dateFormat = "h:mm a"
+                return formatter12.string(from: date)
+            }
+
+            return cleaned
         }
         
         return PrayerTimes(
