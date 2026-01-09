@@ -64,7 +64,7 @@ class PrayerTimesService {
             Dhuhr: timings.Dhuhr,
             Asr: timings.Asr,
             Maghrib: timings.Maghrib,
-            Isha: timings.Isha
+                Isha: timings.Isha
         )
         return PrayerTimes.formatted(from: rawTimes)
     }
@@ -78,7 +78,6 @@ class PrayerTimesService {
         }
         
         userDefaults?.set(encoded, forKey: storageKey)
-        
         // Reload widget timelines after storing new prayer times
         reloadWidgetTimelines()
     }
