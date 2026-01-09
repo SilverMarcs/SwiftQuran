@@ -14,22 +14,19 @@ struct PrayerTimesWidgetEntryView: View {
     var body: some View {
         if let summary = entry.summary {
             VStack(alignment: .leading) {
-                Text("Next Prayer")
-                    .foregroundStyle(.secondary)
-
-                Spacer()
-                
                 HStack {
                     Image(systemName: summary.type.symbol)
                         .foregroundStyle(summary.type.color)
                     Text(summary.type.label)
                         .bold()
-                    Spacer()
-                    Text(summary.time)
-                        .bold()
                 }
-                .font(.system(size: 22, weight: .bold))
-                .minimumScaleFactor(1.0)
+
+                Spacer()
+                
+                Text(summary.time)
+                    .bold()
+                    .font(.system(size: 23, weight: .bold))
+                    .minimumScaleFactor(1.0)
 
             }
             .containerBackground(summary.type.color.opacity(0.35), for: .widget)
