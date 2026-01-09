@@ -15,12 +15,18 @@ struct PrayerTimesWidgetEntryView: View {
         if let summary = entry.summary {
             HStack {
                 VStack(alignment: .leading) {
-                    Label {
-                        Text(summary.type.label)
-                            .bold()
-                    } icon: {
-                        Image(systemName: summary.type.symbol)
-                            .foregroundStyle(summary.type.color)
+                    HStack {
+                        Label {
+                            Text(summary.type.label)
+                                .bold()
+                        } icon: {
+                            Image(systemName: summary.type.symbol)
+                                .foregroundStyle(summary.type.color)
+                        }
+                        Spacer()
+
+                        Text(PrayerTimesWidgetRemainingTimeFormatter.formattedRemainingTime(from: entry.date, to: summary.date))
+                            .foregroundStyle(.secondary)
                     }
                     
                     Text(summary.time)

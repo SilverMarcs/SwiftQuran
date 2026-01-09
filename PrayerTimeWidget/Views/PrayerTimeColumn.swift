@@ -10,6 +10,7 @@ import SwiftUI
 struct PrayerTimeColumn: View {
     let type: PrayerTimeType
     let time: String
+    let isCurrent: Bool
     
     private var timeComponents: (hour: String, ampm: String) {
         let components = time.split(separator: " ")
@@ -21,20 +22,21 @@ struct PrayerTimeColumn: View {
         VStack(spacing: 5) {
             Text(type.label)
                 .font(.footnote)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(isCurrent ? .accent : .secondary)
             
             Image(systemName: type.symbol)
-                .foregroundStyle(type.color)
+                .foregroundStyle(isCurrent ? .accent : type.color)
                 .font(.subheadline)
             
             Text(timeComponents.hour)
                 .font(.callout)
                 .fontWeight(.medium)
+                .foregroundStyle(isCurrent ? .accent : .primary)
                 .contentTransition(.numericText())
             
             Text(timeComponents.ampm)
                 .font(.caption2)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(isCurrent ? .accent : .secondary)
         }
         .frame(maxWidth: .infinity)
     }
