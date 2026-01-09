@@ -14,7 +14,8 @@ final class PrayerTimesStore {
     static let shared = PrayerTimesStore()
 
     private let storageKey = "prayer_times"
-    private let userDefaults = UserDefaults.standard
+    private let standardDefaults = UserDefaults.standard
+    private let appGroupDefaults = UserDefaults(suiteName: "group.com.temporary.SwiftQuran")
 
     var prayerTimes: PrayerTimes?
     var currentPrayerType: PrayerTimeType?
@@ -22,7 +23,7 @@ final class PrayerTimesStore {
     private init() {}
 
     func load() {
-        guard let data = userDefaults.data(forKey: storageKey),
+        guard let data = readStoredData(),
               let persisted = try? JSONDecoder().decode(PersistedPrayerTimes.self, from: data) else {
             prayerTimes = nil
             currentPrayerType = nil
@@ -38,13 +39,22 @@ final class PrayerTimesStore {
             return
         }
 
-        userDefaults.set(data, forKey: storageKey)
+        writeStoredData(data)
         update(with: persisted)
     }
 
     func update(with persisted: PersistedPrayerTimes) {
         prayerTimes = persisted.prayerTimes
         refreshCurrentPrayer()
+    }
+
+    private func readStoredData() -> Data? {
+        appGroupDefaults?.data(forKey: storageKey) ?? standardDefaults.data(forKey: storageKey)
+    }
+
+    private func writeStoredData(_ data: Data) {
+        standardDefaults.set(data, forKey: storageKey)
+        appGroupDefaults?.set(data, forKey: storageKey)
     }
 
     func refreshCurrentPrayer(now: Date = .now) {

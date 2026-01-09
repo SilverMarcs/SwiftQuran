@@ -8,20 +8,22 @@
 import Foundation
 import CoreLocation
 import Observation
+import WidgetKit
 
 @MainActor
 @Observable
 final class PrayerTimesService {
     static let shared = PrayerTimesService()
 
-    private let userDefaults = UserDefaults.standard
+    private let standardDefaults = UserDefaults.standard
+    private let appGroupDefaults = UserDefaults(suiteName: "group.com.temporary.SwiftQuran")
     private let storageKey = "prayer_times"
     private let locationManager = LocationManager()
 
     private init() {}
 
     func loadStoredPrayerData() -> PersistedPrayerTimes? {
-        guard let data = userDefaults.data(forKey: storageKey),
+        guard let data = readStoredData(),
               let persisted = try? JSONDecoder().decode(PersistedPrayerTimes.self, from: data) else {
             return nil
         }
@@ -59,8 +61,9 @@ final class PrayerTimesService {
             guard let encoded = try? JSONEncoder().encode(persisted) else {
                 return .encodingFailed
             }
-            userDefaults.set(encoded, forKey: storageKey)
+            writeStoredData(encoded)
             PrayerTimesStore.shared.update(with: persisted)
+            WidgetCenter.shared.reloadTimelines(ofKind: "SwiftQuranWidget")
             return nil
         } catch {
             print("Watch failed to fetch prayer times: \(error)")
@@ -95,6 +98,15 @@ final class PrayerTimesService {
             Isha: timings.Isha
         )
         return formatted(from: rawTimes)
+    }
+
+    private func readStoredData() -> Data? {
+        appGroupDefaults?.data(forKey: storageKey) ?? standardDefaults.data(forKey: storageKey)
+    }
+
+    private func writeStoredData(_ data: Data) {
+        standardDefaults.set(data, forKey: storageKey)
+        appGroupDefaults?.set(data, forKey: storageKey)
     }
 
     private func formatted(from raw: PrayerTimes) -> PrayerTimes {
