@@ -13,21 +13,23 @@ struct PrayerTimesWidgetEntryView: View {
 
     var body: some View {
         if let summary = entry.summary {
-            VStack(alignment: .leading) {
-                HStack {
-                    Image(systemName: summary.type.symbol)
-                        .foregroundStyle(summary.type.color)
-                    Text(summary.type.label)
-                        .bold()
+            HStack {
+                VStack(alignment: .leading) {
+                    Label {
+                        Text(summary.type.label)
+                            .bold()
+                    } icon: {
+                        Image(systemName: summary.type.symbol)
+                            .foregroundStyle(summary.type.color)
+                    }
+                    
+                    Text(summary.time)
+                        .font(.system(size: 26))
+                        .fontWeight(.semibold)
+                        .minimumScaleFactor(1.0)
                 }
-
-                Spacer()
                 
-                Text(summary.time)
-                    .bold()
-                    .font(.system(size: 23, weight: .bold))
-                    .minimumScaleFactor(1.0)
-
+                Spacer()
             }
             .containerBackground(summary.type.color.opacity(0.35), for: .widget)
         } else {
