@@ -27,6 +27,10 @@ struct PrayerTimeListRow: View {
                 .contentTransition(.numericText())
                 .bold()
         }
-        .listRowBackground(type.color.opacity(isCurrent ? 0.45 : 0.2))
+        .listRowInsets(.init(top: 6, leading: 10, bottom: 6, trailing: 10))
+        .listRowBackground(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(type.color.opacity(isCurrent ? 0.65 : 0.35))
+        )
     }
 }
