@@ -19,13 +19,15 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (PrayerTimesEntry) -> ()) {
-        let prayerData = loadPrayerData()
-        let entry = PrayerTimesEntry(
-            date: Date(), 
-            prayerTimes: prayerData?.prayerTimes,
-            locationName: prayerData?.location?.locationName
-        )
-        completion(entry)
+        Task {
+            let prayerData = await loadPrayerData()
+            let entry = PrayerTimesEntry(
+                date: Date(),
+                prayerTimes: prayerData?.prayerTimes,
+                locationName: prayerData?.location?.locationName
+            )
+            completion(entry)
+        }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<PrayerTimesEntry>) -> ()) {
@@ -37,7 +39,7 @@ struct Provider: TimelineProvider {
             await fetchPrayerTimesIfNeeded()
             
             // Load prayer data after potential fetch
-            let prayerData = loadPrayerData()
+            let prayerData = await loadPrayerData()
             
             // Create current entry
             let currentEntry = PrayerTimesEntry(
@@ -63,13 +65,18 @@ struct Provider: TimelineProvider {
         }
     }
 
-    private func loadPrayerData() -> PersistedPrayerTimes? {
-        return PrayerTimesService.shared.loadStoredPrayerData()
+    private func loadPrayerData() async -> PersistedPrayerTimes? {
+        await MainActor.run {
+            PrayerTimesService.shared.loadStoredPrayerData()
+        }
     }
     
     private func fetchPrayerTimesIfNeeded() async {
         // Check if prayer times need to be refreshed (not from today)
-        if PrayerTimesService.shared.shouldFetchNewTimes() {
+        let shouldFetch = await MainActor.run {
+            PrayerTimesService.shared.shouldFetchNewTimes()
+        }
+        if shouldFetch {
             do {
                 try await PrayerTimesService.shared.fetchPrayerTimesForStoredLocation()
             } catch {
