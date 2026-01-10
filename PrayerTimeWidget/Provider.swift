@@ -49,18 +49,12 @@ struct Provider: TimelineProvider {
             )
             
             let entries = [currentEntry]
+
+            let nextRefresh = nextRefreshDate(from: prayerData?.prayerTimes, now: currentDate, calendar: calendar)
+                ?? calendar.date(byAdding: .hour, value: 1, to: currentDate)
+                ?? currentDate.addingTimeInterval(3600)
             
-            // Schedule next refresh for tomorrow at midnight
-            let refreshPolicy: TimelineReloadPolicy
-            if let tomorrowMidnight = calendar.dateInterval(of: .day, for: currentDate)?.end {
-                refreshPolicy = .after(tomorrowMidnight)
-            } else {
-                // Fallback: update in 24 hours
-                let tomorrow = calendar.date(byAdding: .day, value: 1, to: currentDate) ?? currentDate
-                refreshPolicy = .after(tomorrow)
-            }
-            
-            let timeline = Timeline(entries: entries, policy: refreshPolicy)
+            let timeline = Timeline(entries: entries, policy: .after(nextRefresh))
             completion(timeline)
         }
     }
@@ -84,5 +78,17 @@ struct Provider: TimelineProvider {
                 print("Widget failed to fetch prayer times: \(error)")
             }
         }
+    }
+
+    private func nextRefreshDate(from times: PrayerTimes?, now: Date, calendar: Calendar) -> Date? {
+        guard let times else {
+            return calendar.dateInterval(of: .day, for: now)?.end
+        }
+
+        if let nextPrayer = PrayerTimeWidgetScheduleBuilder.nextPrayer(from: times, now: now, calendar: calendar) {
+            return nextPrayer.date
+        }
+
+        return calendar.dateInterval(of: .day, for: now)?.end
     }
 }
