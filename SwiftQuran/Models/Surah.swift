@@ -27,7 +27,7 @@ struct Surah: Identifiable, Hashable {
     }
 }
 
-struct Verse: Identifiable {
+struct Verse: Identifiable, Hashable {
     let id: Int
     let text: String
     let translation: String

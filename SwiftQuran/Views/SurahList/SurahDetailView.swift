@@ -74,6 +74,7 @@ struct SurahDetailView: View {
         .contentMargins(7)
         .scrollPosition($scrollPosition, anchor: .top)
         .navigationTitle(surah.transliteration)
+//        .navigationSubtitle(surah.translation)
         .toolbarTitleDisplayMode(.inline)
         .toolbarTitleMenu {
             Menu {

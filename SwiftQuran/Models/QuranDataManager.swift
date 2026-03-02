@@ -3,7 +3,7 @@ import SQLite
 
 @Observable
 final class QuranDataManager {
-    private let database: Connection
+    @ObservationIgnored private let database: Connection
 
     private(set) var surahs: [Surah]
 
@@ -95,6 +95,50 @@ final class QuranDataManager {
         }
     }
 
+    func tafseer(for verse: Verse) -> String? {
+        text(
+            in: "Tafseer",
+            textColumn: "ayatText",
+            idColumn: "ayatID",
+            verseID: verse.id
+        )
+    }
+
+    func commentary(for verse: Verse) -> String? {
+        text(
+            in: "Commentary",
+            textColumn: "ayatText",
+            idColumn: "ayatID",
+            verseID: verse.id
+        )
+    }
+
+    func hadiths(for verse: Verse) -> [VerseHadith] {
+        let sql = """
+            SELECT h.hadithID, h.hadithNum, h.hadithTxt
+            FROM IndexHadith ih
+            JOIN Hadith h ON h.hadithID = ih.hadithID
+            WHERE CAST(ih.ayatNum AS INTEGER) = ?
+            ORDER BY CAST(ih.hadithNum AS INTEGER), CAST(h.hadithID AS INTEGER)
+            """
+
+        do {
+            let statement = try database.prepare(sql, verse.id)
+            return statement.compactMap { row in
+                guard let id = intValue(row[0]),
+                      let number = intValue(row[1]),
+                      let text = trimmedStringValue(row[2]) else {
+                    return nil
+                }
+
+                return VerseHadith(id: id, number: number, text: text)
+            }
+        } catch {
+            print("Error loading hadith for verse \(verse.id): \(error)")
+            return []
+        }
+    }
+
     private func loadSurahs() -> [Surah] {
         let sql = """
             SELECT surahID, surahNameArabic, surahNameEnglish, surahTranslation, surahAyatFrom, surahAyatTo, MakkiMadni
@@ -129,6 +173,31 @@ final class QuranDataManager {
         }
     }
 
+    private func text(
+        in table: String,
+        textColumn: String,
+        idColumn: String,
+        verseID: Int
+    ) -> String? {
+        let sql = """
+            SELECT \(textColumn)
+            FROM \(table)
+            WHERE CAST(\(idColumn) AS INTEGER) = ?
+            LIMIT 1
+            """
+
+        do {
+            let statement = try database.prepare(sql, verseID)
+            for row in statement {
+                return trimmedStringValue(row[0])
+            }
+        } catch {
+            print("Error loading \(table) for verse \(verseID): \(error)")
+        }
+
+        return nil
+    }
+
     private func intValue(_ binding: Binding?) -> Int? {
         switch binding {
         case let integer as Int64:
@@ -142,5 +211,15 @@ final class QuranDataManager {
 
     private func stringValue(_ binding: Binding?) -> String? {
         binding as? String
+    }
+
+    private func trimmedStringValue(_ binding: Binding?) -> String? {
+        guard let text = stringValue(binding)?
+            .trimmingCharacters(in: .whitespacesAndNewlines),
+            !text.isEmpty else {
+            return nil
+        }
+
+        return text
     }
 }
