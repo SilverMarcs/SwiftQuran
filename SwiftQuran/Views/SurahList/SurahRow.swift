@@ -2,8 +2,8 @@ import SwiftUI
 
 struct SurahRow: View {
     let surah: Surah
-    var progressManager = ReadingProgressManager.shared
-    
+    @Environment(ReadingProgressManager.self) var progressManager
+
     var body: some View {
         HStack(alignment: .center) {
             Text("\(surah.id)")
@@ -11,7 +11,7 @@ struct SurahRow: View {
                 #if !(macOS)
                 .padding(.trailing, 2)
                 #endif
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(surah.transliteration)
                     .font(.headline)
@@ -19,9 +19,9 @@ struct SurahRow: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
-            
+
             Spacer()
-            
+
             if let markedVerse = progressManager.getProgress(for: surah.id) {
                 Text("\(markedVerse)/\(surah.totalVerses)")
                     .font(.subheadline)
@@ -45,5 +45,5 @@ struct SurahRow: View {
 }
 
 #Preview {
-   SurahRow(surah: Mock.surah)
+    SurahRow(surah: Mock.surah)
 }

@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct SurahSearchTab: View {
+    @Environment(QuranDataManager.self) var dataManager
     @State private var searchText: String = ""
-    
+
     private var surahs: [Surah] {
-        let allSurahs = QuranDataManager.shared.surahs
+        let allSurahs = dataManager.surahs
         if searchText.isEmpty { return allSurahs }
         return allSurahs.filter { surah in
             surah.transliteration.localizedCaseInsensitiveContains(searchText) ||

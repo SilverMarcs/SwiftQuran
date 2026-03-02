@@ -3,21 +3,22 @@ import AVKit
 
 struct VerseRow: View {
     let verse: Verse
-    
+    var surahTitle: String = ""
+
     @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
     @AppStorage("translationFontSize") var translationFontSize: Double = 18
-    var progressManager = ReadingProgressManager.shared
-    var savedVersesManager = SavedVersesManager.shared
+    @Environment(ReadingProgressManager.self) var progressManager
+    @Environment(SavedVersesManager.self) var savedVersesManager
     @Environment(AudioPlayerManager.self) var audioPlayer
-    
+
     private var verseId: String {
         "verse_\(verse.verseKey)"
     }
-    
+
     private var isCurrentVerse: Bool {
         audioPlayer.currentVerseId == verseId
     }
-    
+
     var body: some View {
         VStack(spacing: 16) {
             Text(verse.text)
@@ -32,13 +33,13 @@ struct VerseRow: View {
                 .font(.system(size: arabicTextFontSize))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .environment(\.layoutDirection, .rightToLeft)
-            
+
             Text("\(verse.verseIndex) • \(verse.translation)")
                 .textSelection(.enabled)
                 .font(.system(size: translationFontSize))
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             HStack {
                 Button {
                     savedVersesManager.toggleSaved(verse: verse)
@@ -48,9 +49,9 @@ struct VerseRow: View {
                 }
                 .buttonStyle(.glass)
                 .foregroundStyle(savedVersesManager.isSaved(verse: verse) ? .red : .secondary)
-                
+
                 Spacer()
-                
+
                 Button {
                     progressManager.toggleProgress(for: verse)
                 } label: {
@@ -59,14 +60,12 @@ struct VerseRow: View {
                 }
                 .buttonStyle(.glass)
                 .foregroundStyle(progressManager.isProgress(for: verse) ? .accent : .secondary)
-                
+
                 Button {
                     if isCurrentVerse && audioPlayer.isPlaying {
                         audioPlayer.pause()
-                    } else if isCurrentVerse {
-                        playVerse()
                     } else {
-                        playVerse()
+                        audioPlayer.play(verse: verse, surahTitle: surahTitle)
                     }
                 } label: {
                     Image(systemName: (isCurrentVerse && audioPlayer.isPlaying) ? "pause.fill" : "play.fill")
@@ -77,10 +76,6 @@ struct VerseRow: View {
             }
         }
         .id("verse\(verse.id)")
-    }
-    
-    private func playVerse() {
-        audioPlayer.play(verse: verse)
     }
 }
 

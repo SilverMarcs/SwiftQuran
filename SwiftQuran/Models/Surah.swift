@@ -17,7 +17,6 @@ struct Surah: Identifiable, Hashable {
     let ayatTo: Int
 
     var totalVerses: Int { ayatTo - ayatFrom + 1 }
-    var verses: [Verse]
 
     static func == (lhs: Surah, rhs: Surah) -> Bool {
         lhs.id == rhs.id
@@ -34,10 +33,6 @@ struct Verse: Identifiable {
     let translation: String
     let surahNumber: Int
     let verseIndex: Int
-
-    var surah: Surah? {
-        QuranDataManager.shared.surah(id: surahNumber)
-    }
 
     var verseKey: String {
         "\(surahNumber)_\(verseIndex)"

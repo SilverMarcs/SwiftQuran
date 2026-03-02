@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct SurahList: View {
-    var progressManager = ReadingProgressManager.shared
-    
+    @Environment(QuranDataManager.self) var dataManager
+    @Environment(ReadingProgressManager.self) var progressManager
+
     private var filteredSurahs: ([Surah], [Surah]) {
-        let allSurahs = QuranDataManager.shared.surahs
+        let allSurahs = dataManager.surahs
         let inProgress = allSurahs.filter { progressManager.getProgress(for: $0.id) != nil }
         let remaining = allSurahs.filter { progressManager.getProgress(for: $0.id) == nil }
         return (inProgress, remaining)

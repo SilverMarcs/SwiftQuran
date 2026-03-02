@@ -1,22 +1,23 @@
 import SwiftUI
 
 struct SavedVersesList: View {
-    var savedVersesManager = SavedVersesManager.shared
-    
+    @Environment(SavedVersesManager.self) var savedVersesManager
+    @Environment(QuranDataManager.self) var dataManager
+
     @State private var savedVerses: [Verse] = []
-    
+
     private var groupedVerses: [(Surah, [Verse])] {
         let grouped = Dictionary(grouping: savedVerses) { verse in
-            verse.surah
+            dataManager.surah(id: verse.surahNumber)
         }
-        
+
         return grouped.compactMap { (surah, verses) in
             guard let surah = surah else { return nil }
             let sortedVerses = verses.sorted { $0.verseIndex < $1.verseIndex }
             return (surah, sortedVerses)
         }.sorted { $0.0.id < $1.0.id }
     }
-    
+
     var body: some View {
         List {
             if savedVerses.isEmpty {
@@ -44,7 +45,7 @@ struct SavedVersesList: View {
         .navigationTitle("Saved")
         .toolbarTitleDisplayMode(.inlineLarge)
         .task(id: savedVersesManager.savedVerses) {
-            savedVerses = savedVersesManager.getSavedVersesData()
+            savedVerses = savedVersesManager.getSavedVersesData(surahs: dataManager.surahs)
         }
         .settingsSheet()
     }

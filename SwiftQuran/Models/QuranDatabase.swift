@@ -59,8 +59,7 @@ final class QuranDatabase: Sendable {
                     translation: translation,
                     type: makkiMadni == 0 ? "meccan" : "medinan",
                     ayatFrom: ayatFrom,
-                    ayatTo: ayatTo,
-                    verses: []
+                    ayatTo: ayatTo
                 )
             }
         } catch {
