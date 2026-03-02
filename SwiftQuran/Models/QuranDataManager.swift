@@ -3,10 +3,9 @@ import SQLite
 
 @Observable
 final class QuranDataManager {
-    private(set) var surahs: [Surah] = []
-    private(set) var isLoaded = false
-
     private let database: Connection
+
+    private(set) var surahs: [Surah]
 
     init(bundle: Bundle = .main) {
         guard let databaseURL = bundle.url(forResource: "quran", withExtension: "sqlite") else {
@@ -15,15 +14,11 @@ final class QuranDataManager {
 
         do {
             database = try Connection(databaseURL.path, readonly: true)
+            surahs = []
+            surahs = loadSurahs()
         } catch {
             fatalError("Failed to open quran.sqlite: \(error)")
         }
-    }
-
-    func loadQuranData() {
-        guard !isLoaded else { return }
-        surahs = loadSurahs()
-        isLoaded = true
     }
 
     func surah(id: Int) -> Surah? {

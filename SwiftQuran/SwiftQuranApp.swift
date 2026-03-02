@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 
 @main
 struct SwiftQuranApp: App {
@@ -15,9 +14,6 @@ struct SwiftQuranApp: App {
                 .environment(savedVersesManager)
                 .environment(progressManager)
                 .environment(audioPlayerManager)
-                .task {
-                    quranDataManager.loadQuranData()
-                }
         }
         .commands { MenuCommands() }
     }
