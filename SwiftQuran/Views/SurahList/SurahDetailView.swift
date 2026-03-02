@@ -16,6 +16,49 @@ struct SurahDetailView: View {
     }
 
     var body: some View {
+        /*
+        Quick swap: uncomment this block and comment the active ScrollView block below
+        to return to the List + ScrollViewReader version.
+
+        ScrollViewReader { proxy in
+            List {
+                ForEach(verses, id: \.id) { verse in
+                    VerseRow(verse: verse, surahTitle: surah.translation)
+                        .id(scrollIdentifier(for: verse))
+                }
+            }
+            .listStyle(.plain)
+            .navigationTitle(surah.transliteration)
+            .toolbarTitleDisplayMode(.inline)
+            .toolbarTitleMenu {
+                Menu {
+                    ForEach(verses) { verse in
+                        Button {
+                            scrollToVerse(verse, using: proxy)
+                        } label: {
+                            Text("Verse \(verse.verseIndex)")
+                        }
+                    }
+                } label: {
+                    Label("Verse List", systemImage: "list.bullet")
+                }
+            }
+            .toolbar {
+                SurahToolbar(surah: surah)
+            }
+            .task {
+                verses = dataManager.loadVerses(for: surah)
+
+                if let targetID = initialScrollIdentifier() {
+                    scrollToIdentifier(targetID, using: proxy, animated: false)
+                }
+            }
+            #if os(macOS)
+            .navigationSubtitle(surah.translation)
+            #endif
+        }
+        */
+
         ScrollView {
             LazyVStack(spacing: 0) {
                 ForEach(verses, id: \.id) { verse in
@@ -52,13 +95,36 @@ struct SurahDetailView: View {
             verses = dataManager.loadVerses(for: surah)
 
             if let targetID = initialScrollIdentifier() {
-                scrollPosition.scrollTo(id: targetID, anchor: .top)
+                try? await Task.sleep(for: .seconds(0.1))
+//                withAnimation {
+                    scrollPosition.scrollTo(id: targetID, anchor: .top)
+//                }
             }
         }
         #if os(macOS)
         .navigationSubtitle(surah.translation)
         #endif
     }
+
+    /*
+    private func scrollToVerse(_ verse: Verse, using proxy: ScrollViewProxy) {
+        scrollToIdentifier(scrollIdentifier(for: verse), using: proxy)
+    }
+
+    private func scrollToIdentifier(
+        _ identifier: String,
+        using proxy: ScrollViewProxy,
+        animated: Bool = true
+    ) {
+        if animated {
+            withAnimation {
+                proxy.scrollTo(identifier, anchor: .top)
+            }
+        } else {
+            proxy.scrollTo(identifier, anchor: .top)
+        }
+    }
+    */
 
     private func scrollToVerse(_ verse: Verse) {
         scrollPosition.scrollTo(id: scrollIdentifier(for: verse), anchor: .top)
