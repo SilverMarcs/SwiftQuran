@@ -27,7 +27,7 @@ final class QuranDataManager {
 
     func loadVerses(for surah: Surah) -> [Verse] {
         let sql = """
-            SELECT a.ayatID, a.ayatText, e.ayatText, ia.surahAyatID
+            SELECT a.ayatID, a.ayatText, e.ayatText, ia.surahAyatID, ia.Prostation
             FROM ArabicAmiri a
             JOIN English e ON e.ayatID = a.ayatID
             JOIN IndexAyat ia ON ia.ayatID = a.ayatID
@@ -37,7 +37,7 @@ final class QuranDataManager {
 
         do {
             let statement = try database.prepare(sql, surah.ayatFrom, surah.ayatTo)
-            return statement.compactMap { row in
+            return statement.compactMap { row -> Verse? in
                 guard let ayatID = intValue(row[0]),
                       let arabicText = stringValue(row[1]),
                       let englishText = stringValue(row[2]),
@@ -50,7 +50,8 @@ final class QuranDataManager {
                     text: arabicText.trimmingCharacters(in: .whitespaces),
                     translation: englishText.trimmingCharacters(in: .whitespaces),
                     surahNumber: surah.id,
-                    verseIndex: surahAyatID
+                    verseIndex: surahAyatID,
+                    isProstrationVerse: (intValue(row[4]) ?? 0) > 0
                 )
             }
         } catch {
@@ -124,7 +125,7 @@ final class QuranDataManager {
 
         do {
             let statement = try database.prepare(sql, verse.id)
-            return statement.compactMap { row in
+            return statement.compactMap { row -> VerseHadith? in
                 guard let id = intValue(row[0]),
                       let number = intValue(row[1]),
                       let text = trimmedStringValue(row[2]) else {
@@ -147,7 +148,7 @@ final class QuranDataManager {
 
         do {
             let statement = try database.prepare(sql)
-            return statement.compactMap { row in
+            return statement.compactMap { row -> Surah? in
                 guard let id = intValue(row[0]),
                       let nameArabic = stringValue(row[1]),
                       let nameEnglish = stringValue(row[2]),

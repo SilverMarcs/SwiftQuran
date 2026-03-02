@@ -29,7 +29,7 @@ struct SavedVersesList: View {
                 ForEach(groupedVerses, id: \.0.id) { surah, verses in
                     Section(header: Text(surah.translation)) {
                         ForEach(verses, id: \.id) { verse in
-                            NavigationLink(destination: SurahDetailView(surah: surah, initialVerseNumberToScrollTo: verse.verseIndex)) {
+                            NavigationLink(destination: SurahDetailView(surah: surah, dataManager: dataManager, initialVerseNumberToScrollTo: verse.verseIndex)) {
                                 SavedVerseRow(verse: verse)
                             }
                             .swipeActions(edge: .trailing) {
@@ -51,6 +51,6 @@ struct SavedVersesList: View {
     }
 }
 
-#Preview {
-    SavedVersesList()
-}
+//#Preview {
+//    SavedVersesList()
+//}

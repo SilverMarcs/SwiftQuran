@@ -54,6 +54,12 @@ struct VerseRow: View {
                     .buttonStyle(.glass)
                     .foregroundStyle(savedVersesManager.isSaved(verse: verse) ? .red : .secondary)
 
+                    if verse.isProstrationVerse {
+                        Text("Sajdah")
+                            .font(.caption.bold())
+                        .foregroundStyle(.secondary)
+                    }
+
                     Spacer()
 
                     Button {

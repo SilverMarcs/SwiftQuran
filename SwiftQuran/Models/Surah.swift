@@ -33,6 +33,23 @@ struct Verse: Identifiable, Hashable {
     let translation: String
     let surahNumber: Int
     let verseIndex: Int
+    let isProstrationVerse: Bool
+
+    init(
+        id: Int,
+        text: String,
+        translation: String,
+        surahNumber: Int,
+        verseIndex: Int,
+        isProstrationVerse: Bool = false
+    ) {
+        self.id = id
+        self.text = text
+        self.translation = translation
+        self.surahNumber = surahNumber
+        self.verseIndex = verseIndex
+        self.isProstrationVerse = isProstrationVerse
+    }
 
     var verseKey: String {
         "\(surahNumber)_\(verseIndex)"
