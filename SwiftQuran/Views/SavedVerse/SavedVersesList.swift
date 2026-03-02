@@ -45,7 +45,7 @@ struct SavedVersesList: View {
         .navigationTitle("Saved")
         .toolbarTitleDisplayMode(.inlineLarge)
         .task(id: savedVersesManager.savedVerses) {
-            savedVerses = savedVersesManager.getSavedVersesData(surahs: dataManager.surahs)
+            savedVerses = dataManager.savedVerses(for: savedVersesManager.savedVerses)
         }
         .settingsSheet()
     }

@@ -1,6 +1,7 @@
 import Foundation
 
-@Observable class SavedVersesManager {
+@Observable
+final class SavedVersesManager {
     private let savedVersesKey = "saved_verses"
     private let cloudStore = NSUbiquitousKeyValueStore.default
 
@@ -37,36 +38,6 @@ import Foundation
 
     func isSaved(verse: Verse) -> Bool {
         savedVerses.contains(verse.verseKey)
-    }
-
-    func getSavedVersesData(surahs: [Surah]) -> [Verse] {
-        // Group saved verse keys by surah
-        var surahVerses: [Int: [Int]] = [:]
-        for verseKey in savedVerses {
-            let components = verseKey.split(separator: "_")
-            guard components.count == 2,
-                  let surahNumber = Int(components[0]),
-                  let verseNumber = Int(components[1]) else {
-                continue
-            }
-            surahVerses[surahNumber, default: []].append(verseNumber)
-        }
-
-        // Load verses from DB for each surah that has saved verses
-        var result: [Verse] = []
-        for (surahID, verseNumbers) in surahVerses {
-            guard let surah = surahs.first(where: { $0.id == surahID }) else { continue }
-            let allVerses = QuranDatabase.shared.loadVerses(for: surah)
-            let saved = allVerses.filter { verseNumbers.contains($0.verseIndex) }
-            result.append(contentsOf: saved)
-        }
-
-        return result.sorted { lhs, rhs in
-            if lhs.surahNumber == rhs.surahNumber {
-                return lhs.verseIndex < rhs.verseIndex
-            }
-            return lhs.surahNumber < rhs.surahNumber
-        }
     }
 
     private func loadSavedVerses() {
