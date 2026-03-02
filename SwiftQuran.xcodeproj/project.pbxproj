@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08A70E242F5526C100CE22B2 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 08A70E232F5526C100CE22B2 /* SQLite */; };
 		08ADE0E62F10B07000A14A96 /* SwiftQuran Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 08ADE0DC2F10B06F00A14A96 /* SwiftQuran Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08ADE2EE2F10C10300A14A96 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D52E29CEF500AC8D97 /* WidgetKit.framework */; };
 		08ADE2EF2F10C10300A14A96 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D72E29CEF500AC8D97 /* SwiftUI.framework */; };
@@ -179,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08A70E242F5526C100CE22B2 /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +298,7 @@
 			);
 			name = SwiftQuran;
 			packageProductDependencies = (
+				08A70E232F5526C100CE22B2 /* SQLite */,
 			);
 			productName = SwiftQuran;
 			productReference = 08D691902D8343A700EC14D8 /* SwiftQuran.app */;
@@ -356,6 +359,9 @@
 			);
 			mainGroup = 08D691872D8343A700EC14D8;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				08A70E222F5526C100CE22B2 /* XCRemoteSwiftPackageReference "SQLite" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 08D691912D8343A700EC14D8 /* Products */;
 			projectDirPath = "";
@@ -940,6 +946,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		08A70E222F5526C100CE22B2 /* XCRemoteSwiftPackageReference "SQLite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		08A70E232F5526C100CE22B2 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08A70E222F5526C100CE22B2 /* XCRemoteSwiftPackageReference "SQLite" */;
+			productName = SQLite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 08D691882D8343A700EC14D8 /* Project object */;
 }

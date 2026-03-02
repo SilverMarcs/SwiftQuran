@@ -1,37 +1,33 @@
 import SwiftUI
 
 struct SettingsView: View {
-    // Default font sizes per platform
     #if os(iOS)
     private let defaultTranslationFontSize: Double = 18
     #else
     private let defaultTranslationFontSize: Double = 13
     #endif
-    
+
     private let defaultArabicFontSize: Double = 21
     private let minFontSize: Double = 10
     private let maxFontSize: Double = 60
-    
+
     @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
     @AppStorage("translationFontSize") var translationFontSize: Double = 18
     @Environment(\.dismiss) private var dismiss
-    
-    // Sample texts for preview
+
     private let sampleArabicText = "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ"
     private let sampleEnglishText = "In the name of Allah, the Entirely Merciful, the Especially Merciful."
-    
+
     var body: some View {
         NavigationStack {
             Form {
-                // Arabic Font Settings
                 fontSettingsSection(
                     title: "Arabic Text",
                     fontSize: $arabicTextFontSize,
                     sampleText: sampleArabicText,
                     isArabic: true
                 )
-                
-                // English Font Settings
+
                 fontSettingsSection(
                     title: "English Translation",
                     fontSize: $translationFontSize,
@@ -49,7 +45,7 @@ struct SettingsView: View {
                     }
                     .foregroundStyle(.red)
                 }
-                
+
                 ToolbarItem(placement: .cancellationAction) {
                     Button(role:. close) {
                         dismiss()
@@ -58,7 +54,7 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     func resetAllFontSizes() {
         arabicTextFontSize = defaultArabicFontSize
         #if os(iOS)
@@ -67,7 +63,7 @@ struct SettingsView: View {
         translationFontSize = 13
         #endif
     }
-    
+
     @ViewBuilder
     private func fontSettingsSection(
         title: String,
@@ -79,7 +75,7 @@ struct SettingsView: View {
             Text(sampleText)
                 .font(.system(size: fontSize.wrappedValue))
                 .fontDesign(isArabic ? .serif : .default)
-            
+
             Slider(
                 value: fontSize,
                 in: minFontSize...maxFontSize,

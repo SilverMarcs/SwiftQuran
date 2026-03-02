@@ -7,37 +7,38 @@
 
 import Foundation
 
-struct Surah: Codable, Identifiable, Hashable {
+struct Surah: Identifiable, Hashable {
     let id: Int
     let name: String
     let transliteration: String
     let translation: String
     let type: String
-    let totalVerses: Int
-    let verses: [Verse]
-    
+    let ayatFrom: Int
+    let ayatTo: Int
+
+    var totalVerses: Int { ayatTo - ayatFrom + 1 }
+    var verses: [Verse]
+
     static func == (lhs: Surah, rhs: Surah) -> Bool {
         lhs.id == rhs.id
     }
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }
 
-struct Verse: Codable, Identifiable {
+struct Verse: Identifiable {
     let id: Int
     let text: String
     let translation: String
     let surahNumber: Int
     let verseIndex: Int
-    
-    // Computed property to get the associated surah
+
     var surah: Surah? {
         QuranDataManager.shared.surah(id: surahNumber)
     }
-    
-    // Helper method to generate verse key used for saving/audio
+
     var verseKey: String {
         "\(surahNumber)_\(verseIndex)"
     }

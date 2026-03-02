@@ -1,20 +1,14 @@
-//
-//  Mock.swift
-//  SwiftQuran
-//
-//  Created by Zabir Raihan on 14/03/2025.
-//
-
 import SwiftUI
 
 enum Mock {
    static let surah = Surah(
        id: 1,
        name: "الفاتحة",
-       transliteration: "Al-Fatihah",
+       transliteration: "Al-Fatiha",
        translation: "The Opener",
        type: "meccan",
-       totalVerses: 7,
+       ayatFrom: 1,
+       ayatTo: 7,
        verses: [
            Verse(id: 1, text: "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", translation: "In the name of Allah, the Entirely Merciful, the Especially Merciful", surahNumber: 1, verseIndex: 1),
            Verse(id: 2, text: "ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ", translation: "[All] praise is [due] to Allah, Lord of the worlds", surahNumber: 1, verseIndex: 2),
@@ -25,6 +19,6 @@ enum Mock {
            Verse(id: 7, text: "صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ", translation: "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray", surahNumber: 1, verseIndex: 7)
        ]
    )
-   
+
    static let verse = Verse(id: 1, text: "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", translation: "In the name of Allah, the Entirely Merciful, the Especially Merciful", surahNumber: 1, verseIndex: 1)
 }

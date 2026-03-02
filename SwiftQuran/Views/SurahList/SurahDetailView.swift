@@ -5,12 +5,12 @@ struct SurahDetailView: View {
     let initialVerseNumberToScrollTo: Int?
     var progressManager = ReadingProgressManager.shared
     @State private var showingVerseList = false
-    
+
     init(surah: Surah, initialVerseNumberToScrollTo: Int? = nil) {
         self.surah = surah
         self.initialVerseNumberToScrollTo = initialVerseNumberToScrollTo
     }
-    
+
     var body: some View {
         ScrollViewReader { proxy in
             List {
@@ -31,7 +31,7 @@ struct SurahDetailView: View {
                         Button(action: {
                             proxy.scrollTo("verse\(verse.id)", anchor: .top)
                         }) {
-                            Text("Verse \(verse.id)")
+                            Text("Verse \(verse.verseIndex)")
                         }
                     }
                 } label: {
@@ -45,7 +45,8 @@ struct SurahDetailView: View {
                 if let initial = initialVerseNumberToScrollTo, initial > 0, initial <= surah.verses.count {
                     let verseId = surah.verses[initial - 1].id
                     proxy.scrollTo("verse\(verseId)", anchor: .top)
-                } else if let markedVerse = progressManager.getProgress(for: surah.id) {
+                } else if let markedVerse = progressManager.getProgress(for: surah.id),
+                          markedVerse > 0, markedVerse <= surah.verses.count {
                     let verseId = surah.verses[markedVerse - 1].id
                     proxy.scrollTo("verse\(verseId)", anchor: .top)
                 }
