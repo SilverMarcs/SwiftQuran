@@ -14,8 +14,8 @@ struct HadithReferenceView: View {
             if hadiths.isEmpty {
                 ContentUnavailableView("No hadith available for this ayah.", systemImage: "books.vertical")
             } else {
-                Section("Hadith") {
-                    ForEach(hadiths) { hadith in
+                ForEach(hadiths) { hadith in
+                    Section(hadith.sectionTitle) {
                         VerseHadithRow(hadith: hadith)
                     }
                 }
@@ -28,12 +28,7 @@ private struct VerseHadithRow: View {
     let hadith: VerseHadith
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Hadith \(hadith.number)")
-                .bold()
-
-            Text(hadith.text)
-                .textSelection(.enabled)
-        }
+        Text(hadith.text)
+            .textSelection(.enabled)
     }
 }

@@ -4,6 +4,10 @@ struct VerseHadith: Identifiable, Hashable {
     let id: Int
     let number: Int
     let text: String
+
+    var sectionTitle: String {
+        "Hadith \(String(number))"
+    }
 }
 
 enum VerseReferenceSection: String, CaseIterable, Identifiable {
