@@ -29,8 +29,7 @@ struct VerseRow: View {
                     #else
                     .opacity(0.8)
                     #endif
-                    .kerning(0)
-                    .lineSpacing(4)
+                    .lineSpacing(15)
                     .fontDesign(.serif)
                     .font(.system(size: arabicTextFontSize))
                     .multilineTextAlignment(.leading)
