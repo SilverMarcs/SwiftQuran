@@ -3,20 +3,25 @@ import SwiftUI
 struct SurahDetailView: View {
     @Environment(ReadingProgressManager.self) var progressManager
 
+    @State private var hasPerformedInitialScroll = false
+
     let dataManager: QuranDataManager
     let surah: Surah
     let initialVerseNumberToScrollTo: Int?
+    let shouldScrollToSavedProgress: Bool
 
     let verses: [Verse]
     
     init(
         surah: Surah,
         dataManager: QuranDataManager,
-        initialVerseNumberToScrollTo: Int? = nil
+        initialVerseNumberToScrollTo: Int? = nil,
+        shouldScrollToSavedProgress: Bool = false
     ) {
         self.dataManager = dataManager
         self.surah = surah
         self.initialVerseNumberToScrollTo = initialVerseNumberToScrollTo
+        self.shouldScrollToSavedProgress = shouldScrollToSavedProgress
         self.verses = dataManager.loadVerses(for: self.surah)
     }
 
@@ -44,6 +49,12 @@ struct SurahDetailView: View {
                 SurahToolbar(surah: surah)
             }
             .task {
+                guard !hasPerformedInitialScroll else {
+                    return
+                }
+
+                hasPerformedInitialScroll = true
+
                 if let targetID = initialScrollIdentifier() {
                     proxy.scrollTo(targetID, anchor: .top)
                 }
@@ -63,7 +74,8 @@ struct SurahDetailView: View {
             return scrollIdentifier(for: verses[initial - 1])
         }
 
-        if let markedVerse = progressManager.getProgress(for: surah.id),
+        if shouldScrollToSavedProgress,
+           let markedVerse = progressManager.getProgress(for: surah.id),
            markedVerse > 0, markedVerse <= verses.count {
             return scrollIdentifier(for: verses[markedVerse - 1])
         }

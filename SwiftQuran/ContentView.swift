@@ -15,7 +15,7 @@ struct ContentView: View {
             Tab("Surahs", systemImage: "book", value: .surahList) {
                 NavigationStack {
                     SurahList()
-                        .surahNavigationDestination()
+                        .surahNavigationDestination(shouldScrollToSavedProgress: true)
                 }
             }
             
