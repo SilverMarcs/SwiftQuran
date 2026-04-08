@@ -5,7 +5,7 @@ struct SurahToolbar: ToolbarContent {
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingFontSettings = false
-    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
+    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 26
     @AppStorage("translationFontSize") var translationFontSize: Double = 18
 
     var body: some ToolbarContent {

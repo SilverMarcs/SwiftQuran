@@ -16,7 +16,7 @@ final class PrayerTimesService {
     static let shared = PrayerTimesService()
 
     private let standardDefaults = UserDefaults.standard
-    private let appGroupDefaults = UserDefaults(suiteName: "group.com.temporary.SwiftQuran")
+    private let appGroupDefaults = UserDefaults(suiteName: "group.com.SilverMarcs.SwiftQuran")
     private let storageKey = "prayer_times"
     private let locationManager = LocationManager()
 

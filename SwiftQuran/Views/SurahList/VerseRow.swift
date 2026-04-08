@@ -5,7 +5,7 @@ struct VerseRow: View {
     let verse: Verse
     var surahTitle: String = ""
 
-    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
+    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 26
     @AppStorage("translationFontSize") var translationFontSize: Double = 18
     
     @Environment(ReadingProgressManager.self) var progressManager

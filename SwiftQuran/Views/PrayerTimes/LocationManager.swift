@@ -52,11 +52,20 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        #if os(macOS)
+        if status == .authorizedAlways {
+            manager.requestLocation()
+        } else if status == .denied || status == .restricted {
+            continuation?.resume(returning: nil)
+            continuation = nil
+        }
+        #else
         if status == .authorizedWhenInUse || status == .authorizedAlways {
             manager.requestLocation()
         } else if status == .denied || status == .restricted {
             continuation?.resume(returning: nil)
             continuation = nil
         }
+        #endif
     }
 }

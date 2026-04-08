@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.temporary.SwiftQuran</string>
+		<string>group.com.SilverMarcs.SwiftQuran</string>
 	</array>
 </dict>
 </plist>

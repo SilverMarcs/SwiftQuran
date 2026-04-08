@@ -15,7 +15,7 @@ import WidgetKit
 class PrayerTimesService {
     static let shared = PrayerTimesService()
     
-    private let userDefaults = UserDefaults(suiteName: "group.com.temporary.SwiftQuran")
+    private let userDefaults = UserDefaults(suiteName: "group.com.SilverMarcs.SwiftQuran")
     private let storageKey = "prayer_times"
     
     private init() {}

@@ -15,7 +15,7 @@ final class PrayerTimesStore {
 
     private let storageKey = "prayer_times"
     private let standardDefaults = UserDefaults.standard
-    private let appGroupDefaults = UserDefaults(suiteName: "group.com.temporary.SwiftQuran")
+    private let appGroupDefaults = UserDefaults(suiteName: "group.com.SilverMarcs.SwiftQuran")
 
     var prayerTimes: PrayerTimes?
     var currentPrayerType: PrayerTimeType?

@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		08A70E242F5526C100CE22B2 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 08A70E232F5526C100CE22B2 /* SQLite */; };
-		08ADE0E62F10B07000A14A96 /* SwiftQuran Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 08ADE0DC2F10B06F00A14A96 /* SwiftQuran Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		08ADE0E62F10B07000A14A96 /* SwiftQuran Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 08ADE0DC2F10B06F00A14A96 /* SwiftQuran Watch App.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08ADE2EE2F10C10300A14A96 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D52E29CEF500AC8D97 /* WidgetKit.framework */; };
 		08ADE2EF2F10C10300A14A96 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D72E29CEF500AC8D97 /* SwiftUI.framework */; };
 		08ADE2FE2F10C10400A14A96 /* SwiftQuranWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08ADE2ED2F10C10300A14A96 /* SwiftQuranWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08ED25D62E29CEF500AC8D97 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D52E29CEF500AC8D97 /* WidgetKit.framework */; };
 		08ED25D82E29CEF500AC8D97 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D72E29CEF500AC8D97 /* SwiftUI.framework */; };
-		08ED25E32E29CEF600AC8D97 /* PrayerTimeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08ED25D32E29CEF500AC8D97 /* PrayerTimeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		08ED25E32E29CEF600AC8D97 /* PrayerTimeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08ED25D32E29CEF500AC8D97 /* PrayerTimeWidgetExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -440,6 +440,7 @@
 /* Begin PBXTargetDependency section */
 		08ADE0E52F10B07000A14A96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 08ADE0DB2F10B06F00A14A96 /* SwiftQuran Watch App */;
 			targetProxy = 08ADE0E42F10B07000A14A96 /* PBXContainerItemProxy */;
 		};
@@ -450,6 +451,7 @@
 		};
 		08ED25E22E29CEF600AC8D97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 08ED25D22E29CEF500AC8D97 /* PrayerTimeWidgetExtension */;
 			targetProxy = 08ED25E12E29CEF600AC8D97 /* PBXContainerItemProxy */;
 		};
@@ -464,19 +466,19 @@
 				CODE_SIGN_ENTITLEMENTS = "SwiftQuran Watch App/SwiftQuran Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L782RMCG7;
+				DEVELOPMENT_TEAM = J52QUTREBS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = SwiftQuran;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SwiftQuran needs access to your location to provide accurate prayer times for your area.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.temporary.SwiftQuran;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.SilverMarcs.SwiftQuran;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.temporary.SwiftQuran.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -499,19 +501,19 @@
 				CODE_SIGN_ENTITLEMENTS = "SwiftQuran Watch App/SwiftQuran Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L782RMCG7;
+				DEVELOPMENT_TEAM = J52QUTREBS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = SwiftQuran;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SwiftQuran needs access to your location to provide accurate prayer times for your area.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.temporary.SwiftQuran;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.SilverMarcs.SwiftQuran;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.temporary.SwiftQuran.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -535,7 +537,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftQuranWidget/SwiftQuranWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L782RMCG7;
+				DEVELOPMENT_TEAM = J52QUTREBS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftQuranWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SwiftQuranWidget;
@@ -547,7 +549,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.temporary.SwiftQuran.watchkitapp.SwiftQuranWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.watchkitapp.SwiftQuranWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -569,7 +571,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftQuranWidget/SwiftQuranWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L782RMCG7;
+				DEVELOPMENT_TEAM = J52QUTREBS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftQuranWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SwiftQuranWidget;
@@ -581,7 +583,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.temporary.SwiftQuran.watchkitapp.SwiftQuranWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.watchkitapp.SwiftQuranWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -840,6 +842,7 @@
 				CODE_SIGN_ENTITLEMENTS = PrayerTimeWidget/PrayerTimeWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J52QUTREBS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrayerTimeWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrayerTimeWidget;
@@ -851,7 +854,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.temporary.SwiftQuran.PrayerTimeWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.PrayerTimeWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -872,6 +875,7 @@
 				CODE_SIGN_ENTITLEMENTS = PrayerTimeWidget/PrayerTimeWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J52QUTREBS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrayerTimeWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PrayerTimeWidget;
@@ -883,7 +887,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.temporary.SwiftQuran.PrayerTimeWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.PrayerTimeWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

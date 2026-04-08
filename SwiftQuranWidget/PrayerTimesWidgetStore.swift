@@ -11,7 +11,7 @@ struct PrayerTimesWidgetStore {
     static let storageKey = "prayer_times"
 
     static func loadPersistedPrayerTimes() -> PersistedPrayerTimes? {
-        guard let data = UserDefaults(suiteName: "group.com.temporary.SwiftQuran")?.data(forKey: storageKey),
+        guard let data = UserDefaults(suiteName: "group.com.SilverMarcs.SwiftQuran")?.data(forKey: storageKey),
               let persisted = try? JSONDecoder().decode(PersistedPrayerTimes.self, from: data) else {
             return nil
         }

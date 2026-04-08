@@ -11,7 +11,7 @@ struct SettingsView: View {
     private let minFontSize: Double = 10
     private let maxFontSize: Double = 60
 
-    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
+    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 26
     @AppStorage("translationFontSize") var translationFontSize: Double = 18
     @Environment(\.dismiss) private var dismiss
 

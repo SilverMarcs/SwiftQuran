@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct MenuCommands: Commands {
-    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 21
+    @AppStorage("arabicTextFontSize") var arabicTextFontSize: Double = 26
     @AppStorage("translationFontSize") var translationFontSize: Double = 18
     
     private let minFontSize: Double = 10
