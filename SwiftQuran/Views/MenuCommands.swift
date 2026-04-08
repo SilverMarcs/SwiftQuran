@@ -16,28 +16,36 @@ struct MenuCommands: Commands {
     private let maxFontSize: Double = 60
     
     var body: some Commands {
+        CommandGroup(replacing: .newItem) {}
+        
         CommandGroup(before: .toolbar) {
-            Button("Increase Font Size") {
+            Button {
                 if arabicTextFontSize < maxFontSize {
                     arabicTextFontSize += 1
                 }
+            } label: {
+                Label("Increase Font Size", systemImage: "plus.magnifyingglass")
             }
             .keyboardShortcut("+")
             
-            Button("Decrease Font Size") {
+            Button {
                 if arabicTextFontSize > minFontSize {
                     arabicTextFontSize -= 1
                 }
+            } label: {
+                Label("Decrease Font Size", systemImage: "minus.magnifyingglass")
             }
             .keyboardShortcut("-")
             
-            Button("Reset Font Size") {
+            Button {
                 arabicTextFontSize = 21
                 #if os(iOS)
                 translationFontSize = 18
                 #else
                 translationFontSize = 13
                 #endif
+            } label: {
+                Label("Reset Font Size", systemImage: "arrow.counterclockwise")
             }
             .keyboardShortcut("o")
         }
