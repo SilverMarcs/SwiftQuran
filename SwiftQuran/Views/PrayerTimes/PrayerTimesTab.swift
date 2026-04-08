@@ -19,7 +19,7 @@ struct PrayerTimesTab: View {
     private let prayerTimesService = PrayerTimesService.shared
     
     var body: some View {
-          List {
+          Form {
               if let times = prayerTimes {
                   Section("Times") {
                       PrayerTimeRow(type: .fajr, time: times.Fajr)
@@ -50,6 +50,7 @@ struct PrayerTimesTab: View {
                       description: Text("Allow location access to view prayer times"))
               }
           }
+          .formStyle(.grouped)
           .navigationTitle("Prayers")
           .toolbarTitleDisplayMode(.inlineLarge)
           .toolbar {
@@ -60,10 +61,14 @@ struct PrayerTimesTab: View {
               } label: {
                   if isLoading {
                       ProgressView()
+                      #if os(macOS)
+                          .controlSize(.small)
+                      #endif
                   } else {
                       Image(systemName: "location")
                   }
               }
+              .disabled(isLoading)
           }
           .task {
               loadStoredPrayerTimes()

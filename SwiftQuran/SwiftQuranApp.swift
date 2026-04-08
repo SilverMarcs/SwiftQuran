@@ -22,5 +22,13 @@ struct SwiftQuranApp: App {
             .environment(audioPlayerManager)
         }
         .commands { MenuCommands() }
+
+        #if os(macOS)
+        Window("Prayer Times", id: "prayer-times") {
+            PrayerTimesTab()
+        }
+        .restorationBehavior(.disabled)
+        .defaultSize(width: 360, height: 470)
+        #endif
     }
 }
