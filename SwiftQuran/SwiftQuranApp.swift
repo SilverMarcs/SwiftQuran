@@ -9,11 +9,17 @@ struct SwiftQuranApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(quranDataManager)
-                .environment(savedVersesManager)
-                .environment(progressManager)
-                .environment(audioPlayerManager)
+            Group {
+                #if os(macOS)
+                MacContentView()
+                #else
+                ContentView()
+                #endif
+            }
+            .environment(quranDataManager)
+            .environment(savedVersesManager)
+            .environment(progressManager)
+            .environment(audioPlayerManager)
         }
         .commands { MenuCommands() }
     }

@@ -83,6 +83,9 @@ struct VerseRow: View {
                     .buttonStyle(.glass)
                     .foregroundStyle((isCurrentVerse && audioPlayer.isPlaying) ? .accent : .secondary)
                 }
+                #if os(macOS)
+                .buttonBorderShape(.capsule)
+                #endif
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }

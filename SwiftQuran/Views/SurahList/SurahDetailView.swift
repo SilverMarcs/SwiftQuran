@@ -31,6 +31,9 @@ struct SurahDetailView: View {
                 ForEach(verses, id: \.id) { verse in
                     VerseRow(verse: verse, surahTitle: surah.translation)
                         .id(scrollIdentifier(for: verse))
+                    #if os(macOS)
+                        .padding(7)
+                    #endif
                 }
             }
             .listStyle(.plain)

@@ -45,12 +45,6 @@ struct ContentView: View {
                 selectedTab = .prayers
             }
         }
-        #if os(macOS)
-        .tabViewSidebarBottomBar {
-            InlineAudioPlayer()
-                .padding()
-        }
-        #else
         .tabViewSearchActivation(.searchTabSelection)
         .tabBarMinimizeBehavior(.onScrollDown)
         .tabViewBottomAccessory(isEnabled: audioManager.currentVerse != nil) {
@@ -66,7 +60,6 @@ struct ContentView: View {
             }
             .navigationTransition(.zoom(sourceID: "MINIPLAYER", in: audioPlayerAnimation))
         }
-        #endif
     }
 }
 

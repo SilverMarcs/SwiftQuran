@@ -92,6 +92,10 @@
 			membershipExceptions = (
 				Info.plist,
 			);
+			platformFiltersByRelativePath = {
+				ContentView.swift = (ios, xros, );
+				MacContentView.swift = (macos, );
+			};
 			target = 08D6918F2D8343A700EC14D8 /* SwiftQuran */;
 		};
 		08ADE0EC2F10B09300A14A96 /* Exceptions for "SwiftQuran" folder in "SwiftQuran Watch App" target */ = {
