@@ -16,7 +16,7 @@ struct MenuCommands: Commands {
     private let maxFontSize: Double = 60
     
     var body: some Commands {
-        CommandGroup(replacing: .newItem) {}
+        // CommandGroup(replacing: .newItem) {}
         
         CommandGroup(before: .toolbar) {
             Button {

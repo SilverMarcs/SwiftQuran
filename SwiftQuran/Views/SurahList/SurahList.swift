@@ -3,6 +3,9 @@ import SwiftUI
 struct SurahList: View {
     @Environment(QuranDataManager.self) var dataManager
     @Environment(ReadingProgressManager.self) var progressManager
+    #if os(macOS)
+    @Environment(\.openWindow) private var openWindow
+    #endif
 
     private var filteredSurahs: ([Surah], [Surah]) {
         let allSurahs = dataManager.surahs
@@ -36,5 +39,16 @@ struct SurahList: View {
         .navigationTitle("Surahs")
         .toolbarTitleDisplayMode(.inlineLarge)
         .settingsSheet()
+        #if os(macOS)
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    openWindow(id: "prayer-times")
+                } label: {
+                    Label("Prayer Times", systemImage: "clock")
+                }
+            }
+        }
+        #endif
     }
 }

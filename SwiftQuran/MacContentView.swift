@@ -12,11 +12,13 @@ struct MacContentView: View {
                     InlineAudioPlayer()
                 }
                 .surahNavigationDestination()
+                .navigationSplitViewColumnWidth(min: 220, ideal: 260, max: 320)
         } detail: {
             ScrollView {
                 ContentUnavailableView("Select a Surah", systemImage: "book")
             }
             .defaultScrollAnchor(.center)
+            .navigationSplitViewColumnWidth(min: 480, ideal: 720)
         }
     }
 }
