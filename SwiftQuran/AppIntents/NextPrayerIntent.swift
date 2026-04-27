@@ -12,7 +12,7 @@ import SwiftUI
 struct NextPrayerIntent: @preconcurrency AppIntent {
     static var title: LocalizedStringResource = "Next Prayer Time"
     static var description = IntentDescription("Tells you the next prayer time.")
-    static var suggestedInvocationPhrase: String? = "When is the next prayer in SwiftQuran"
+    static var suggestedInvocationPhrase: String? = "When is the next prayer in Iqra"
 
     func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
         let persisted = await MainActor.run {
