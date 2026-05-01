@@ -3,6 +3,9 @@
 SwiftUI Quran app with Liquid Glass.
 Uses several new SwiftUI APIs introduced in WWDC25/
 
+<a href="https://apps.apple.com/app/id6761860265"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" height="50"></a>
+<a href="https://apps.apple.com/app/id6761860265?mt=12"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-mac-app-store/black/en-us" alt="Download on the Mac App Store" height="50"></a>
+
 ## Features
 - Read Quran and sync reading progress across multiple devices
 - Play audio recitation of ayahs
