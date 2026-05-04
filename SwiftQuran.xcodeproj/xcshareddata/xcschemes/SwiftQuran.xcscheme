@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "08D6918F2D8343A700EC14D8"
-               BuildableName = "SwiftQuran.app"
+               BuildableName = "Iqra.app"
                BlueprintName = "SwiftQuran"
                ReferencedContainer = "container:SwiftQuran.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "08D6918F2D8343A700EC14D8"
-            BuildableName = "SwiftQuran.app"
+            BuildableName = "Iqra.app"
             BlueprintName = "SwiftQuran"
             ReferencedContainer = "container:SwiftQuran.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "08D6918F2D8343A700EC14D8"
-            BuildableName = "SwiftQuran.app"
+            BuildableName = "Iqra.app"
             BlueprintName = "SwiftQuran"
             ReferencedContainer = "container:SwiftQuran.xcodeproj">
          </BuildableReference>

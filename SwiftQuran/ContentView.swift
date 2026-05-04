@@ -7,7 +7,9 @@ struct ContentView: View {
     @State private var searchText: String = ""
     
     @Namespace private var audioPlayerAnimation
-    
+
+    @State private var isPlayerExpanded = false
+
     var body: some View {
         @Bindable var manager = audioManager
 
@@ -47,11 +49,14 @@ struct ContentView: View {
         }
         .tabViewSearchActivation(.searchTabSelection)
         .tabBarMinimizeBehavior(.onScrollDown)
+        .environment(\.requestAudioPlayerExpansion) {
+            isPlayerExpanded = true
+        }
         .tabViewBottomAccessory(isEnabled: audioManager.currentVerse != nil) {
             InlineAudioPlayer()
                 .matchedTransitionSource(id: "MINIPLAYER", in: audioPlayerAnimation)
         }
-        .sheet(isPresented: $manager.isExpanded) {
+        .sheet(isPresented: $isPlayerExpanded) {
             NavigationStack {
                 ExpandedAudioPlayer()
                     .presentationDetents([.fraction(1/3.5)])

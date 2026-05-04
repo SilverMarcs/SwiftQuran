@@ -2,7 +2,8 @@ import SwiftUI
 
 struct InlineAudioPlayer: View {
     @Environment(AudioPlayerManager.self) var manager
-    
+    @Environment(\.requestAudioPlayerExpansion) private var requestAudioPlayerExpansion
+
     var body: some View {
         if manager.currentVerse != nil {
             HStack {
@@ -37,7 +38,9 @@ struct InlineAudioPlayer: View {
             .padding(.horizontal, 4)
             .contentShape(.rect)
             .onTapGesture {
-                manager.isExpanded = true
+                Task { @MainActor in
+                    requestAudioPlayerExpansion()
+                }
             }
         }
     }
