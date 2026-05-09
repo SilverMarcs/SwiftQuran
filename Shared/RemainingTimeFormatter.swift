@@ -1,13 +1,6 @@
-//
-//  PrayerTimesWidgetRemainingTimeFormatter.swift
-//  SwiftQuranWidget
-//
-//  Created by Zabir Raihan on 09/01/2026.
-//
-
 import Foundation
 
-struct PrayerTimesWidgetRemainingTimeFormatter {
+struct RemainingTimeFormatter {
     static func formattedRemainingTime(from start: Date, to end: Date, calendar: Calendar = .current) -> String {
         let components = calendar.dateComponents([.hour, .minute], from: start, to: end)
         let hours = max(0, components.hour ?? 0)

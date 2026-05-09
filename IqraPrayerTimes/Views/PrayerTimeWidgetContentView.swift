@@ -53,7 +53,7 @@ struct PrayerTimeWidgetContentView: View {
 
     private var remainingTimeText: String? {
         guard let next = nextPrayer else { return nil }
-        return PrayerTimeWidgetRemainingTimeFormatter.formattedRemainingTime(from: now, to: next.date)
+        return RemainingTimeFormatter.formattedRemainingTime(from: now, to: next.date)
     }
 
     private var currentPrayerType: PrayerTimeType? {

@@ -25,7 +25,7 @@ struct PrayerTimesWidgetEntryView: View {
                         }
                         Spacer()
 
-                        Text(PrayerTimesWidgetRemainingTimeFormatter.formattedRemainingTime(from: entry.date, to: summary.date))
+                        Text(RemainingTimeFormatter.formattedRemainingTime(from: entry.date, to: summary.date))
                             .foregroundStyle(.secondary)
                     }
                     

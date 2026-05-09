@@ -122,7 +122,6 @@
 		08ED25EA2E29CFDA00AC8D97 /* Exceptions for "Iqra" folder in "IqraPrayerTimesExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Models/PrayerTimesModels.swift,
 				Models/PrayerTimesService.swift,
 			);
 			target = 08ED25D22E29CEF500AC8D97 /* IqraPrayerTimesExtension */;
@@ -159,6 +158,11 @@
 				08ED25E72E29CEF600AC8D97 /* Exceptions for "IqraPrayerTimes" folder in "IqraPrayerTimesExtension" target */,
 			);
 			path = IqraPrayerTimes;
+			sourceTree = "<group>";
+		};
+		08C0DE0000000000000005ED /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -209,6 +213,7 @@
 				08ADE2F02F10C10300A14A96 /* IqraWidget */,
 				08ED25D42E29CEF500AC8D97 /* Frameworks */,
 				08D691912D8343A700EC14D8 /* Products */,
+				08C0DE0000000000000005ED /* Shared */,
 			);
 			sourceTree = "<group>";
 		};
@@ -251,6 +256,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				08ADE0DD2F10B06F00A14A96 /* IqraWatchApp */,
+				08C0DE0000000000000005ED /* Shared */,
 			);
 			name = "IqraWatchApp";
 			packageProductDependencies = (
@@ -273,6 +279,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				08ADE2F02F10C10300A14A96 /* IqraWidget */,
+				08C0DE0000000000000005ED /* Shared */,
 			);
 			name = IqraWidgetExtension;
 			packageProductDependencies = (
@@ -299,6 +306,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				08D691922D8343A700EC14D8 /* Iqra */,
+				08C0DE0000000000000005ED /* Shared */,
 			);
 			name = Iqra;
 			packageProductDependencies = (
@@ -322,6 +330,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				08ED25D92E29CEF500AC8D97 /* IqraPrayerTimes */,
+				08C0DE0000000000000005ED /* Shared */,
 			);
 			name = IqraPrayerTimesExtension;
 			packageProductDependencies = (

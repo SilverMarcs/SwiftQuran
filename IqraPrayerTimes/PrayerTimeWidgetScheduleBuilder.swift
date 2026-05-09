@@ -19,7 +19,7 @@ struct PrayerTimeWidgetScheduleBuilder {
 
         return items.compactMap { type, time in
             guard let date = timeStringToDate(time, on: date, calendar: calendar) else { return nil }
-            return PrayerScheduleItem(type: type, time: time, date: date)
+            return PrayerScheduleItem(type: type, timeString: time, date: date)
         }
         .sorted { $0.date < $1.date }
     }
@@ -36,7 +36,7 @@ struct PrayerTimeWidgetScheduleBuilder {
         let minute = calendar.component(.minute, from: first.date)
         if let nextDate = calendar.date(byAdding: .day, value: 1, to: now),
            let tomorrow = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: nextDate) {
-            return PrayerScheduleItem(type: first.type, time: first.time, date: tomorrow)
+            return PrayerScheduleItem(type: first.type, timeString: first.timeString, date: tomorrow)
         }
 
         return first
