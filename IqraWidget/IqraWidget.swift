@@ -8,8 +8,8 @@
 import SwiftUI
 import WidgetKit
 
-struct SwiftQuranWidget: Widget {
-    let kind: String = "SwiftQuranWidget"
+struct IqraWidget: Widget {
+    let kind: String = "IqraWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: PrayerTimesWidgetProvider()) { entry in
@@ -22,7 +22,7 @@ struct SwiftQuranWidget: Widget {
 }
 
 #Preview(as: .accessoryRectangular) {
-    SwiftQuranWidget()
+    IqraWidget()
 } timeline: {
     PrayerTimesWidgetEntry(
         date: .now,

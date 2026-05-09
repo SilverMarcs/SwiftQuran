@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct SwiftQuran_Watch_AppApp: App {
+struct Iqra_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

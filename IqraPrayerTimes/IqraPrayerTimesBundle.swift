@@ -9,8 +9,8 @@ import WidgetKit
 import SwiftUI
 
 @main
-struct PrayerTimeWidgetBundle: WidgetBundle {
+struct IqraPrayerTimesBundle: WidgetBundle {
     var body: some Widget {
-        PrayerTimeWidget()
+        IqraPrayerTimes()
     }
 }

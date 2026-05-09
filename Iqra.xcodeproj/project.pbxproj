@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		08A70E242F5526C100CE22B2 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 08A70E232F5526C100CE22B2 /* SQLite */; };
-		08ADE0E62F10B07000A14A96 /* SwiftQuran Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 08ADE0DC2F10B06F00A14A96 /* SwiftQuran Watch App.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		08ADE0E62F10B07000A14A96 /* IqraWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 08ADE0DC2F10B06F00A14A96 /* IqraWatchApp.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08ADE2EE2F10C10300A14A96 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D52E29CEF500AC8D97 /* WidgetKit.framework */; };
 		08ADE2EF2F10C10300A14A96 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D72E29CEF500AC8D97 /* SwiftUI.framework */; };
-		08ADE2FE2F10C10400A14A96 /* SwiftQuranWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08ADE2ED2F10C10300A14A96 /* SwiftQuranWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		08ADE2FE2F10C10400A14A96 /* IqraWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08ADE2ED2F10C10300A14A96 /* IqraWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08ED25D62E29CEF500AC8D97 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D52E29CEF500AC8D97 /* WidgetKit.framework */; };
 		08ED25D82E29CEF500AC8D97 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED25D72E29CEF500AC8D97 /* SwiftUI.framework */; };
-		08ED25E32E29CEF600AC8D97 /* PrayerTimeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08ED25D32E29CEF500AC8D97 /* PrayerTimeWidgetExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		08ED25E32E29CEF600AC8D97 /* IqraPrayerTimesExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 08ED25D32E29CEF500AC8D97 /* IqraPrayerTimesExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,21 +23,21 @@
 			containerPortal = 08D691882D8343A700EC14D8 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 08ADE0DB2F10B06F00A14A96;
-			remoteInfo = "SwiftQuran Watch App";
+			remoteInfo = "IqraWatchApp";
 		};
 		08ADE2FC2F10C10400A14A96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D691882D8343A700EC14D8 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 08ADE2EC2F10C10300A14A96;
-			remoteInfo = SwiftQuranWidgetExtension;
+			remoteInfo = IqraWidgetExtension;
 		};
 		08ED25E12E29CEF600AC8D97 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D691882D8343A700EC14D8 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 08ED25D22E29CEF500AC8D97;
-			remoteInfo = PrayerTimeWidgetExtension;
+			remoteInfo = IqraPrayerTimesExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -48,7 +48,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				08ADE0E62F10B07000A14A96 /* SwiftQuran Watch App.app in Embed Watch Content */,
+				08ADE0E62F10B07000A14A96 /* IqraWatchApp.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,7 +59,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				08ADE2FE2F10C10400A14A96 /* SwiftQuranWidgetExtension.appex in Embed Foundation Extensions */,
+				08ADE2FE2F10C10400A14A96 /* IqraWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,7 +70,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				08ED25E32E29CEF600AC8D97 /* PrayerTimeWidgetExtension.appex in Embed Foundation Extensions */,
+				08ED25E32E29CEF600AC8D97 /* IqraPrayerTimesExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,16 +78,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08ADE0DC2F10B06F00A14A96 /* SwiftQuran Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Iqra.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		08ADE2ED2F10C10300A14A96 /* SwiftQuranWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SwiftQuranWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		08D691902D8343A700EC14D8 /* SwiftQuran.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftQuran.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		08ED25D32E29CEF500AC8D97 /* PrayerTimeWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrayerTimeWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		08ADE0DC2F10B06F00A14A96 /* IqraWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Iqra.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08ADE2ED2F10C10300A14A96 /* IqraWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IqraWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		08D691902D8343A700EC14D8 /* Iqra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Iqra.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		08ED25D32E29CEF500AC8D97 /* IqraPrayerTimesExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IqraPrayerTimesExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		08ED25D52E29CEF500AC8D97 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		08ED25D72E29CEF500AC8D97 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		0856ABE12D83ECCB0042F9B8 /* Exceptions for "SwiftQuran" folder in "SwiftQuran" target */ = {
+		0856ABE12D83ECCB0042F9B8 /* Exceptions for "Iqra" folder in "Iqra" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -96,69 +96,69 @@
 				ContentView.swift = (ios, xros, );
 				MacContentView.swift = (macos, );
 			};
-			target = 08D6918F2D8343A700EC14D8 /* SwiftQuran */;
+			target = 08D6918F2D8343A700EC14D8 /* Iqra */;
 		};
-		08ADE0EC2F10B09300A14A96 /* Exceptions for "SwiftQuran" folder in "SwiftQuran Watch App" target */ = {
+		08ADE0EC2F10B09300A14A96 /* Exceptions for "Iqra" folder in "IqraWatchApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				AppIcon.icon,
 			);
-			target = 08ADE0DB2F10B06F00A14A96 /* SwiftQuran Watch App */;
+			target = 08ADE0DB2F10B06F00A14A96 /* IqraWatchApp */;
 		};
-		08ADE3032F10C10400A14A96 /* Exceptions for "SwiftQuranWidget" folder in "SwiftQuranWidgetExtension" target */ = {
+		08ADE3032F10C10400A14A96 /* Exceptions for "IqraWidget" folder in "IqraWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 08ADE2EC2F10C10300A14A96 /* SwiftQuranWidgetExtension */;
+			target = 08ADE2EC2F10C10300A14A96 /* IqraWidgetExtension */;
 		};
-		08ED25E72E29CEF600AC8D97 /* Exceptions for "PrayerTimeWidget" folder in "PrayerTimeWidgetExtension" target */ = {
+		08ED25E72E29CEF600AC8D97 /* Exceptions for "IqraPrayerTimes" folder in "IqraPrayerTimesExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 08ED25D22E29CEF500AC8D97 /* PrayerTimeWidgetExtension */;
+			target = 08ED25D22E29CEF500AC8D97 /* IqraPrayerTimesExtension */;
 		};
-		08ED25EA2E29CFDA00AC8D97 /* Exceptions for "SwiftQuran" folder in "PrayerTimeWidgetExtension" target */ = {
+		08ED25EA2E29CFDA00AC8D97 /* Exceptions for "Iqra" folder in "IqraPrayerTimesExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Models/PrayerTimesModels.swift,
 				Models/PrayerTimesService.swift,
 			);
-			target = 08ED25D22E29CEF500AC8D97 /* PrayerTimeWidgetExtension */;
+			target = 08ED25D22E29CEF500AC8D97 /* IqraPrayerTimesExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		08ADE0DD2F10B06F00A14A96 /* SwiftQuran Watch App */ = {
+		08ADE0DD2F10B06F00A14A96 /* IqraWatchApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "SwiftQuran Watch App";
+			path = "IqraWatchApp";
 			sourceTree = "<group>";
 		};
-		08ADE2F02F10C10300A14A96 /* SwiftQuranWidget */ = {
+		08ADE2F02F10C10300A14A96 /* IqraWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				08ADE3032F10C10400A14A96 /* Exceptions for "SwiftQuranWidget" folder in "SwiftQuranWidgetExtension" target */,
+				08ADE3032F10C10400A14A96 /* Exceptions for "IqraWidget" folder in "IqraWidgetExtension" target */,
 			);
-			path = SwiftQuranWidget;
+			path = IqraWidget;
 			sourceTree = "<group>";
 		};
-		08D691922D8343A700EC14D8 /* SwiftQuran */ = {
+		08D691922D8343A700EC14D8 /* Iqra */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				0856ABE12D83ECCB0042F9B8 /* Exceptions for "SwiftQuran" folder in "SwiftQuran" target */,
-				08ED25EA2E29CFDA00AC8D97 /* Exceptions for "SwiftQuran" folder in "PrayerTimeWidgetExtension" target */,
-				08ADE0EC2F10B09300A14A96 /* Exceptions for "SwiftQuran" folder in "SwiftQuran Watch App" target */,
+				0856ABE12D83ECCB0042F9B8 /* Exceptions for "Iqra" folder in "Iqra" target */,
+				08ED25EA2E29CFDA00AC8D97 /* Exceptions for "Iqra" folder in "IqraPrayerTimesExtension" target */,
+				08ADE0EC2F10B09300A14A96 /* Exceptions for "Iqra" folder in "IqraWatchApp" target */,
 			);
-			path = SwiftQuran;
+			path = Iqra;
 			sourceTree = "<group>";
 		};
-		08ED25D92E29CEF500AC8D97 /* PrayerTimeWidget */ = {
+		08ED25D92E29CEF500AC8D97 /* IqraPrayerTimes */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				08ED25E72E29CEF600AC8D97 /* Exceptions for "PrayerTimeWidget" folder in "PrayerTimeWidgetExtension" target */,
+				08ED25E72E29CEF600AC8D97 /* Exceptions for "IqraPrayerTimes" folder in "IqraPrayerTimesExtension" target */,
 			);
-			path = PrayerTimeWidget;
+			path = IqraPrayerTimes;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -203,10 +203,10 @@
 		08D691872D8343A700EC14D8 = {
 			isa = PBXGroup;
 			children = (
-				08D691922D8343A700EC14D8 /* SwiftQuran */,
-				08ED25D92E29CEF500AC8D97 /* PrayerTimeWidget */,
-				08ADE0DD2F10B06F00A14A96 /* SwiftQuran Watch App */,
-				08ADE2F02F10C10300A14A96 /* SwiftQuranWidget */,
+				08D691922D8343A700EC14D8 /* Iqra */,
+				08ED25D92E29CEF500AC8D97 /* IqraPrayerTimes */,
+				08ADE0DD2F10B06F00A14A96 /* IqraWatchApp */,
+				08ADE2F02F10C10300A14A96 /* IqraWidget */,
 				08ED25D42E29CEF500AC8D97 /* Frameworks */,
 				08D691912D8343A700EC14D8 /* Products */,
 			);
@@ -215,10 +215,10 @@
 		08D691912D8343A700EC14D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				08D691902D8343A700EC14D8 /* SwiftQuran.app */,
-				08ED25D32E29CEF500AC8D97 /* PrayerTimeWidgetExtension.appex */,
-				08ADE0DC2F10B06F00A14A96 /* SwiftQuran Watch App.app */,
-				08ADE2ED2F10C10300A14A96 /* SwiftQuranWidgetExtension.appex */,
+				08D691902D8343A700EC14D8 /* Iqra.app */,
+				08ED25D32E29CEF500AC8D97 /* IqraPrayerTimesExtension.appex */,
+				08ADE0DC2F10B06F00A14A96 /* IqraWatchApp.app */,
+				08ADE2ED2F10C10300A14A96 /* IqraWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,9 +235,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		08ADE0DB2F10B06F00A14A96 /* SwiftQuran Watch App */ = {
+		08ADE0DB2F10B06F00A14A96 /* IqraWatchApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08ADE0EA2F10B07000A14A96 /* Build configuration list for PBXNativeTarget "SwiftQuran Watch App" */;
+			buildConfigurationList = 08ADE0EA2F10B07000A14A96 /* Build configuration list for PBXNativeTarget "IqraWatchApp" */;
 			buildPhases = (
 				08ADE0D82F10B06F00A14A96 /* Sources */,
 				08ADE0D92F10B06F00A14A96 /* Frameworks */,
@@ -250,18 +250,18 @@
 				08ADE2FD2F10C10400A14A96 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				08ADE0DD2F10B06F00A14A96 /* SwiftQuran Watch App */,
+				08ADE0DD2F10B06F00A14A96 /* IqraWatchApp */,
 			);
-			name = "SwiftQuran Watch App";
+			name = "IqraWatchApp";
 			packageProductDependencies = (
 			);
-			productName = "SwiftQuran Watch App";
-			productReference = 08ADE0DC2F10B06F00A14A96 /* SwiftQuran Watch App.app */;
+			productName = "IqraWatchApp";
+			productReference = 08ADE0DC2F10B06F00A14A96 /* IqraWatchApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		08ADE2EC2F10C10300A14A96 /* SwiftQuranWidgetExtension */ = {
+		08ADE2EC2F10C10300A14A96 /* IqraWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08ADE3022F10C10400A14A96 /* Build configuration list for PBXNativeTarget "SwiftQuranWidgetExtension" */;
+			buildConfigurationList = 08ADE3022F10C10400A14A96 /* Build configuration list for PBXNativeTarget "IqraWidgetExtension" */;
 			buildPhases = (
 				08ADE2E92F10C10300A14A96 /* Sources */,
 				08ADE2EA2F10C10300A14A96 /* Frameworks */,
@@ -272,18 +272,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				08ADE2F02F10C10300A14A96 /* SwiftQuranWidget */,
+				08ADE2F02F10C10300A14A96 /* IqraWidget */,
 			);
-			name = SwiftQuranWidgetExtension;
+			name = IqraWidgetExtension;
 			packageProductDependencies = (
 			);
-			productName = SwiftQuranWidgetExtension;
-			productReference = 08ADE2ED2F10C10300A14A96 /* SwiftQuranWidgetExtension.appex */;
+			productName = IqraWidgetExtension;
+			productReference = 08ADE2ED2F10C10300A14A96 /* IqraWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		08D6918F2D8343A700EC14D8 /* SwiftQuran */ = {
+		08D6918F2D8343A700EC14D8 /* Iqra */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08D691A12D8343A800EC14D8 /* Build configuration list for PBXNativeTarget "SwiftQuran" */;
+			buildConfigurationList = 08D691A12D8343A800EC14D8 /* Build configuration list for PBXNativeTarget "Iqra" */;
 			buildPhases = (
 				08D6918C2D8343A700EC14D8 /* Sources */,
 				08D6918D2D8343A700EC14D8 /* Frameworks */,
@@ -298,19 +298,19 @@
 				08ADE0E52F10B07000A14A96 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				08D691922D8343A700EC14D8 /* SwiftQuran */,
+				08D691922D8343A700EC14D8 /* Iqra */,
 			);
-			name = SwiftQuran;
+			name = Iqra;
 			packageProductDependencies = (
 				08A70E232F5526C100CE22B2 /* SQLite */,
 			);
-			productName = SwiftQuran;
-			productReference = 08D691902D8343A700EC14D8 /* SwiftQuran.app */;
+			productName = Iqra;
+			productReference = 08D691902D8343A700EC14D8 /* Iqra.app */;
 			productType = "com.apple.product-type.application";
 		};
-		08ED25D22E29CEF500AC8D97 /* PrayerTimeWidgetExtension */ = {
+		08ED25D22E29CEF500AC8D97 /* IqraPrayerTimesExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08ED25E42E29CEF600AC8D97 /* Build configuration list for PBXNativeTarget "PrayerTimeWidgetExtension" */;
+			buildConfigurationList = 08ED25E42E29CEF600AC8D97 /* Build configuration list for PBXNativeTarget "IqraPrayerTimesExtension" */;
 			buildPhases = (
 				08ED25CF2E29CEF500AC8D97 /* Sources */,
 				08ED25D02E29CEF500AC8D97 /* Frameworks */,
@@ -321,13 +321,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				08ED25D92E29CEF500AC8D97 /* PrayerTimeWidget */,
+				08ED25D92E29CEF500AC8D97 /* IqraPrayerTimes */,
 			);
-			name = PrayerTimeWidgetExtension;
+			name = IqraPrayerTimesExtension;
 			packageProductDependencies = (
 			);
-			productName = PrayerTimeWidgetExtension;
-			productReference = 08ED25D32E29CEF500AC8D97 /* PrayerTimeWidgetExtension.appex */;
+			productName = IqraPrayerTimesExtension;
+			productReference = 08ED25D32E29CEF500AC8D97 /* IqraPrayerTimesExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -354,7 +354,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 08D6918B2D8343A700EC14D8 /* Build configuration list for PBXProject "SwiftQuran" */;
+			buildConfigurationList = 08D6918B2D8343A700EC14D8 /* Build configuration list for PBXProject "Iqra" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -371,10 +371,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				08D6918F2D8343A700EC14D8 /* SwiftQuran */,
-				08ED25D22E29CEF500AC8D97 /* PrayerTimeWidgetExtension */,
-				08ADE0DB2F10B06F00A14A96 /* SwiftQuran Watch App */,
-				08ADE2EC2F10C10300A14A96 /* SwiftQuranWidgetExtension */,
+				08D6918F2D8343A700EC14D8 /* Iqra */,
+				08ED25D22E29CEF500AC8D97 /* IqraPrayerTimesExtension */,
+				08ADE0DB2F10B06F00A14A96 /* IqraWatchApp */,
+				08ADE2EC2F10C10300A14A96 /* IqraWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -445,18 +445,18 @@
 		08ADE0E52F10B07000A14A96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
-			target = 08ADE0DB2F10B06F00A14A96 /* SwiftQuran Watch App */;
+			target = 08ADE0DB2F10B06F00A14A96 /* IqraWatchApp */;
 			targetProxy = 08ADE0E42F10B07000A14A96 /* PBXContainerItemProxy */;
 		};
 		08ADE2FD2F10C10400A14A96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 08ADE2EC2F10C10300A14A96 /* SwiftQuranWidgetExtension */;
+			target = 08ADE2EC2F10C10300A14A96 /* IqraWidgetExtension */;
 			targetProxy = 08ADE2FC2F10C10400A14A96 /* PBXContainerItemProxy */;
 		};
 		08ED25E22E29CEF600AC8D97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
-			target = 08ED25D22E29CEF500AC8D97 /* PrayerTimeWidgetExtension */;
+			target = 08ED25D22E29CEF500AC8D97 /* IqraPrayerTimesExtension */;
 			targetProxy = 08ED25E12E29CEF600AC8D97 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -467,9 +467,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "SwiftQuran Watch App/SwiftQuran Watch App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "IqraWatchApp/IqraWatchApp.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = J52QUTREBS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -481,7 +481,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.watchkitapp;
 				PRODUCT_NAME = Iqra;
 				SDKROOT = watchos;
@@ -502,9 +502,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "SwiftQuran Watch App/SwiftQuran Watch App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "IqraWatchApp/IqraWatchApp.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = J52QUTREBS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -516,7 +516,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.watchkitapp;
 				PRODUCT_NAME = Iqra;
 				SDKROOT = watchos;
@@ -538,13 +538,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = SwiftQuranWidget/SwiftQuranWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IqraWidget/IqraWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = J52QUTREBS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SwiftQuranWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SwiftQuranWidget;
+				INFOPLIST_FILE = IqraWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IqraWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -552,7 +552,7 @@
 					"@executable_path/../../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.watchkitapp.SwiftQuranWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -572,13 +572,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = SwiftQuranWidget/SwiftQuranWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IqraWidget/IqraWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = J52QUTREBS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SwiftQuranWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SwiftQuranWidget;
+				INFOPLIST_FILE = IqraWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IqraWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -586,7 +586,7 @@
 					"@executable_path/../../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.watchkitapp.SwiftQuranWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -727,9 +727,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SwiftQuran/SwiftQuran.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Iqra/Iqra.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = J52QUTREBS;
@@ -747,7 +747,7 @@
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SwiftQuran/Info.plist;
+				INFOPLIST_FILE = Iqra/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Iqra;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -767,7 +767,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran;
 				PRODUCT_NAME = Iqra;
 				REGISTER_APP_GROUPS = YES;
@@ -788,9 +788,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SwiftQuran/SwiftQuran.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Iqra/Iqra.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = J52QUTREBS;
@@ -808,7 +808,7 @@
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SwiftQuran/Info.plist;
+				INFOPLIST_FILE = Iqra/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Iqra;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -828,7 +828,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran;
 				PRODUCT_NAME = Iqra;
 				REGISTER_APP_GROUPS = YES;
@@ -849,13 +849,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PrayerTimeWidget/PrayerTimeWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IqraPrayerTimes/IqraPrayerTimes.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = J52QUTREBS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PrayerTimeWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PrayerTimeWidget;
+				INFOPLIST_FILE = IqraPrayerTimes/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IqraPrayerTimes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -863,7 +863,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.PrayerTimeWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -882,13 +882,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = PrayerTimeWidget/PrayerTimeWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IqraPrayerTimes/IqraPrayerTimes.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = J52QUTREBS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PrayerTimeWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PrayerTimeWidget;
+				INFOPLIST_FILE = IqraPrayerTimes/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IqraPrayerTimes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -896,7 +896,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SilverMarcs.SwiftQuran.PrayerTimeWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -914,7 +914,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		08ADE0EA2F10B07000A14A96 /* Build configuration list for PBXNativeTarget "SwiftQuran Watch App" */ = {
+		08ADE0EA2F10B07000A14A96 /* Build configuration list for PBXNativeTarget "IqraWatchApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08ADE0E82F10B07000A14A96 /* Debug */,
@@ -923,7 +923,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		08ADE3022F10C10400A14A96 /* Build configuration list for PBXNativeTarget "SwiftQuranWidgetExtension" */ = {
+		08ADE3022F10C10400A14A96 /* Build configuration list for PBXNativeTarget "IqraWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08ADE3002F10C10400A14A96 /* Debug */,
@@ -932,7 +932,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		08D6918B2D8343A700EC14D8 /* Build configuration list for PBXProject "SwiftQuran" */ = {
+		08D6918B2D8343A700EC14D8 /* Build configuration list for PBXProject "Iqra" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08D6919F2D8343A800EC14D8 /* Debug */,
@@ -941,7 +941,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		08D691A12D8343A800EC14D8 /* Build configuration list for PBXNativeTarget "SwiftQuran" */ = {
+		08D691A12D8343A800EC14D8 /* Build configuration list for PBXNativeTarget "Iqra" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08D691A22D8343A800EC14D8 /* Debug */,
@@ -950,7 +950,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		08ED25E42E29CEF600AC8D97 /* Build configuration list for PBXNativeTarget "PrayerTimeWidgetExtension" */ = {
+		08ED25E42E29CEF600AC8D97 /* Build configuration list for PBXNativeTarget "IqraPrayerTimesExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08ED25E52E29CEF600AC8D97 /* Debug */,

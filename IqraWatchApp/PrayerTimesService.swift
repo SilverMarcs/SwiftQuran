@@ -63,7 +63,7 @@ final class PrayerTimesService {
             }
             writeStoredData(encoded)
             PrayerTimesStore.shared.update(with: persisted)
-            WidgetCenter.shared.reloadTimelines(ofKind: "SwiftQuranWidget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "IqraWidget")
             return nil
         } catch {
             print("Watch failed to fetch prayer times: \(error)")

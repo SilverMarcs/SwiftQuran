@@ -43,7 +43,7 @@ struct ContentView: View {
         }
         .tabViewStyle(.sidebarAdaptable)
         .onOpenURL { url in
-            if url.scheme == "swiftquran" && url.host == "prayers" {
+            if url.scheme == "iqra" && url.host == "prayers" {
                 selectedTab = .prayers
             }
         }

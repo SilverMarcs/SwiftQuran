@@ -8,8 +8,8 @@
 import WidgetKit
 import SwiftUI
 
-struct PrayerTimeWidget: Widget {
-    let kind: String = "PrayerTimeWidget"
+struct IqraPrayerTimes: Widget {
+    let kind: String = "IqraPrayerTimes"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
@@ -17,7 +17,7 @@ struct PrayerTimeWidget: Widget {
                 .containerBackground(for: .widget) {
                     Color(.systemBackground)
                 }
-                .widgetURL(URL(string: "swiftquran://prayers"))
+                .widgetURL(URL(string: "iqra://prayers"))
         }
         .configurationDisplayName("Prayer Times")
         .supportedFamilies([.systemMedium])
@@ -26,7 +26,7 @@ struct PrayerTimeWidget: Widget {
 }
 
 #Preview(as: .systemSmall) {
-    PrayerTimeWidget()
+    IqraPrayerTimes()
 } timeline: {
     PrayerTimesEntry(date: .now, prayerTimes: nil, locationName: "Cupertino")
 }

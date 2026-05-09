@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct SwiftQuranApp: App {
+struct IqraApp: App {
     let quranDataManager = QuranDataManager()
     let savedVersesManager = SavedVersesManager()
     let progressManager = ReadingProgressManager()

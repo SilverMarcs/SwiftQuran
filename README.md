@@ -1,4 +1,4 @@
-# SwiftQuran
+# Iqra
 
 SwiftUI Quran app with Liquid Glass.
 Uses several new SwiftUI APIs introduced in WWDC25/
