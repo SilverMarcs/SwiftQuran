@@ -40,20 +40,20 @@ private struct NextPrayerSnippetView: View {
 
     var body: some View {
         if let summary {
-            VStack(alignment: .leading) {
-                Text("Next Prayer")
-                    .foregroundStyle(.secondary)
-                HStack {
-                    Image(systemName: summary.type.symbol)
-                        .foregroundStyle(summary.type.color)
-                    Text(summary.type.label)
-                        .bold()
-                    Spacer()
-                    Text(summary.time)
-                        .bold()
-                }
+            HStack {
+                Image(systemName: summary.type.symbol)
+                    .foregroundStyle(summary.type.color)
+                Text(summary.type.label)
+                    .bold()
+                Spacer()
+                Text(summary.time)
+                    .bold()
             }
+            .padding()
             .background(summary.type.color.opacity(0.2), in: .rect(cornerRadius: 12))
+            .padding(.top)
+            .padding(.horizontal)
+            .padding(.bottom, 5)
         } else {
             VStack(alignment: .leading) {
                 Text("No Location Saved")
@@ -61,6 +61,7 @@ private struct NextPrayerSnippetView: View {
                 Text("Open the app to set your location.")
                     .foregroundStyle(.secondary)
             }
+            .padding()
         }
     }
 }
