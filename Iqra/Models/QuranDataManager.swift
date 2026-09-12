@@ -2,8 +2,10 @@ import Foundation
 import SQLite
 
 @Observable
+@MainActor
 final class QuranDataManager {
     @ObservationIgnored private let database: Connection
+    @ObservationIgnored private var referenceSectionsByVerse: [Int: [VerseReferenceSection]] = [:]
 
     private(set) var surahs: [Surah]
 
@@ -94,6 +96,25 @@ final class QuranDataManager {
 
             return lhs.surahNumber < rhs.surahNumber
         }
+    }
+
+    func availableReferenceSections(for verse: Verse) -> [VerseReferenceSection] {
+        if let sections = referenceSectionsByVerse[verse.id] {
+            return sections
+        }
+
+        let sections = VerseReferenceSection.allCases.filter { section in
+            switch section {
+            case .tafseer:
+                tafseer(for: verse) != nil
+            case .commentary:
+                commentary(for: verse) != nil
+            case .hadith:
+                !hadiths(for: verse).isEmpty
+            }
+        }
+        referenceSectionsByVerse[verse.id] = sections
+        return sections
     }
 
     func tafseer(for verse: Verse) -> String? {

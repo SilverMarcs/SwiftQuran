@@ -53,6 +53,8 @@ struct VerseRow: View {
                     .buttonStyle(.glass)
                     .foregroundStyle(savedVersesManager.isSaved(verse: verse) ? .red : .secondary)
 
+                    VerseReferenceIndicators(verse: verse)
+
                     if verse.isProstrationVerse {
                         Text("Sajdah")
                             .font(.caption.bold())
@@ -98,5 +100,8 @@ struct VerseRow: View {
 #Preview {
     VerseRow(verse: Mock.verse)
         .padding()
+        .environment(QuranDataManager())
+        .environment(ReadingProgressManager())
+        .environment(SavedVersesManager())
         .environment(AudioPlayerManager())
 }
