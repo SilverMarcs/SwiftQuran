@@ -10,11 +10,13 @@ import CoreLocation
 import MapKit
 
 struct PrayerTimesTab: View {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var prayerTimes: PrayerTimes? = nil
     @State private var lastFetched: Date? = nil
     @State private var isLoading = false
     @State private var locationData: LocationData? = nil
     @State private var locationManager = LocationManager()
+    @State private var notifications = PrayerNotificationManager.shared
     
     private let prayerTimesService = PrayerTimesService.shared
     
@@ -22,12 +24,16 @@ struct PrayerTimesTab: View {
           Form {
               if let times = prayerTimes {
                   Section("Times") {
-                      PrayerTimeRow(type: .fajr, time: times.Fajr)
-                      PrayerTimeRow(type: .duha, time: times.Duha)
-                      PrayerTimeRow(type: .dhuhr, time: times.Dhuhr)
-                      PrayerTimeRow(type: .asr, time: times.Asr)
-                      PrayerTimeRow(type: .maghrib, time: times.Maghrib)
-                      PrayerTimeRow(type: .isha, time: times.Isha)
+                      ForEach(PrayerTimeType.allCases) { type in
+                          PrayerTimeRow(
+                              type: type,
+                              time: times.time(for: type),
+                              notificationsEnabled: notifications.isEnabled(type),
+                              isUpdatingNotifications: notifications.isUpdating
+                          ) {
+                              Task { await notifications.toggle(type, times: times) }
+                          }
+                      }
                   }
                   
                   Section("Calculation Info") {
@@ -53,6 +59,14 @@ struct PrayerTimesTab: View {
           .formStyle(.grouped)
           .navigationTitle("Prayers")
           .toolbarTitleDisplayMode(.inlineLarge)
+          .alert("Prayer Notifications", isPresented: Binding(
+              get: { notifications.errorMessage != nil },
+              set: { if !$0 { notifications.errorMessage = nil } }
+          )) {
+              Button("OK", role: .cancel) { notifications.errorMessage = nil }
+          } message: {
+              Text(notifications.errorMessage ?? "")
+          }
           .toolbar {
               Button {
                   Task {
@@ -70,8 +84,10 @@ struct PrayerTimesTab: View {
               }
               .disabled(isLoading)
           }
-          .task {
+          .task(id: scenePhase) {
+              guard scenePhase == .active else { return }
               loadStoredPrayerTimes()
+              await notifications.refresh(times: prayerTimes)
               
               if prayerTimesService.shouldFetchNewTimes() {
                   await fetchPrayerTimesForStoredLocation()
@@ -96,6 +112,7 @@ struct PrayerTimesTab: View {
             
             // Reload local state
             loadStoredPrayerTimes()
+            await notifications.refresh(times: prayerTimes)
         } catch {
             print("Error fetching prayer times: \(error)")
         }

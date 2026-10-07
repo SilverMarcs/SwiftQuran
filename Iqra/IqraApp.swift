@@ -7,6 +7,10 @@ struct IqraApp: App {
     let progressManager = ReadingProgressManager()
     let audioPlayerManager = AudioPlayerManager()
 
+    init() {
+        _ = PrayerNotificationManager.shared
+    }
+
     var body: some Scene {
         #if os(macOS)
         Window("Quran", id: "main") {
