@@ -35,10 +35,7 @@ struct PrayerTimeRow: View {
                     systemImage: notificationsEnabled ? "bell.fill" : "bell"
                 )
                 .labelStyle(.iconOnly)
-                #if !os(macOS)
-                .frame(minWidth: 44, minHeight: 44)
                 .contentShape(.rect)
-                #endif
             }
             .buttonStyle(.borderless)
             .foregroundStyle(notificationsEnabled ? Color.accentColor : Color.secondary)
